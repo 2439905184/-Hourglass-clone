@@ -1,0 +1,137 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/VersionsTab.gd" type="Script" id=1]
+
+[node name="Versions" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/separation = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox2" type="VBoxContainer" parent="."]
+margin_right = 200.0
+margin_bottom = 564.0
+
+[node name="Tree" type="Tree" parent="VBox2"]
+margin_right = 200.0
+margin_bottom = 486.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 3
+hide_root = true
+
+[node name="spacer" type="Control" parent="VBox2"]
+margin_top = 490.0
+margin_right = 200.0
+margin_bottom = 490.0
+
+[node name="Label" type="Label" parent="VBox2"]
+margin_top = 494.0
+margin_right = 200.0
+margin_bottom = 508.0
+text = "Show:"
+
+[node name="Beta" type="CheckBox" parent="VBox2"]
+margin_top = 512.0
+margin_right = 200.0
+margin_bottom = 536.0
+text = "Beta"
+
+[node name="Mono" type="CheckBox" parent="VBox2"]
+margin_top = 540.0
+margin_right = 200.0
+margin_bottom = 564.0
+text = "Mono (C#)"
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_left = 210.0
+margin_right = 1016.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_right = 806.0
+margin_bottom = 20.0
+custom_constants/separation = 6
+
+[node name="Version" type="Label" parent="VBox/HBox"]
+margin_top = 3.0
+margin_right = 32.0
+margin_bottom = 17.0
+text = "3.0.6"
+
+[node name="spacer" type="Control" parent="VBox/HBox"]
+margin_left = 38.0
+margin_right = 355.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="DownloadProgress" type="ProgressBar" parent="VBox/HBox"]
+margin_left = 361.0
+margin_top = 5.0
+margin_right = 678.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+percent_visible = false
+
+[node name="Label" type="Label" parent="VBox/HBox/DownloadProgress"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+text = "Hello"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Launch" type="Button" parent="VBox/HBox"]
+margin_left = 684.0
+margin_right = 741.0
+margin_bottom = 20.0
+text = "Launch"
+
+[node name="Remove" type="Button" parent="VBox/HBox"]
+visible = false
+margin_left = 677.0
+margin_right = 741.0
+margin_bottom = 20.0
+text = "Remove"
+
+[node name="Install" type="Button" parent="VBox/HBox"]
+margin_left = 747.0
+margin_right = 799.0
+margin_bottom = 20.0
+text = "Install"
+
+[node name="Cancel" type="Button" parent="VBox/HBox"]
+visible = false
+margin_left = 746.0
+margin_right = 800.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[node name="spacer2" type="Control" parent="VBox/HBox"]
+margin_left = 805.0
+margin_right = 805.0
+margin_bottom = 20.0
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+margin_top = 24.0
+margin_right = 806.0
+margin_bottom = 28.0
+[connection signal="item_selected" from="VBox2/Tree" to="." method="_on_version_selected"]
+[connection signal="toggled" from="VBox2/Beta" to="." method="_on_Beta_toggled"]
+[connection signal="toggled" from="VBox2/Mono" to="." method="_on_Mono_toggled"]
+[connection signal="pressed" from="VBox/HBox/Launch" to="." method="_on_Launch_pressed"]
+[connection signal="pressed" from="VBox/HBox/Install" to="." method="_on_Install_pressed"]

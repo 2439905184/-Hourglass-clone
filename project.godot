@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "HTTPRequest",
+"class": "Downloader",
+"language": "GDScript",
+"path": "res://src/model/Downloader.gd"
+}, {
+"base": "Reference",
+"class": "ProjectCreator",
+"language": "GDScript",
+"path": "res://src/dialogs/ProjectCreator.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ProjectListItem",
+"language": "GDScript",
+"path": "res://src/ProjectListItem.gd"
+} ]
+_global_script_class_icons={
+"Downloader": "",
+"ProjectCreator": "",
+"ProjectListItem": ""
+}
+
+[application]
+
+config/name="Godot Version Manager"
+run/main_scene="res://src/MainWindow.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="godot-version-manager"
+config/icon="res://data/template/3/icon.png"
+
+[autoload]
+
+Versions="*res://src/model/Versions.gd"
+Projects="*res://src/model/Projects.gd"
+Config="*res://src/model/Config.gd"
+ErrorDialog="*res://src/dialogs/ErrorDialog.gd"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

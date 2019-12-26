@@ -4,19 +4,17 @@
 [ext_resource path="res://src/VersionsTab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/ProjectsTab.tscn" type="PackedScene" id=3]
 
-[node name="MainWindow" type="VBoxContainer"]
+[node name="MainWindow" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TabContainer" type="TabContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
@@ -32,3 +30,35 @@ margin_bottom = -4.0
 
 [node name="Versions" parent="TabContainer" instance=ExtResource( 2 )]
 visible = false
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -200.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 200, 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spacer" type="Control" parent="HBox"]
+margin_right = 187.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Version" type="LinkButton" parent="HBox"]
+margin_left = 191.0
+margin_top = 5.0
+margin_right = 191.0
+margin_bottom = 19.0
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spacer2" type="Control" parent="HBox"]
+margin_left = 195.0
+margin_right = 200.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 5, 0 )
+[connection signal="pressed" from="HBox/Version" to="." method="_on_Version_pressed"]

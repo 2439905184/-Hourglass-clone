@@ -6,6 +6,12 @@ track of all your Godot projects as well as the Godot Engine versions they
 require. It aims to match and exceed all the features of the built-in project
 manager (though it's not there yet).
 
+## Download
+Currently, only a Linux download is available. Support for other platforms is
+in progress.
+
+[Download for Linux](https://gitlab.com/FlyingPiMonster/godot-version-manager/-/jobs/389318089/artifacts/raw/export/godot-version-manager-linux?inline=false)
+
 ## Build Instructions
 GVM itself is a Godot Engine project, written in pure GDScript. However, it
 uses a slightly modified engine, in order to read ZIP files using scripts. The

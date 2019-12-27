@@ -20,6 +20,9 @@ build:
     - mkdir export
     - ./godot/bin/godot_server.x11.tools.64 --export linux export/godot-version-manager-linux
 
+    only:
+    - tags
+
     artifacts:
         paths:
         - export

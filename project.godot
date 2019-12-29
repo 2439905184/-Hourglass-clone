@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "ProjectListItem",
 "language": "GDScript",
 "path": "res://src/ProjectListItem.gd"
+}, {
+"base": "HTTPRequest",
+"class": "VersionsUpdater",
+"language": "GDScript",
+"path": "res://src/model/VersionsUpdater.gd"
 } ]
 _global_script_class_icons={
 "Downloader": "",
 "ProjectCreator": "",
-"ProjectListItem": ""
+"ProjectListItem": "",
+"VersionsUpdater": ""
 }
 
 [application]

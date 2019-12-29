@@ -15,6 +15,7 @@ func _ready() -> void:
 	Versions.connect("version_installed", self, "_on_version_installed")
 	Versions.connect("install_failed", self, "_on_install_failed")
 	Versions.connect("download_progress", self, "_on_download_progress")
+	Versions.connect("versions_updated", self, "_on_versions_updated")
 
 	_build_tree()
 
@@ -92,6 +93,9 @@ func _on_version_installed(version: String) -> void:
 	_build_tree()
 	if version == _selected_version():
 		_show_download_bar(false)
+
+func _on_versions_updated() -> void:
+	_build_tree()
 
 func _on_install_failed(version: String) -> void:
 	ErrorDialog.show_error(

@@ -3,6 +3,7 @@ extends ConfirmationDialog
 var path : String setget set_path
 
 func show_dialog() -> void:
+	$VBox/HBox/VersionDropdown.refresh()
 	rect_size = Vector2(0, 0)
 	popup_centered_minsize()
 

@@ -5,6 +5,7 @@ var _project_id : String
 func show_dialog(project_id: String) -> void:
 	_project_id = project_id
 	var version := Projects.get_project_version(project_id)
+	$HBox/VersionDropdown.refresh()
 	$HBox/VersionDropdown.selected_version = version
 
 	window_title = tr("Edit {name}").format({"name": Projects.get_project_name(project_id)})

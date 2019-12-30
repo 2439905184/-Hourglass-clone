@@ -6,12 +6,24 @@ const VERSIONS_TEMPLATE = "res://data/versions.cfg"
 var _versions_store : ConfigFile
 
 signal version_installed(version)
+signal version_changed(version)
 signal download_progress(version, downloaded, total)
 signal install_failed(version)
 signal versions_updated()
 
 func get_versions() -> PoolStringArray:
 	return _versions_store.get_sections()
+
+func exists(version: String) -> bool:
+	return _versions_store.has_section(version)
+
+func get_version_name(version: String) -> String:
+	return _versions_store.get_value(version, "name", version)
+
+func set_version_name(version: String, new_name: String) -> void:
+	_versions_store.set_value(version, "name", new_name)
+	emit_signal("version_changed", version)
+	_save()
 
 func get_tags(version: String) -> PoolStringArray:
 	return _versions_store.get_value(version, "tags", [])
@@ -33,8 +45,19 @@ func get_directory(version: String) -> String:
 	return OS.get_user_data_dir().plus_file("versions").plus_file(version)
 
 func get_executable(version: String) -> String:
+	if _versions_store.has_section_key(version, "executable"):
+		return _versions_store.get_value(version, "executable", null)
+
 	var exec_name := "godot.exe" if OS.get_name() == "Windows" else "godot"
 	return get_directory(version).plus_file(exec_name)
+
+func set_custom_executable(version: String, path: String) -> void:
+	_versions_store.set_value(version, "executable", path)
+	emit_signal("version_changed", version)
+	_save()
+
+func is_executable_set(version: String) -> bool:
+	return _versions_store.has_section_key(version, "executable")
 
 func get_config_version(version: String) -> int:
 	return _versions_store.get_value(version, "config_version")
@@ -54,6 +77,24 @@ func install(version: String) -> void:
 	add_child(download)
 	download.download()
 
+func add_custom() -> String:
+	var version := Utils.uuid()
+	_versions_store.set_value(version, "is_custom", true)
+	_versions_store.set_value(version, "name", tr("New Custom Version"))
+	emit_signal("version_installed", version)
+	_save()
+	return version
+
+func is_custom(version: String) -> bool:
+	return _versions_store.get_value(version, "is_custom", false)
+
+func remove_custom_version(version: String) -> void:
+	if not is_custom(version): return
+	_versions_store.erase_section(version)
+	emit_signal("version_changed", version)
+	_save()
+
+
 func _ready() -> void:
 	_versions_store = ConfigFile.new()
 	_versions_store.load(VERSIONS_STORE)
@@ -63,6 +104,8 @@ func _ready() -> void:
 	add_child(updater)
 
 	_merge_versions(VERSIONS_TEMPLATE)
+
+	print(Utils.list_dir_recursive("user://versions/3.0.6"))
 
 func _merge_versions(path: String) -> void:
 	var file := ConfigFile.new()

@@ -68,7 +68,7 @@ func get_project_name(id: String) -> String:
 	return cfg.get_value("application", "config/name")
 
 func create_project(path: String, version: String) -> String:
-	var id := _uuid()
+	var id := Utils.uuid()
 	set_project_directory(id, path)
 	set_project_version(id, version)
 	update_project_last_opened(id)
@@ -90,17 +90,3 @@ func _get_project_value(id: String, key: String) -> String:
 
 func _save() -> void:
 	_projects_store.save(PROJECTS_STORE)
-
-func _uuid() -> String:
-	var rand := RandomNumberGenerator.new()
-	rand.randomize()
-	var bytes := PoolByteArray()
-	for i in range(15):
-		bytes.append(rand.randi_range(0, 255))
-
-	var tmp := ["8", "9", "a", "b"]
-	tmp.shuffle()
-	var res := bytes.hex_encode()
-	res = res.insert(16, tmp[0]).insert(12, "4")
-	res = res.insert(20, "-").insert(16, "-").insert(12, "-").insert(8, "-")
-	return res

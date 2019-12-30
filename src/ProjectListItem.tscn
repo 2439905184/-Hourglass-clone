@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/ProjectListItem.gd" type="Script" id=1]
 [ext_resource path="res://src/dialogs/InstallDialog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/dialogs/EditProjectDialog.tscn" type="PackedScene" id=3]
 
 [node name="ProjectListItem" type="HBoxContainer"]
 margin_left = 10.0
@@ -55,5 +56,9 @@ anchor_bottom = 0.0
 margin_left = 804.0
 margin_right = 1004.0
 margin_bottom = 580.0
+
+[node name="EditProjectDialog" parent="." instance=ExtResource( 3 )]
+margin_left = 804.0
+margin_right = 804.0
 [connection signal="draw" from="." to="." method="_custom_draw"]
 [connection signal="pressed" from="VBox/HBox/Version" to="." method="_on_show_version"]

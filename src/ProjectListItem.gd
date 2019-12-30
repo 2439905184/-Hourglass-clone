@@ -15,7 +15,7 @@ func open() -> int:
 
 	var res := Projects.open_project(project_id)
 	if res == ERR_DOES_NOT_EXIST:
-		$InstallDialog.show_dialog(Projects.get_project_version(project_id))
+		_not_installed()
 	return res
 
 func run() -> int:
@@ -24,7 +24,7 @@ func run() -> int:
 
 	var res := Projects.run_project(project_id, _main_scene)
 	if res == ERR_DOES_NOT_EXIST:
-		$InstallDialog.show_dialog(Projects.get_project_version(project_id))
+		_not_installed()
 	return res
 
 func show_files() -> void:
@@ -44,10 +44,15 @@ func get_selected() -> bool:
 
 func _ready() -> void:
 	Projects.connect("project_changed", self, "_on_project_changed")
+	Versions.connect("version_changed", self, "_on_version_changed")
 	_build()
 
 func _on_project_changed(id: String) -> void:
 	if id == project_id:
+		_build()
+
+func _on_version_changed(version: String) -> void:
+	if version == Projects.get_project_version(project_id):
 		_build()
 
 func _build() -> void:
@@ -77,9 +82,20 @@ func _build() -> void:
 	if main_scene:
 		_main_scene = _resolve_path(main_scene)
 
-	$VBox/HBox/Version.text = Projects.get_project_version(project_id)
+	var version := Projects.get_project_version(project_id)
+	if Versions.exists(version):
+		$VBox/HBox/Version.text = Versions.get_version_name(version)
+	else:
+		$VBox/HBox/Version.text = tr("Unknown version")
 
 	valid = true
+
+func _not_installed() -> void:
+	var version := Projects.get_project_version(project_id)
+	if Versions.exists(version):
+		$InstallDialog.show_dialog(version)
+	else:
+		$EditProjectDialog.show_dialog(project_id)
 
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
@@ -94,7 +110,10 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_show_version() -> void:
 	var version = Projects.get_project_version(project_id)
-	find_parent("MainWindow").show_version(version)
+	if Versions.exists(version):
+		find_parent("MainWindow").show_version(version)
+	else:
+		$EditProjectDialog.show_dialog(project_id)
 
 func _resolve_path(path: String) -> String:
 	return path.replace("res://", _path + "/")

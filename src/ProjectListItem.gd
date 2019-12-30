@@ -122,6 +122,6 @@ func _custom_draw() -> void:
 	if selected:
 		var rect := Rect2(
 			Vector2(-5, -5),
-			get_size() + Vector2(20, 10)
+			get_size() + Vector2(10, 10)
 		)
 		draw_style_box(get_stylebox("selected", "Tree"), rect)

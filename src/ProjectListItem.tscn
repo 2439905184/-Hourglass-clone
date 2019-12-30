@@ -24,31 +24,36 @@ stretch_mode = 1
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 60.0
 margin_top = 274.0
-margin_right = 1004.0
+margin_right = 994.0
 margin_bottom = 306.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_right = 944.0
+margin_right = 934.0
 margin_bottom = 14.0
 
 [node name="Name" type="Label" parent="VBox/HBox"]
-margin_right = 940.0
+margin_right = 930.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Version" type="LinkButton" parent="VBox/HBox"]
-margin_left = 944.0
-margin_right = 944.0
+margin_left = 934.0
+margin_right = 934.0
 margin_bottom = 14.0
 
 [node name="Path" type="Label" parent="VBox"]
 modulate = Color( 1, 1, 1, 0.752941 )
 margin_top = 18.0
-margin_right = 944.0
+margin_right = 934.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
+
+[node name="spacer" type="Control" parent="."]
+margin_left = 1004.0
+margin_right = 1004.0
+margin_bottom = 580.0
 
 [node name="InstallDialog" parent="." instance=ExtResource( 2 )]
 anchor_right = 0.0

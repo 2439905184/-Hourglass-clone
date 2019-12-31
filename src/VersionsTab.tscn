@@ -19,7 +19,14 @@ __meta__ = {
 margin_right = 200.0
 margin_bottom = 564.0
 
+[node name="Search" type="LineEdit" parent="VBox2"]
+margin_right = 200.0
+margin_bottom = 24.0
+clear_button_enabled = true
+placeholder_text = "Search Versions"
+
 [node name="Tree" type="Tree" parent="VBox2"]
+margin_top = 28.0
 margin_right = 200.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 200, 0 )
@@ -207,11 +214,12 @@ margin_top = -28.0
 margin_right = 517.0
 margin_bottom = 372.0
 rect_min_size = Vector2( 600, 400 )
-window_title = "Find Godot Executable"
+window_title = "Open a File"
 mode = 0
 access = 2
 current_dir = "/home/james/Documents/git/godot-version-manager"
 current_path = "/home/james/Documents/git/godot-version-manager/"
+[connection signal="text_changed" from="VBox2/Search" to="." method="_on_Search_text_changed"]
 [connection signal="item_selected" from="VBox2/Tree" to="." method="_on_version_selected"]
 [connection signal="toggled" from="VBox2/Beta" to="." method="_on_Beta_toggled"]
 [connection signal="toggled" from="VBox2/Mono" to="." method="_on_Mono_toggled"]

@@ -40,7 +40,13 @@ func _build_tree() -> void:
 	var beta := Config.show_beta_versions
 	var mono := Config.show_mono_versions
 
+	var search : String = $VBox2/Search.text
+
 	for version in Versions.get_versions():
+		if search != "":
+			if Versions.get_version_name(version).find(search) == -1:
+				continue
+
 		var item
 		if Versions.is_installed(version):
 			item = $VBox2/Tree.create_item(installed)
@@ -193,3 +199,6 @@ func _on_Browse_pressed() -> void:
 
 func _on_BrowseDialog_file_selected(path: String) -> void:
 	Versions.set_custom_executable(_selected_version(), path)
+
+func _on_Search_text_changed(new_text: String) -> void:
+	_build_tree()

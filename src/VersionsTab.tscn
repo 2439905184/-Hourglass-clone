@@ -81,14 +81,14 @@ text = "3.0.6"
 
 [node name="spacer" type="Control" parent="VBox/HBox"]
 margin_left = 38.0
-margin_right = 320.0
+margin_right = 283.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="DownloadProgress" type="ProgressBar" parent="VBox/HBox"]
-margin_left = 326.0
+margin_left = 289.0
 margin_top = 5.0
-margin_right = 608.0
+margin_right = 534.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
@@ -108,36 +108,39 @@ __meta__ = {
 }
 
 [node name="Launch" type="Button" parent="VBox/HBox"]
-margin_left = 614.0
-margin_right = 671.0
+margin_left = 540.0
+margin_right = 597.0
 margin_bottom = 20.0
 text = "Launch"
 
 [node name="Install" type="Button" parent="VBox/HBox"]
-margin_left = 677.0
-margin_right = 729.0
+margin_left = 603.0
+margin_right = 655.0
 margin_bottom = 20.0
 text = "Install"
 
 [node name="Remove" type="Button" parent="VBox/HBox"]
-margin_left = 735.0
-margin_right = 799.0
+margin_left = 661.0
+margin_right = 725.0
 margin_bottom = 20.0
 text = "Remove"
 
 [node name="Uninstall" type="Button" parent="VBox/HBox"]
-visible = false
 margin_left = 731.0
 margin_right = 800.0
 margin_bottom = 20.0
 text = "Uninstall"
 
 [node name="spacer2" type="Control" parent="VBox/HBox"]
-margin_left = 805.0
-margin_right = 805.0
+margin_left = 806.0
+margin_right = 806.0
 margin_bottom = 20.0
 
 [node name="ConfirmRemove" type="ConfirmationDialog" parent="VBox/HBox"]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="ConfirmUninstall" type="ConfirmationDialog" parent="VBox/HBox"]
 margin_right = 200.0
 margin_bottom = 70.0
 
@@ -229,6 +232,7 @@ current_path = "/home/james/Documents/git/godot-version-manager/"
 [connection signal="pressed" from="VBox/HBox/Remove" to="." method="_on_Remove_pressed"]
 [connection signal="pressed" from="VBox/HBox/Uninstall" to="." method="_on_Uninstall_pressed"]
 [connection signal="confirmed" from="VBox/HBox/ConfirmRemove" to="." method="_on_ConfirmRemove_confirmed"]
+[connection signal="confirmed" from="VBox/HBox/ConfirmUninstall" to="." method="_on_ConfirmUninstall_confirmed"]
 [connection signal="text_entered" from="VBox/EditCustom/HBox2/Name" to="." method="_on_Name_text_entered"]
 [connection signal="pressed" from="VBox/EditCustom/HBox2/Rename" to="." method="_on_Rename_pressed"]
 [connection signal="pressed" from="VBox/EditCustom/HBox/Browse" to="." method="_on_Browse_pressed"]

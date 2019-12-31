@@ -102,6 +102,10 @@ func _extract_godot() -> void:
 	out.store_buffer(godot)
 	out.close()
 
+	var manifest := ConfigFile.new()
+	manifest.set_value("files", "GodotSharp", godot_sharp)
+	manifest.save(dest_dir.plus_file("manifest.cfg"))
+
 	# make the file executable on *nix systems
 	if OS.get_name() == "X11" or OS.get_name() == "OSX":
 		OS.execute("chmod", ["+x", exec_path], true)

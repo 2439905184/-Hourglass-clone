@@ -82,7 +82,7 @@ func _on_version_selected() -> void:
 	var custom = Versions.is_custom(version)
 	$VBox/HBox/Launch.visible = installed
 	$VBox/HBox/Install.visible = (not installed) and (not custom)
-	#$VBox/HBox/Uninstall.visible = installed and not custom
+	$VBox/HBox/Uninstall.visible = installed and not custom
 	$VBox/HBox/Remove.visible = custom
 
 	if Versions.is_custom(version):
@@ -113,7 +113,17 @@ func _on_Launch_pressed() -> void:
 	get_tree().quit()
 
 func _on_Uninstall_pressed() -> void:
-	pass # Replace with function body.
+	var version := Versions.get_version_name(_selected_version())
+	var dialog = $VBox/HBox/ConfirmUninstall
+
+	dialog.get_ok().text = tr("Uninstall")
+	dialog.dialog_text = tr("Are you sure you want to uninstall {version}?").format({"version": version})
+	dialog.window_title = tr("Uninstall {version}?").format({"version": version})
+	dialog.rect_size = Vector2(0, 0)
+	dialog.popup_centered_minsize()
+
+func _on_ConfirmUninstall_confirmed() -> void:
+	Versions.uninstall(_selected_version())
 
 func _on_Remove_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())
@@ -157,6 +167,8 @@ func _on_install_failed(version: String) -> void:
 func _show_download_bar(show: bool) -> void:
 	$VBox/HBox/DownloadProgress.visible = show
 	$VBox/HBox/spacer.visible = !show
+	if show:
+		$VBox/HBox/Install.visible = false
 
 func _on_download_progress(version: String, downloaded: int, total: int) -> void:
 	if version != _selected_version(): return

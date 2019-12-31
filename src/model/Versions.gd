@@ -77,6 +77,37 @@ func install(version: String) -> void:
 	add_child(download)
 	download.download()
 
+func uninstall(version: String) -> void:
+	if not is_installed(version): return
+
+	var path := get_directory(version)
+	var dir := Directory.new()
+
+	# read the manifest and delete files listed there
+	var manifest := ConfigFile.new()
+	var manifest_path := path.plus_file("manifest.cfg")
+	manifest.load(manifest_path)
+
+	var to_delete := []
+
+	to_delete += manifest.get_value("files", "GodotSharp")
+
+	# delete in reverse order, so that directories are deleted after their
+	# contents
+	to_delete.invert()
+	for file in to_delete:
+		dir.remove(path.plus_file(file))
+
+	# delete the executable
+	dir.remove(get_executable(version))
+	# delete the manifest
+	dir.remove(manifest_path)
+	# delete the directory
+	dir.remove(path)
+
+	emit_signal("version_changed", version)
+
+
 func add_custom() -> String:
 	var version := Utils.uuid()
 	_versions_store.set_value(version, "is_custom", true)
@@ -104,8 +135,6 @@ func _ready() -> void:
 	add_child(updater)
 
 	_merge_versions(VERSIONS_TEMPLATE)
-
-	print(Utils.list_dir_recursive("user://versions/3.0.6"))
 
 func _merge_versions(path: String) -> void:
 	var file := ConfigFile.new()

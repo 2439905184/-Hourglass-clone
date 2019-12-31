@@ -61,4 +61,11 @@ margin_left = 195.0
 margin_right = 200.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 5, 0 )
+
+[node name="ConfirmQuit" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+dialog_text = "Are you sure you want to quit?
+One or more downloads will be canceled."
 [connection signal="pressed" from="HBox/Version" to="." method="_on_Version_pressed"]
+[connection signal="confirmed" from="ConfirmQuit" to="." method="_on_ConfirmQuit_confirmed"]

@@ -110,7 +110,7 @@ func _on_Install_pressed() -> void:
 
 func _on_Launch_pressed() -> void:
 	Versions.launch(_selected_version(), ["--project-manager"])
-	get_tree().quit()
+	find_parent("MainWindow").quit()
 
 func _on_Uninstall_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())

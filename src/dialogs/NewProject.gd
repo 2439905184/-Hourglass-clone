@@ -83,7 +83,7 @@ func _on_confirmed() -> void:
 
 		ret = Projects.open_project(creator.project_id)
 		if ret == OK:
-			get_tree().quit()
+			find_parent("MainWindow").quit()
 
 func _on_About_pressed() -> void:
 	$AboutGLES.get_cancel().text = tr("Close")

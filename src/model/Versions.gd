@@ -3,6 +3,8 @@ extends Node
 const VERSIONS_STORE = "user://versions.cfg"
 const VERSIONS_TEMPLATE = "res://data/versions.cfg"
 
+var active_downloads := 0
+
 var _versions_store : ConfigFile
 
 signal version_installed(version)

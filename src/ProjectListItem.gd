@@ -104,7 +104,7 @@ func _gui_input(event: InputEvent) -> void:
 
 	if event.doubleclick:
 		if open() == OK:
-			get_tree().quit()
+			find_parent("MainWindow").quit()
 	else:
 		find_parent("Projects").select_project(self, event.shift)
 

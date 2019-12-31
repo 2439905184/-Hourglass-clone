@@ -14,6 +14,8 @@ func _init(version: String) -> void:
 	connect("request_completed", self, "_on_request_completed")
 
 func download() -> void:
+	Versions.active_downloads += 1
+
 	var dir := Directory.new()
 	dir.make_dir_recursive(Versions.get_directory(_version))
 
@@ -115,10 +117,12 @@ func _extract_godot() -> void:
 	directory.remove(download_file)
 
 	Versions.emit_signal("version_installed", _version)
+	Versions.active_downloads -= 1
 	queue_free()
 
 func _failed() -> void:
 	Versions.emit_signal("install_failed", _version)
+	Versions.active_downloads -= 1
 	queue_free()
 
 # Returns the longest substring that both strings start with.

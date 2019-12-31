@@ -97,14 +97,14 @@ func _on_Open_pressed() -> void:
 	for project in _selected:
 		success |= project.open()
 
-	if success == OK: get_tree().quit()
+	if success == OK: find_parent("MainWindow").quit()
 
 func _on_Run_pressed() -> void:
 	var success := 0
 	for project in _selected:
 		success |= project.run()
 
-	if success == OK: get_tree().quit()
+	if success == OK: find_parent("MainWindow").quit()
 
 func _on_ShowFiles_pressed() -> void:
 	for project in _selected:

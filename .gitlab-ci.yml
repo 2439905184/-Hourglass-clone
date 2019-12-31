@@ -7,7 +7,7 @@ before_script:
 - apt-get install -y libpulse-dev libfreetype6-dev libudev-dev libxi-dev
 - apt-get install -y libxrandr-dev git
 
-build:
+pages:
     script:
     - "echo Threads available: $(nproc)"
     - git clone --depth 1 --branch zip-module https://github.com/flyingpimonster/godot.git
@@ -17,13 +17,13 @@ build:
     - mkdir -p $HOME/.local/share/godot/templates/3.2.beta
     - cp bin/godot.x11.opt.64 $HOME/.local/share/godot/templates/3.2.beta/linux_x11_64_release
     - cd -
-    - mkdir export
-    - ./godot/bin/godot_server.x11.tools.64 --export linux export/godot-version-manager-linux
+    - mkdir public
+    - ./godot/bin/godot_server.x11.tools.64 --export linux public/godot-version-manager-linux
 
     only:
     - tags
 
     artifacts:
         paths:
-        - export
+        - public
 

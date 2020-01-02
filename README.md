@@ -10,7 +10,7 @@ manager (though it's not there yet).
 Currently, only a Linux download is available. Support for other platforms is
 in progress.
 
-[Download for Linux](https://gitlab.com/FlyingPiMonster/hourglass/-/jobs/389318089/artifacts/raw/export/hourglass-linux?inline=false)
+[Download for Linux](https://flyingpimonster.gitlab.io/hourglass/hourglass-linux.tar.gz)
 
 ## Build Instructions
 Hourglass itself is a Godot Engine project, written in pure GDScript. However, it

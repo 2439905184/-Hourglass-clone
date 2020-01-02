@@ -1,7 +1,7 @@
-# Godot Version Manager
-A project/version manager for Godot Engine
+# Hourglass
+A project manager for Godot Engine
 
-Godot Version Manager is the project manager you've been waiting for. It keeps
+Hourglass is the project manager you've been waiting for. It keeps
 track of all your Godot projects as well as the Godot Engine versions they
 require. It aims to match and exceed all the features of the built-in project
 manager (though it's not there yet).
@@ -10,11 +10,11 @@ manager (though it's not there yet).
 Currently, only a Linux download is available. Support for other platforms is
 in progress.
 
-[Download for Linux](https://gitlab.com/FlyingPiMonster/godot-version-manager/-/jobs/389318089/artifacts/raw/export/godot-version-manager-linux?inline=false)
+[Download for Linux](https://gitlab.com/FlyingPiMonster/hourglass/-/jobs/389318089/artifacts/raw/export/hourglass-linux?inline=false)
 
 ## Build Instructions
-GVM itself is a Godot Engine project, written in pure GDScript. However, it
-uses a slightly modified engine, in order to read ZIP files using scripts. The
+Hourglass itself is a Godot Engine project, written in pure GDScript. However, it
+uses a slightly modified engine, in order to read ZIP files using scripts.The
 modifications [have been submitted upstream](https://github.com/godotengine/godot/pull/34444).
 Until they are reviewed and accepted, you will need to use
 [this branch](https://github.com/flyingpimonster/godot/tree/zip-module) instead.
@@ -22,7 +22,7 @@ Build instructions can be found
 [here in Godot's documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html). It is fairly simple.
 
 ## License
-Godot Version Manager is licensed under the GNU General Public License, version
+Hourglass is licensed under the GNU General Public License, version
 3 or, at your option, any later version.
 
 The logo images in `data/template` are licensed under CC-BY-3.0.

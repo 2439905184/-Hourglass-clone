@@ -34,6 +34,7 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 
 func _ready() -> void:
 	$VBox/Margin/HBox/SortMode.select(Config.sort_mode)
+	$Dialogs/ImportFile.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 
 	for project_id in Projects.get_projects():
 		_add_project(project_id)

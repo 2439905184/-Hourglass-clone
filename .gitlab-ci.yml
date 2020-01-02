@@ -18,7 +18,7 @@ pages:
     - cp bin/godot.x11.opt.64 $HOME/.local/share/godot/templates/3.2.beta/linux_x11_64_release
     - cd -
     - mkdir public
-    - ./godot/bin/godot_server.x11.tools.64 --export linux public/godot-version-manager-linux
+    - ./godot/bin/godot_server.x11.tools.64 --export linux public/hourglass-linux
 
     only:
     - tags

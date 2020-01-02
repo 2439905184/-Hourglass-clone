@@ -44,10 +44,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot Version Manager"
+config/name="Hourglass"
 run/main_scene="res://src/MainWindow.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="godot-version-manager"
+config/custom_user_dir_name="hourglass"
 config/icon="res://data/template/3/icon.png"
 
 [autoload]

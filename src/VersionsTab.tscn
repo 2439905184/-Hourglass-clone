@@ -220,8 +220,8 @@ rect_min_size = Vector2( 600, 400 )
 window_title = "Open a File"
 mode = 0
 access = 2
-current_dir = "/home/james/Documents/git/godot-version-manager"
-current_path = "/home/james/Documents/git/godot-version-manager/"
+current_dir = "/home/james/Documents/git/hourglass"
+current_path = "/home/james/Documents/git/hourglass/"
 [connection signal="text_changed" from="VBox2/Search" to="." method="_on_Search_text_changed"]
 [connection signal="item_selected" from="VBox2/Tree" to="." method="_on_version_selected"]
 [connection signal="toggled" from="VBox2/Beta" to="." method="_on_Beta_toggled"]

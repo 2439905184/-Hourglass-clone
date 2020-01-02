@@ -13,7 +13,7 @@ func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 
 func _on_Version_pressed() -> void:
-	OS.shell_open("https://gitlab.com/FlyingPiMonster/godot-version-manager")
+	OS.shell_open("https://hourglass.flyingpimonster.net")
 
 
 func _notification(what: int) -> void:

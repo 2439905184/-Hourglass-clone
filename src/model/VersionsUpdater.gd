@@ -1,7 +1,7 @@
 extends HTTPRequest
 class_name VersionsUpdater
 
-const URL = "https://gitlab.com/FlyingPiMonster/godot-version-manager/raw/master/data/versions.cfg"
+const URL = "https://gitlab.com/FlyingPiMonster/hourglass/raw/master/data/versions.cfg"
 const DOWNLOAD_PATH = "user://versions_update.cfg"
 
 signal request_failed()

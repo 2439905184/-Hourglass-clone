@@ -17,8 +17,9 @@ pages:
     - mkdir -p $HOME/.local/share/godot/templates/3.2.beta
     - cp bin/godot.x11.opt.64 $HOME/.local/share/godot/templates/3.2.beta/linux_x11_64_release
     - cd -
+    - ./godot/bin/godot_server.x11.tools.64 --export linux hourglass-linux
     - mkdir public
-    - ./godot/bin/godot_server.x11.tools.64 --export linux public/hourglass-linux
+    - tar czf public/hourglass-linux.tar.gz hourglass-linux
 
     only:
     - tags

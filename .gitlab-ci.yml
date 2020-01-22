@@ -1,14 +1,16 @@
 image: python:slim
 
-before_script:
-- apt-get update
-- apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev
-- apt-get install -y libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev
-- apt-get install -y libpulse-dev libfreetype6-dev libudev-dev libxi-dev
-- apt-get install -y libxrandr-dev git
+check_versions:
+    script:
+    - python3 scripts/check_versions.py
 
 pages:
     script:
+    - apt-get update
+    - apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev
+    - apt-get install -y libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev
+    - apt-get install -y libpulse-dev libfreetype6-dev libudev-dev libxi-dev
+    - apt-get install -y libxrandr-dev git
     - "echo Threads available: $(nproc)"
     - git clone --depth 1 --branch zip-module https://github.com/flyingpimonster/godot.git
     - cd godot
@@ -27,4 +29,3 @@ pages:
     artifacts:
         paths:
         - public
-

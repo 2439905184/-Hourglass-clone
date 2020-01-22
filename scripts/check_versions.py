@@ -3,7 +3,7 @@
 import configparser, sys, time, urllib.error, urllib.request
 
 mirror = "https://downloads.tuxfamily.org/godotengine/"
-platforms = ["Windows.32", "Windows.64", "OSX.32", "OSX.64", "X11.32", "X11.64"]
+platforms = ["source", "Windows.32", "Windows.64", "OSX.32", "OSX.64", "X11.32", "X11.64"]
 
 config = configparser.ConfigParser()
 config.read("data/versions.cfg")

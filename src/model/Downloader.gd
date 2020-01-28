@@ -50,26 +50,37 @@ func _extract_godot() -> void:
 	# figure out where all the needed files are
 	var exec_file : String
 	var godot_sharp := []
+	var macos_files := []
 	var prefix
 	if files.size() == 1:
 		exec_file = files[0]
 		prefix = ""
 	else:
 		for file in files:
+			if file.ends_with(".app/"):
+				continue
 			prefix = _str_prefix(prefix, file)
-
 		for i in range(files.size()):
 			var file = files[i].trim_prefix(prefix)
 			files[i] = file
 
-			if file.begins_with("GodotSharp/"):
-				godot_sharp.append(file)
-			else:
-				if exec_file:
-					push_error("Error! Can't tell which file is the Godot executable")
-					_failed()
-					return
-				exec_file = file
+		if OS.get_name() == "osx":
+			# Treat macOS as a special case due to its app bundle structure
+			exec_file = "MacOS/Godot"
+			for file in files:
+				if file == exec_file: continue
+				if file.ends_with(".app/"): continue
+				macos_files.append(file)
+		else:
+			for file in files:
+				if file.begins_with("GodotSharp/"):
+					godot_sharp.append(file)
+				else:
+					if exec_file:
+						push_error("Error! Can't tell which file is the Godot executable")
+						_failed()
+						return
+					exec_file = file
 
 	if not exec_file:
 		push_error("Error! Can't find Godot executable in zip file")
@@ -78,7 +89,7 @@ func _extract_godot() -> void:
 
 	# if there are any files in GodotSharp/ extract them
 	var dest_dir : String = Versions.get_directory(_version)
-	for filename in godot_sharp:
+	for filename in godot_sharp + macos_files:
 		if filename.find("..") != -1:
 			push_error("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
 			push_error(filename)
@@ -106,6 +117,8 @@ func _extract_godot() -> void:
 
 	var manifest := ConfigFile.new()
 	manifest.set_value("files", "GodotSharp", godot_sharp)
+	if OS.get_name() == "osx":
+		manifest.set_value("files", "macOS", macos_files)
 	manifest.save(dest_dir.plus_file("manifest.cfg"))
 
 	# make the file executable on *nix systems

@@ -93,6 +93,8 @@ func uninstall(version: String) -> void:
 	var to_delete := []
 
 	to_delete += manifest.get_value("files", "GodotSharp")
+	if manifest.has_section_key("files", "macOS"):
+		to_delete += manifest.get_value("files", "macOS")
 
 	# delete in reverse order, so that directories are deleted after their
 	# contents

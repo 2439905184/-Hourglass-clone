@@ -64,7 +64,7 @@ func _extract_godot() -> void:
 			var file = files[i].trim_prefix(prefix)
 			files[i] = file
 
-		if OS.get_name() == "osx":
+		if OS.get_name() == "OSX":
 			# Treat macOS as a special case due to its app bundle structure
 			exec_file = "MacOS/Godot"
 			for file in files:
@@ -117,7 +117,7 @@ func _extract_godot() -> void:
 
 	var manifest := ConfigFile.new()
 	manifest.set_value("files", "GodotSharp", godot_sharp)
-	if OS.get_name() == "osx":
+	if OS.get_name() == "OSX":
 		manifest.set_value("files", "macOS", macos_files)
 	manifest.save(dest_dir.plus_file("manifest.cfg"))
 

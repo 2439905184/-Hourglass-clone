@@ -83,7 +83,8 @@ export:
   - mkdir public
   - ./godot/bin/godot_server.x11.tools.64 --export linux hourglass-linux
   - tar czf public/hourglass-linux.tar.gz hourglass-linux
-  - ./godot/bin/godot_server.x11.tools.64 --export windows public/hourglass-windows.zip
+  - ./godot/bin/godot_server.x11.tools.64 --export windows hourglass-windows.exe
+  - zip public/hourglass-windows.zip hourglass-windows.exe
   - ./godot/bin/godot_server.x11.tools.64 --export macos hourglass-macos.app
   # workaround for godotengine/godot#527
   - unzip hourglass-macos.app

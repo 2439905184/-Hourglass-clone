@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ProjectListItem.gd" type="Script" id=1]
 [ext_resource path="res://src/dialogs/InstallDialog.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/dialogs/EditProjectDialog.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/icon_star.svg" type="Texture" id=4]
 
 [node name="ProjectListItem" type="HBoxContainer"]
 margin_left = 10.0
@@ -23,9 +24,9 @@ stretch_mode = 1
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 60.0
-margin_top = 274.0
+margin_top = 270.0
 margin_right = 994.0
-margin_bottom = 306.0
+margin_bottom = 310.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
@@ -43,12 +44,27 @@ margin_left = 934.0
 margin_right = 934.0
 margin_bottom = 14.0
 
-[node name="Path" type="Label" parent="VBox"]
-modulate = Color( 1, 1, 1, 0.752941 )
+[node name="HBox2" type="HBoxContainer" parent="VBox"]
 margin_top = 18.0
 margin_right = 934.0
-margin_bottom = 32.0
+margin_bottom = 40.0
+
+[node name="Path" type="Label" parent="VBox/HBox2"]
+modulate = Color( 1, 1, 1, 0.752941 )
+margin_top = 4.0
+margin_right = 902.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
+
+[node name="Favorite" type="Button" parent="VBox/HBox2"]
+margin_left = 906.0
+margin_right = 934.0
+margin_bottom = 22.0
+hint_tooltip = "Favorite"
+size_flags_vertical = 4
+toggle_mode = true
+icon = ExtResource( 4 )
+flat = true
 
 [node name="spacer" type="Control" parent="."]
 margin_left = 1004.0
@@ -67,3 +83,4 @@ margin_left = 804.0
 margin_right = 804.0
 [connection signal="draw" from="." to="." method="_custom_draw"]
 [connection signal="pressed" from="VBox/HBox/Version" to="." method="_on_show_version"]
+[connection signal="toggled" from="VBox/HBox2/Favorite" to="." method="_on_Favorite_toggled"]

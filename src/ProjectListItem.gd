@@ -57,7 +57,7 @@ func _on_version_changed(version: String) -> void:
 
 func _build() -> void:
 	_path = Projects.get_project_directory(project_id)
-	$VBox/Path.text = _path
+	$VBox/HBox2/Path.text = _path
 
 	project_cfg = ConfigFile.new()
 	if project_cfg.load(_path.plus_file("project.godot")) != OK:
@@ -87,6 +87,13 @@ func _build() -> void:
 		$VBox/HBox/Version.text = Versions.get_version_name(version)
 	else:
 		$VBox/HBox/Version.text = tr("Unknown version")
+
+	if Projects.get_project_favorite(project_id):
+		$VBox/HBox2/Favorite.pressed = true
+		$VBox/HBox2/Favorite.modulate = Color(1, 1, 1, 1)
+	else:
+		$VBox/HBox2/Favorite.pressed = false
+		$VBox/HBox2/Favorite.modulate = Color(1, 1, 1, 0.5)
 
 	valid = true
 
@@ -125,3 +132,6 @@ func _custom_draw() -> void:
 			get_size() + Vector2(10, 10)
 		)
 		draw_style_box(get_stylebox("selected", "Tree"), rect)
+
+func _on_Favorite_toggled(button_pressed: bool) -> void:
+	Projects.set_project_favorite(project_id, button_pressed)

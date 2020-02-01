@@ -52,7 +52,7 @@ func set_project_favorite(id: String, favorite: bool) -> void:
 	_save()
 
 func get_project_favorite(id: String) -> bool:
-	return _projects_store.get_value(id, "favorite")
+	return _projects_store.get_value(id, "favorite", false)
 
 func update_project_last_opened(id: String) -> void:
 	_projects_store.set_value(id, "last_opened", OS.get_unix_time())

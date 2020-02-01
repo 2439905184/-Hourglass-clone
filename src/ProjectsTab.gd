@@ -64,6 +64,11 @@ func _sort_and_filter() -> void:
 			projects[i].visible = true
 
 func _project_sorter(a, b) -> bool:
+	var a_favorite := Projects.get_project_favorite(a.project_id)
+	var b_favorite := Projects.get_project_favorite(b.project_id)
+	if a_favorite != b_favorite:
+		return a_favorite
+
 	match Config.sort_mode:
 		SortMode.NAME:
 			var name_a := Projects.get_project_name(a.project_id)

@@ -25,7 +25,9 @@ Build instructions can be found
 Hourglass is licensed under the GNU General Public License, version
 3 or, at your option, any later version.
 
-The logo images in `data/template` are licensed under CC-BY-3.0.
+The logo images in `data/template` are licensed under CC-BY-3.0. The icon
+at `data/icon_star.svg` is from the Godot Engine source code, under the MIT
+license.
 
 ---
 

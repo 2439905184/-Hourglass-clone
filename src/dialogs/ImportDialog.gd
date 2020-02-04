@@ -1,20 +1,19 @@
 extends ConfirmationDialog
 
+
 var path : String setget set_path
 
 onready var version_dropdown: VersionDropdown = $VBox/HBox/VersionDropdown
-
-func show_dialog() -> void:
-	$VBox/HBox/VersionDropdown.refresh()
-	rect_size = Vector2(0, 0)
-	popup_centered_minsize()
 
 
 func _ready() -> void:
 	get_ok().text = tr("Import")
 
-func _on_confirmed() -> void:
-	var project_id := Projects.create_project(path.get_base_dir(), version_dropdown.get_selected_version())
+
+func show_dialog() -> void:
+	$VBox/HBox/VersionDropdown.refresh()
+	rect_size = Vector2(0, 0)
+	popup_centered_minsize()
 
 func set_path(new_path: String) -> void:
 	path = new_path
@@ -25,3 +24,7 @@ func set_path(new_path: String) -> void:
 
 	var name = cfg.get_value("application", "config/name")
 	window_title = tr("Import {name}").format({"name":name})
+
+
+func _on_confirmed() -> void:
+	var project_id := Projects.create_project(path.get_base_dir(), version_dropdown.get_selected_version())

@@ -1,9 +1,12 @@
 extends ConfirmationDialog
 
+
 var _version : String
+
 
 func _ready() -> void:
 	get_ok().text = tr("Install")
+
 
 func show_dialog(version: String) -> void:
 	_version = version

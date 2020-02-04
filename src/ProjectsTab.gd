@@ -1,11 +1,12 @@
 extends HBoxContainer
 
-const PROJECT_LIST_ITEM = preload("res://src/ProjectListItem.tscn")
 
 enum SortMode {
 	LAST_MODIFIED,
 	NAME,
 }
+
+const PROJECT_LIST_ITEM = preload("res://src/ProjectListItem.tscn")
 
 var _selected := []
 
@@ -22,6 +23,18 @@ onready var new_project := $Dialogs/NewProject
 onready var import_dialog := $Dialogs/ImportDialog
 onready var edit_project_dialog := $Dialogs/EditProjectDialog
 
+
+func _ready() -> void:
+	sort_mode.select(Config.sort_mode)
+	import_file.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+
+	for project_id in Projects.get_projects():
+		_add_project(project_id)
+	_sort_and_filter()
+
+	Projects.connect("project_added", self, "_on_project_added")
+	Projects.connect("project_changed", self, "_on_project_changed")
+	Projects.connect("project_removed", self, "_on_project_removed")
 
 func select_project(project: ProjectListItem, shift=false) -> void:
 	if not shift:
@@ -44,18 +57,6 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 
 	edit.disabled = _selected.size() != 1
 
-
-func _ready() -> void:
-	sort_mode.select(Config.sort_mode)
-	import_file.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-
-	for project_id in Projects.get_projects():
-		_add_project(project_id)
-	_sort_and_filter()
-
-	Projects.connect("project_added", self, "_on_project_added")
-	Projects.connect("project_changed", self, "_on_project_changed")
-	Projects.connect("project_removed", self, "_on_project_removed")
 
 func _add_project(project_id: String) -> void:
 	var project = PROJECT_LIST_ITEM.instance()

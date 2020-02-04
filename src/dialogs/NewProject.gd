@@ -1,5 +1,6 @@
 extends ConfirmationDialog
 
+
 onready var version_dropdown: VersionDropdown = $VBox/HBox3/VersionDropdown
 onready var browse: FileDialog = $Browse
 onready var name_label: Label = $VBox/HBox/Name
@@ -10,12 +11,14 @@ onready var gl2: CheckBox = $VBox/HBox3/GLVersion/GL2
 onready var about_gles: ConfirmationDialog = $AboutGLES
 
 
-func show_dialog() -> void:
-	version_dropdown.refresh()
-
 func _ready() -> void:
 	_set_name(tr("New Project"))
 	_set_location(Config.get_project_location())
+
+
+func show_dialog() -> void:
+	version_dropdown.refresh()
+
 
 func _on_Browse_pressed() -> void:
 	if _location_exists():

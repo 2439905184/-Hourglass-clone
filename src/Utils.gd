@@ -1,5 +1,6 @@
-extends Object
 class_name Utils
+extends Object
+
 
 static func uuid() -> String:
 	var rand := RandomNumberGenerator.new()

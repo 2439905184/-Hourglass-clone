@@ -1,7 +1,12 @@
 class_name VersionDropdown
 extends OptionButton
 
+
 var selected_version : String setget set_selected_version, get_selected_version
+
+
+func _ready() -> void:
+	refresh()
 
 func set_selected_version(new_selected_version: String) -> void:
 	for idx in range(get_item_count()):
@@ -18,6 +23,3 @@ func refresh() -> void:
 		if Versions.is_installed(version):
 			add_item(Versions.get_version_name(version))
 			set_item_metadata(get_item_count() - 1, version)
-
-func _ready() -> void:
-	refresh()

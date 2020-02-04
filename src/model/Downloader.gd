@@ -1,10 +1,12 @@
-extends HTTPRequest
 class_name Downloader
+extends HTTPRequest
+
 
 const MIRROR = "https://downloads.tuxfamily.org/godotengine/"
 
 var _version : String
 var _url : String
+
 
 func _init(version: String) -> void:
 	_version = version
@@ -12,6 +14,9 @@ func _init(version: String) -> void:
 	download_file = Versions.get_directory(version).plus_file("download.zip")
 
 	connect("request_completed", self, "_on_request_completed")
+
+func _process(delta: float) -> void:
+	Versions.emit_signal("download_progress", _version, get_downloaded_bytes(), get_body_size())
 
 func download() -> void:
 	Versions.active_downloads += 1
@@ -21,9 +26,6 @@ func download() -> void:
 
 	print("Downloading ", _url)
 	request(_url)
-
-func _process(delta: float) -> void:
-	Versions.emit_signal("download_progress", _version, get_downloaded_bytes(), get_body_size())
 
 func _on_request_completed(result: int, response: int, headers, body) -> void:
 	if result != RESULT_SUCCESS:

@@ -1,5 +1,12 @@
 extends Node
 
+
+signal version_installed(version)
+signal version_changed(version)
+signal download_progress(version, downloaded, total)
+signal install_failed(version)
+signal versions_updated()
+
 const VERSIONS_STORE = "user://versions.cfg"
 const VERSIONS_TEMPLATE = "res://data/versions.cfg"
 
@@ -7,11 +14,17 @@ var active_downloads := 0
 
 var _versions_store : ConfigFile
 
-signal version_installed(version)
-signal version_changed(version)
-signal download_progress(version, downloaded, total)
-signal install_failed(version)
-signal versions_updated()
+
+func _ready() -> void:
+	_versions_store = ConfigFile.new()
+	_versions_store.load(VERSIONS_STORE)
+
+	var updater := VersionsUpdater.new()
+	updater.connect("versions_updated", self, "_on_versions_updated")
+	add_child(updater)
+
+	_merge_versions(VERSIONS_TEMPLATE)
+
 
 func get_versions() -> PoolStringArray:
 	return _versions_store.get_sections()
@@ -128,17 +141,7 @@ func remove_custom_version(version: String) -> void:
 	_versions_store.erase_section(version)
 	emit_signal("version_changed", version)
 	_save()
-
-
-func _ready() -> void:
-	_versions_store = ConfigFile.new()
-	_versions_store.load(VERSIONS_STORE)
-
-	var updater := VersionsUpdater.new()
-	updater.connect("versions_updated", self, "_on_versions_updated")
-	add_child(updater)
-
-	_merge_versions(VERSIONS_TEMPLATE)
+	
 
 func _merge_versions(path: String) -> void:
 	var file := ConfigFile.new()

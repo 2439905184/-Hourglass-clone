@@ -7,10 +7,6 @@ onready var tab_container: TabContainer = $TabContainer
 onready var version_label: Label = $HBox/Version
 
 
-func show_version(version_code: String) -> void:
-	versions.select_version(version_code)
-	tab_container.current_tab = 1
-
 func _ready() -> void:
 	var build = ConfigFile.new()
 	build.load("res://data/build.cfg")
@@ -18,10 +14,6 @@ func _ready() -> void:
 
 	confirm_quit.get_ok().text = tr("Quit")
 	get_tree().set_auto_accept_quit(false)
-
-func _on_Version_pressed() -> void:
-	OS.shell_open("https://flyingpimonster.gitlab.io/hourglass-website")
-
 
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -31,12 +23,21 @@ func _notification(what: int) -> void:
 		else:
 			get_tree().quit()
 
-func _should_ask_before_quitting() -> bool:
-	return Versions.active_downloads != 0
+
+func show_version(version_code: String) -> void:
+	versions.select_version(version_code)
+	tab_container.current_tab = 1
 
 func quit() -> void:
 	if !_should_ask_before_quitting():
 		get_tree().quit()
+
+
+func _on_Version_pressed() -> void:
+	OS.shell_open("https://flyingpimonster.gitlab.io/hourglass-website")
+
+func _should_ask_before_quitting() -> bool:
+	return Versions.active_downloads != 0
 
 func _on_ConfirmQuit_confirmed() -> void:
 	get_tree().quit()

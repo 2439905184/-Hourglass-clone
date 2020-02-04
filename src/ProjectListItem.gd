@@ -1,5 +1,5 @@
-extends HBoxContainer
 class_name ProjectListItem
+extends HBoxContainer
 
 
 var project_id : String
@@ -18,6 +18,23 @@ onready var version_label: Label = $VBox/HBox/Version
 onready var favorite_button: Button = $VBox/HBox2/Favorite
 onready var install_dialog := $InstallDialog
 onready var edit_project_dialog := $EditProjectDialog
+
+
+func _ready() -> void:
+	Projects.connect("project_changed", self, "_on_project_changed")
+	Versions.connect("version_changed", self, "_on_version_changed")
+	_build()
+
+func _gui_input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton: return
+	if not event.button_index == BUTTON_LEFT: return
+	if not event.pressed: return
+
+	if event.doubleclick:
+		if open() == OK:
+			find_parent("MainWindow").quit()
+	else:
+		find_parent("Projects").select_project(self, event.shift)
 
 
 func open() -> int:
@@ -51,11 +68,6 @@ func set_selected(new_selected: bool) -> void:
 func get_selected() -> bool:
 	return selected
 
-
-func _ready() -> void:
-	Projects.connect("project_changed", self, "_on_project_changed")
-	Versions.connect("version_changed", self, "_on_version_changed")
-	_build()
 
 func _on_project_changed(id: String) -> void:
 	if id == project_id:
@@ -113,17 +125,6 @@ func _not_installed() -> void:
 		install_dialog.show_dialog(version)
 	else:
 		edit_project_dialog.show_dialog(project_id)
-
-func _gui_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton: return
-	if not event.button_index == BUTTON_LEFT: return
-	if not event.pressed: return
-
-	if event.doubleclick:
-		if open() == OK:
-			find_parent("MainWindow").quit()
-	else:
-		find_parent("Projects").select_project(self, event.shift)
 
 func _on_show_version() -> void:
 	var version = Projects.get_project_version(project_id)

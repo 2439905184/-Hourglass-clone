@@ -1,9 +1,10 @@
 extends AcceptDialog
 
-var label: Label
+
+onready var label: Label = Label.new()
+
 
 func _ready() -> void:
-	label = Label.new()
 	label.name = "Label"
 	label.autowrap = true
 	add_child(label)

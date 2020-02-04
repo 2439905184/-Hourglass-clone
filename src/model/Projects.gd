@@ -5,11 +5,14 @@ signal project_added(project_id)
 signal project_removed(project_id)
 signal project_changed(project_id)
 
+const PROJECTS_STORE = "user://projects.cfg"
 
 var _projects_store : ConfigFile
 
 
-const PROJECTS_STORE = "user://projects.cfg"
+func _ready() -> void:
+	_projects_store = ConfigFile.new()
+	_projects_store.load(PROJECTS_STORE)
 
 
 func open_project(id: String) -> int:
@@ -81,9 +84,6 @@ func remove_project(id: String) -> void:
 	_save()
 	emit_signal("project_removed", id)
 
-func _ready() -> void:
-	_projects_store = ConfigFile.new()
-	_projects_store.load(PROJECTS_STORE)
 
 func _get_project_value(id: String, key: String) -> String:
 	return _projects_store.get_value(id, key)

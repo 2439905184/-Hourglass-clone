@@ -1,12 +1,13 @@
 extends Node
 
+
+const CONFIG_FILE = "user://options.cfg"
+
 var project_location : String setget set_project_location, get_project_location
 var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versions
 var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
 var sort_mode : int setget set_sort_mode, get_sort_mode
 
-
-const CONFIG_FILE = "user://options.cfg"
 var _config : ConfigFile
 
 

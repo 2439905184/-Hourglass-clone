@@ -1,6 +1,7 @@
 extends HBoxContainer
 
-var child_items := {}
+
+var _child_items := {}
 
 onready var main_pane: VBoxContainer = $MainPane
 onready var side_pane: VBoxContainer = $SidePane
@@ -25,13 +26,6 @@ onready var download_progress_label: Label = $MainPane/HBox/DownloadProgress/Lab
 onready var download_spacer: Control = $SidePane/spacer
 
 
-func select_version(version_code: String) -> bool:
-	if version_code in child_items:
-		child_items[version_code].select(0)
-		return true
-	return false
-
-
 func _ready() -> void:
 	main_pane.visible = false
 	beta.pressed = Config.show_beta_versions
@@ -45,10 +39,16 @@ func _ready() -> void:
 
 	_build_tree()
 
+func select_version(version_code: String) -> bool:
+	if version_code in _child_items:
+		_child_items[version_code].select(0)
+		return true
+	return false
+	
 func _build_tree() -> void:
 	var selected := _selected_version()
 	tree.clear()
-	child_items.clear()
+	_child_items.clear()
 
 	var root = tree.create_item()
 
@@ -83,7 +83,7 @@ func _build_tree() -> void:
 
 		item.set_text(0, Versions.get_version_name(version))
 		item.set_metadata(0, version)
-		child_items[version] = item
+		_child_items[version] = item
 
 	if selected:
 		if not select_version(selected):

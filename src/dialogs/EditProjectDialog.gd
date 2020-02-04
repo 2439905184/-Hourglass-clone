@@ -1,8 +1,10 @@
 extends ConfirmationDialog
 
+
 var _project_id : String
 
 onready var version_dropdown: VersionDropdown = $HBox/VersionDropdown
+
 
 func show_dialog(project_id: String) -> void:
 	_project_id = project_id

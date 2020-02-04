@@ -20,7 +20,7 @@ func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 
 func _on_Version_pressed() -> void:
-	OS.shell_open("https://hourglass.flyingpimonster.net")
+	OS.shell_open("https://flyingpimonster.gitlab.io/hourglass-website")
 
 
 func _notification(what: int) -> void:

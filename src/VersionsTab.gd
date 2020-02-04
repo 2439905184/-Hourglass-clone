@@ -67,7 +67,7 @@ func _build_tree() -> void:
 
 	for version in Versions.get_versions():
 		if search != "":
-			if Versions.get_version_name(version).find(search) == -1:
+			if Versions.get_version_name(version).findn(search) < 0:
 				continue
 
 		var item: TreeItem

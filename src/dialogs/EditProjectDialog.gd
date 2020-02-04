@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
 
-var _project_id : String
+var _project_id: String
 
 onready var version_dropdown: VersionDropdown = $HBox/VersionDropdown
 

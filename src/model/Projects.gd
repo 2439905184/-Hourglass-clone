@@ -7,7 +7,7 @@ signal project_changed(project_id)
 
 const PROJECTS_STORE = "user://projects.cfg"
 
-var _projects_store : ConfigFile
+var _projects_store: ConfigFile
 
 
 func _ready() -> void:
@@ -17,14 +17,14 @@ func _ready() -> void:
 
 func open_project(id: String) -> int:
 	update_project_last_opened(id)
-	var version = get_project_version(id)
+	var version := get_project_version(id)
 	return Versions.launch(version, [
 		"--editor",
 		get_project_directory(id).plus_file("/project.godot")
 	])
 
 func run_project(id: String, scene: String) -> int:
-	var version = get_project_version(id)
+	var version := get_project_version(id)
 	return Versions.launch(version, [
 		"--path", get_project_directory(id),
 		scene

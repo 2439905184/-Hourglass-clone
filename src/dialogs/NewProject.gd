@@ -44,15 +44,15 @@ func _on_Browse_dir_selected(dir: String) -> void:
 	_set_location(dir)
 
 func _on_CreateFolder_pressed() -> void:
-	var folder = _get_name().to_lower().replace(" ", "-")
-	var current = _get_location()
+	var folder := _get_name().to_lower().replace(" ", "-")
+	var current := _get_location()
 	_set_location(current.plus_file(folder))
 
 func _on_Name_text_entered(_1: String) -> void:
 	_on_CreateFolder_pressed()
 
 func _location_exists() -> bool:
-	var dir = Directory.new()
+	var dir := Directory.new()
 	return dir.dir_exists(_get_location())
 
 func _validate() -> bool:

@@ -6,7 +6,7 @@ var PROJECT_GODOT_3: String = _read_file("res://data/template/3/project.godot")
 var PROJECT_GODOT_4: String = _read_file("res://data/template/4/project.godot")
 var GLES_2 : String = _read_file("res://data/template/4/gles2.txt")
 
-var project_id : String
+var project_id: String
 
 
 func create_project(path: String, name: String, version: String, gles2: bool) -> int:
@@ -14,7 +14,7 @@ func create_project(path: String, name: String, version: String, gles2: bool) ->
 	directory.make_dir_recursive(path)
 
 	var config_version := Versions.get_config_version(version)
-	var ret : int
+	var ret: int
 	match config_version:
 		0, 3:
 			# 0 is for custom versions. Just use the same template as 3.

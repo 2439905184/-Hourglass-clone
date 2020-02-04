@@ -23,7 +23,7 @@ onready var custom_executable_show: Button = $MainPane/EditCustom/HBox/ShowExecu
 onready var custom_browse: FileDialog = $MainPane/EditCustom/HBox/BrowseDialog
 onready var download_progress: ProgressBar = $MainPane/HBox/DownloadProgress
 onready var download_progress_label: Label = $MainPane/HBox/DownloadProgress/Label
-onready var download_spacer: Control = $SidePane/spacer
+onready var download_spacer: Control = $MainPane/HBox/spacer
 
 
 func _ready() -> void:
@@ -44,33 +44,33 @@ func select_version(version_code: String) -> bool:
 		_child_items[version_code].select(0)
 		return true
 	return false
-	
+
 func _build_tree() -> void:
 	var selected := _selected_version()
 	tree.clear()
 	_child_items.clear()
 
-	var root = tree.create_item()
+	var root := tree.create_item()
 
-	var installed = tree.create_item(root)
+	var installed := tree.create_item(root)
 	installed.set_text(0, tr("Installed"))
 	installed.set_selectable(0, false)
 
-	var available = tree.create_item(root)
+	var available := tree.create_item(root)
 	available.set_text(0, tr("Available"))
 	available.set_selectable(0, false)
 
 	var beta := Config.show_beta_versions
 	var mono := Config.show_mono_versions
 
-	var search : String = search_box.text
+	var search := search_box.text
 
 	for version in Versions.get_versions():
 		if search != "":
 			if Versions.get_version_name(version).find(search) == -1:
 				continue
 
-		var item
+		var item: TreeItem
 		if Versions.is_installed(version):
 			item = tree.create_item(installed)
 		else:
@@ -90,19 +90,19 @@ func _build_tree() -> void:
 			_on_version_selected()
 
 func _selected_version() -> String:
-	var selected = tree.get_selected()
+	var selected := tree.get_selected()
 	return selected.get_metadata(0) if selected else null
 
 func _on_version_selected() -> void:
-	var version = _selected_version()
+	var version := _selected_version()
 	if not version:
 		main_pane.visible = false
 		return
 
 	version_label.text = Versions.get_version_name(version)
 
-	var installed = Versions.is_installed(version)
-	var custom = Versions.is_custom(version)
+	var installed := Versions.is_installed(version)
+	var custom := Versions.is_custom(version)
 	version_launch.visible = installed
 	version_install.visible = (not installed) and (not custom)
 	version_uninstall.visible = installed and not custom
@@ -137,7 +137,7 @@ func _on_Launch_pressed() -> void:
 
 func _on_Uninstall_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())
-	var dialog = version_uninstall_confirm
+	var dialog := version_uninstall_confirm
 
 	dialog.get_ok().text = tr("Uninstall")
 	dialog.dialog_text = tr("Are you sure you want to uninstall {version}?").format({"version": version})
@@ -150,7 +150,7 @@ func _on_ConfirmUninstall_confirmed() -> void:
 
 func _on_Remove_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())
-	var dialog = version_remove_confirm
+	var dialog := version_remove_confirm
 
 	dialog.get_ok().text = tr("Remove")
 	dialog.dialog_text = tr("Are you sure you want to remove the custom version {version}? No files will be deleted.").format({"version": version})
@@ -182,10 +182,8 @@ func _on_version_changed(_version: String) -> void:
 	_build_tree()
 
 func _on_install_failed(version: String) -> void:
-	ErrorDialog.show_error(
-		"Install Failed",
-		tr("Installation of {version} failed. Check the console for more information.").format({"version": version})
-	)
+	ErrorDialog.show_error("Install Failed",
+			tr("Installation of {version} failed. Check the console for more information.").format({"version": version}))
 
 func _show_download_bar(show: bool) -> void:
 	download_progress.visible = show
@@ -194,12 +192,14 @@ func _show_download_bar(show: bool) -> void:
 		version_install.visible = false
 
 func _on_download_progress(version: String, downloaded: int, total: int) -> void:
-	if version != _selected_version(): return
-	if total <= 0: return
+	if version != _selected_version():
+		return
+	if total <= 0:
+		return
 
 	_show_download_bar(true)
 	download_progress.value = (downloaded / float(total))
-	var text = "%.1f / %.1f MB" % [downloaded / 1000000.0, total / 1000000.0]
+	var text := "%.1f / %.1f MB" % [downloaded / 1000000.0, total / 1000000.0]
 	download_progress_label.text = text
 
 func _on_AddCustom_pressed() -> void:
@@ -217,7 +217,7 @@ func _on_ShowExecutable_pressed() -> void:
 	OS.shell_open(Versions.get_executable(_selected_version()).get_base_dir())
 
 func _on_Browse_pressed() -> void:
-	var version = _selected_version()
+	var version := _selected_version()
 
 	if Versions.is_executable_set(version):
 		var path := Versions.get_executable(version)

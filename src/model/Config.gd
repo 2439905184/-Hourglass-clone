@@ -8,7 +8,7 @@ var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versi
 var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
 var sort_mode : int setget set_sort_mode, get_sort_mode
 
-var _config : ConfigFile
+var _config: ConfigFile
 
 
 func _ready() -> void:

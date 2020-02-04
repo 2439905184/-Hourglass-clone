@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
 
-var _version : String
+var _version: String
 
 
 func _ready() -> void:

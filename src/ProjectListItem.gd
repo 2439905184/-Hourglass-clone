@@ -26,9 +26,12 @@ func _ready() -> void:
 	_build()
 
 func _gui_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton: return
-	if not event.button_index == BUTTON_LEFT: return
-	if not event.pressed: return
+	if not event is InputEventMouseButton:
+		return
+	if not event.button_index == BUTTON_LEFT:
+		return
+	if not event.pressed:
+		return
 
 	if event.doubleclick:
 		if open() == OK:
@@ -38,7 +41,8 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func open() -> int:
-	if not valid: return ERR_CANT_OPEN
+	if not valid:
+		return ERR_CANT_OPEN
 
 	var res := Projects.open_project(project_id)
 	if res == ERR_DOES_NOT_EXIST:
@@ -46,8 +50,10 @@ func open() -> int:
 	return res
 
 func run() -> int:
-	if not valid: return ERR_CANT_OPEN
-	if not _main_scene: return OK
+	if not valid:
+		return ERR_CANT_OPEN
+	if not _main_scene:
+		return OK
 
 	var res := Projects.run_project(project_id, _main_scene)
 	if res == ERR_DOES_NOT_EXIST:
@@ -127,7 +133,7 @@ func _not_installed() -> void:
 		edit_project_dialog.show_dialog(project_id)
 
 func _on_show_version() -> void:
-	var version = Projects.get_project_version(project_id)
+	var version := Projects.get_project_version(project_id)
 	if Versions.exists(version):
 		find_parent("MainWindow").show_version(version)
 	else:

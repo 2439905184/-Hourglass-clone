@@ -12,7 +12,7 @@ const VERSIONS_TEMPLATE = "res://data/versions.cfg"
 
 var active_downloads := 0
 
-var _versions_store : ConfigFile
+var _versions_store: ConfigFile
 
 
 func _ready() -> void:
@@ -78,7 +78,8 @@ func get_config_version(version: String) -> int:
 	return _versions_store.get_value(version, "config_version", 0)
 
 func launch(version: String, args: PoolStringArray=[]) -> int:
-	if not is_installed(version): return ERR_DOES_NOT_EXIST
+	if not is_installed(version):
+		return ERR_DOES_NOT_EXIST
 
 	print("executing: ", get_executable(version), " ", args)
 	OS.execute(get_executable(version), args, false)
@@ -93,7 +94,8 @@ func install(version: String) -> void:
 	download.download()
 
 func uninstall(version: String) -> void:
-	if not is_installed(version): return
+	if not is_installed(version):
+		return
 
 	var path := get_directory(version)
 	var dir := Directory.new()
@@ -137,11 +139,13 @@ func is_custom(version: String) -> bool:
 	return _versions_store.get_value(version, "is_custom", false)
 
 func remove_custom_version(version: String) -> void:
-	if not is_custom(version): return
+	if not is_custom(version):
+		return
+
 	_versions_store.erase_section(version)
 	emit_signal("version_changed", version)
 	_save()
-	
+
 
 func _merge_versions(path: String) -> void:
 	var file := ConfigFile.new()

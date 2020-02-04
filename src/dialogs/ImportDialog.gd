@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
 
-var path : String setget set_path
+var path: String setget set_path
 
 onready var version_dropdown: VersionDropdown = $VBox/HBox/VersionDropdown
 
@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func show_dialog() -> void:
-	$VBox/HBox/VersionDropdown.refresh()
+	version_dropdown.refresh()
 	rect_size = Vector2(0, 0)
 	popup_centered_minsize()
 

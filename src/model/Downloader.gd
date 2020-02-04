@@ -4,8 +4,8 @@ extends HTTPRequest
 
 const MIRROR = "https://downloads.tuxfamily.org/godotengine/"
 
-var _version : String
-var _url : String
+var _version: String
+var _url: String
 
 
 func _init(version: String) -> void:
@@ -45,15 +45,15 @@ func _on_request_completed(result: int, response: int, headers, body) -> void:
 
 func _extract_godot() -> void:
 	# open the zip file
-	var unzip = ZipReader.new()
+	var unzip := ZipReader.new()
 	unzip.open(download_file)
-	var files = unzip.get_files()
+	var files := unzip.get_files()
 
 	# figure out where all the needed files are
-	var exec_file : String
+	var exec_file: String
 	var godot_sharp := []
 	var macos_files := []
-	var prefix
+	var prefix: String
 	if files.size() == 1:
 		exec_file = files[0]
 		prefix = ""
@@ -90,7 +90,7 @@ func _extract_godot() -> void:
 		return
 
 	# if there are any files in GodotSharp/ extract them
-	var dest_dir : String = Versions.get_directory(_version)
+	var dest_dir: String = Versions.get_directory(_version)
 	for filename in godot_sharp + macos_files:
 		if filename.find("..") != -1:
 			push_error("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
@@ -110,9 +110,9 @@ func _extract_godot() -> void:
 			file.close()
 
 	# extract the godot executable
-	var exec_path = Versions.get_executable(_version)
-	var godot : PoolByteArray = unzip.read_file(prefix.plus_file(exec_file))
-	var out = File.new()
+	var exec_path: String = Versions.get_executable(_version)
+	var godot: PoolByteArray = unzip.read_file(prefix.plus_file(exec_file))
+	var out := File.new()
 	out.open(exec_path, File.WRITE)
 	out.store_buffer(godot)
 	out.close()
@@ -143,11 +143,16 @@ func _failed() -> void:
 # Returns the longest substring that both strings start with.
 # Will just return b if a is null
 func _str_prefix(a, b: String) -> String:
-	if a == null: return b
+	if a == null:
+		return b
 
 	var result := ""
 	for i in range(a.length()):
-		if b.length() < i: break
-		if b[i] != a[i]: break
+		if b.length() < i:
+			break
+		if b[i] != a[i]:
+			break
+
 		result += a[i]
+
 	return result

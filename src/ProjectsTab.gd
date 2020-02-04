@@ -59,15 +59,15 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 
 
 func _add_project(project_id: String) -> void:
-	var project = PROJECT_LIST_ITEM.instance()
+	var project := PROJECT_LIST_ITEM.instance()
 	project.project_id = project_id
 	project_list.add_child(project)
 
 func _sort_and_filter() -> void:
-	var projects = project_list.get_children()
+	var projects := project_list.get_children()
 	projects.sort_custom(self, "_project_sorter")
 
-	var search : String = search_box.text
+	var search: String = search_box.text
 
 	for i in range(projects.size()):
 		project_list.move_child(projects[i], i)
@@ -117,14 +117,16 @@ func _on_Open_pressed() -> void:
 	for project in _selected:
 		success |= project.open()
 
-	if success == OK: find_parent("MainWindow").quit()
+	if success == OK:
+		find_parent("MainWindow").quit()
 
 func _on_Run_pressed() -> void:
 	var success := 0
 	for project in _selected:
 		success |= project.run()
 
-	if success == OK: find_parent("MainWindow").quit()
+	if success == OK:
+		find_parent("MainWindow").quit()
 
 func _on_ShowFiles_pressed() -> void:
 	for project in _selected:

@@ -1,7 +1,17 @@
 extends ConfirmationDialog
 
+onready var version_dropdown: VersionDropdown = $VBox/HBox3/VersionDropdown
+onready var browse: FileDialog = $Browse
+onready var name_label: Label = $VBox/HBox/Name
+onready var location_label: Label = $VBox/HBox2/Location
+onready var already_exists: Label = $VBox/AlreadyExists
+onready var gl_version: HBoxContainer = $VBox/HBox3/GLVersion
+onready var gl2: CheckBox = $VBox/HBox3/GLVersion/GL2
+onready var about_gles: ConfirmationDialog = $AboutGLES
+
+
 func show_dialog() -> void:
-	$VBox/HBox3/VersionDropdown.refresh()
+	version_dropdown.refresh()
 
 func _ready() -> void:
 	_set_name(tr("New Project"))
@@ -9,23 +19,23 @@ func _ready() -> void:
 
 func _on_Browse_pressed() -> void:
 	if _location_exists():
-		$Browse.current_dir = _get_location()
+		browse.current_dir = _get_location()
 	else:
-		$Browse.current_dir = _get_location().get_base_dir()
-	$Browse.popup_centered_minsize()
+		browse.current_dir = _get_location().get_base_dir()
+	browse.popup_centered_minsize()
 
 func _get_name() -> String:
-	return $VBox/HBox/Name.text
+	return name_label.text
 func _set_name(name: String) -> void:
-	$VBox/HBox/Name.text = name
+	name_label.text = name
 	_validate()
 func _get_location() -> String:
-	return $VBox/HBox2/Location.text
+	return location_label.text
 func _set_location(location: String) -> void:
-	$VBox/HBox2/Location.text = location
+	location_label.text = location
 	_validate()
 func _get_version() -> String:
-	return $VBox/HBox3/VersionDropdown.get_selected_version()
+	return version_dropdown.get_selected_version()
 
 func _on_Browse_dir_selected(dir: String) -> void:
 	_set_location(dir)
@@ -49,10 +59,10 @@ func _validate() -> bool:
 		valid = false
 
 	if _location_exists():
-		$VBox/AlreadyExists.modulate.a = 1
+		already_exists.modulate.a = 1
 		valid = false
 	else:
-		$VBox/AlreadyExists.modulate.a = 0
+		already_exists.modulate.a = 0
 
 	get_ok().disabled = not valid
 	return valid
@@ -64,8 +74,8 @@ func _on_Name_text_changed(_1: String) -> void:
 
 
 func _on_version_selected(id: int) -> void:
-	var version = $VBox/HBox3/VersionDropdown.get_selected_version()
-	$VBox/HBox3/GLVersion.visible = (Versions.get_config_version(version) >= 4)
+	var version = version_dropdown.get_selected_version()
+	gl_version.visible = (Versions.get_config_version(version) >= 4)
 
 func _on_confirmed() -> void:
 	if _validate():
@@ -74,7 +84,7 @@ func _on_confirmed() -> void:
 			_get_location(),
 			_get_name(),
 			_get_version(),
-			$VBox/HBox3/GLVersion/GL2.pressed
+			gl2.pressed
 		)
 
 		if ret != OK:
@@ -86,10 +96,10 @@ func _on_confirmed() -> void:
 			find_parent("MainWindow").quit()
 
 func _on_About_pressed() -> void:
-	$AboutGLES.get_cancel().text = tr("Close")
-	$AboutGLES.get_ok().text = tr("More Details")
-	$AboutGLES.rect_size = Vector2(0, 0)
-	$AboutGLES.popup_centered_minsize()
+	about_gles.get_cancel().text = tr("Close")
+	about_gles.get_ok().text = tr("More Details")
+	about_gles.rect_size = Vector2(0, 0)
+	about_gles.popup_centered_minsize()
 
 func _on_AboutGLES_confirmed() -> void:
 	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/misc/gles2_gles3_differences.html")

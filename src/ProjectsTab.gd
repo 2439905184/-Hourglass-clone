@@ -9,6 +9,19 @@ enum SortMode {
 
 var _selected := []
 
+onready var open: Button = $Margin/VBox/Open
+onready var show_files: Button = $Margin/VBox/ShowFiles
+onready var run: Button = $Margin/VBox/Run
+onready var remove: Button = $Margin/VBox/Remove
+onready var edit: Button = $Margin/VBox/Edit
+onready var sort_mode: OptionButton = $VBox/Margin/HBox/SortMode
+onready var import_file: FileDialog = $Dialogs/ImportFile
+onready var project_list: VBoxContainer = $VBox/Scroll/Margin/ProjectList
+onready var search_box: LineEdit = $VBox/Margin/HBox/Search
+onready var new_project := $Dialogs/NewProject
+onready var import_dialog := $Dialogs/ImportDialog
+onready var edit_project_dialog := $Dialogs/EditProjectDialog
+
 
 func select_project(project: ProjectListItem, shift=false) -> void:
 	if not shift:
@@ -24,17 +37,17 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 		project.set_selected(true)
 
 	var none := _selected.size() <= 0
-	$Margin/VBox/Open.disabled = none
-	$Margin/VBox/ShowFiles.disabled = none
-	$Margin/VBox/Run.disabled = none
-	$Margin/VBox/Remove.disabled = none
+	open.disabled = none
+	show_files.disabled = none
+	run.disabled = none
+	remove.disabled = none
 
-	$Margin/VBox/Edit.disabled = _selected.size() != 1
+	edit.disabled = _selected.size() != 1
 
 
 func _ready() -> void:
-	$VBox/Margin/HBox/SortMode.select(Config.sort_mode)
-	$Dialogs/ImportFile.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	sort_mode.select(Config.sort_mode)
+	import_file.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 
 	for project_id in Projects.get_projects():
 		_add_project(project_id)
@@ -47,16 +60,16 @@ func _ready() -> void:
 func _add_project(project_id: String) -> void:
 	var project = PROJECT_LIST_ITEM.instance()
 	project.project_id = project_id
-	$VBox/Scroll/Margin/VBox.add_child(project)
+	project_list.add_child(project)
 
 func _sort_and_filter() -> void:
-	var projects = $VBox/Scroll/Margin/VBox.get_children()
+	var projects = project_list.get_children()
 	projects.sort_custom(self, "_project_sorter")
 
-	var search : String = $VBox/Margin/HBox/Search.text
+	var search : String = search_box.text
 
 	for i in range(projects.size()):
-		$VBox/Scroll/Margin/VBox.move_child(projects[i], i)
+		project_list.move_child(projects[i], i)
 		if not search.empty():
 			var name : String = projects[i].project_name
 			projects[i].visible = (name.findn(search) >= 0)
@@ -89,14 +102,14 @@ func _on_project_changed(project_id: String) -> void:
 	_sort_and_filter()
 
 func _on_project_removed(project_id: String) -> void:
-	for project in $VBox/Scroll/Margin/VBox.get_children():
+	for project in project_list.get_children():
 		if project.project_id == project_id:
 			project.queue_free()
 			if project in _selected:
 				_selected.erase(project)
 
 func _on_New_pressed() -> void:
-	$Dialogs/NewProject.popup_centered()
+	new_project.popup_centered()
 
 func _on_Open_pressed() -> void:
 	var success := 0
@@ -122,14 +135,14 @@ func _on_Remove_pressed() -> void:
 
 func _on_Edit_pressed() -> void:
 	if _selected.size() == 1:
-		$Dialogs/EditProjectDialog.show_dialog(_selected[0].project_id)
+		edit_project_dialog.show_dialog(_selected[0].project_id)
 
 func _on_Import_pressed() -> void:
-	$Dialogs/ImportFile.popup_centered()
+	import_file.popup_centered()
 
 func _on_ImportFile_file_selected(path: String) -> void:
-	$Dialogs/ImportDialog.path = path
-	$Dialogs/ImportDialog.show_dialog()
+	import_dialog.path = path
+	import_dialog.show_dialog()
 
 func _on_sort_selected(id: int) -> void:
 	Config.sort_mode = id

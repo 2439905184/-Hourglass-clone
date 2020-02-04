@@ -1,3 +1,4 @@
+class_name VersionDropdown
 extends OptionButton
 
 var selected_version : String setget set_selected_version, get_selected_version

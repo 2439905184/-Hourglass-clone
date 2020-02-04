@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Utils.gd"
 }, {
+"base": "OptionButton",
+"class": "VersionDropdown",
+"language": "GDScript",
+"path": "res://src/misc/VersionDropdown.gd"
+}, {
 "base": "HTTPRequest",
 "class": "VersionsUpdater",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "ProjectCreator": "",
 "ProjectListItem": "",
 "Utils": "",
+"VersionDropdown": "",
 "VersionsUpdater": ""
 }
 

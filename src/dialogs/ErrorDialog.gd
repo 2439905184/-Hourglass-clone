@@ -1,7 +1,9 @@
 extends AcceptDialog
 
+var label: Label
+
 func _ready() -> void:
-	var label := Label.new()
+	label = Label.new()
 	label.name = "Label"
 	label.autowrap = true
 	add_child(label)
@@ -10,7 +12,7 @@ func _ready() -> void:
 
 func show_error(title: String, error: String) -> void:
 	window_title = tr(title)
-	$Label.text = tr(error)
+	label.text = tr(error)
 
 	rect_size = Vector2(0, 0)
 	popup_centered()

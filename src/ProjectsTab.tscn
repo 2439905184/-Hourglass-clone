@@ -75,7 +75,7 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Scroll/Margin"]
+[node name="ProjectList" type="VBoxContainer" parent="VBox/Scroll/Margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 901.0
@@ -159,8 +159,8 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "project.godot", "engine.cfg" )
-current_dir = "/home/james/Documents/git/hourglass"
-current_path = "/home/james/Documents/git/hourglass/"
+current_dir = "/home/jwestman/Documents/hourglass"
+current_path = "/home/jwestman/Documents/hourglass/"
 
 [node name="ImportDialog" parent="Dialogs" instance=ExtResource( 1 )]
 

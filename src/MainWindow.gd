@@ -1,15 +1,22 @@
 extends Control
 
+
+onready var confirm_quit: Button = $ConfirmQuit
+onready var versions: HBoxContainer = $TabContainer/Versions
+onready var tab_container: TabContainer = $TabContainer
+onready var version_label: Label = $HBox/Version
+
+
 func show_version(version_code: String) -> void:
-	$TabContainer/Versions.select_version(version_code)
-	$TabContainer.current_tab = 1
+	versions.select_version(version_code)
+	tab_container.current_tab = 1
 
 func _ready() -> void:
 	var build = ConfigFile.new()
 	build.load("res://data/build.cfg")
-	$HBox/Version.text = "v" + build.get_value("build", "version")
+	version_label.text = "v" + build.get_value("build", "version")
 
-	$ConfirmQuit.get_ok().text = tr("Quit")
+	confirm_quit.get_ok().text = tr("Quit")
 	get_tree().set_auto_accept_quit(false)
 
 func _on_Version_pressed() -> void:
@@ -19,8 +26,8 @@ func _on_Version_pressed() -> void:
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		if _should_ask_before_quitting():
-			$ConfirmQuit.rect_size = Vector2(0, 0)
-			$ConfirmQuit.popup_centered()
+			confirm_quit.rect_size = Vector2(0, 0)
+			confirm_quit.popup_centered()
 		else:
 			get_tree().quit()
 

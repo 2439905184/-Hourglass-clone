@@ -1,6 +1,7 @@
 extends HBoxContainer
 class_name ProjectListItem
 
+
 var project_id : String
 var project_cfg : ConfigFile
 var selected := false setget set_selected, get_selected
@@ -9,6 +10,15 @@ var project_name : String
 
 var _path : String
 var _main_scene : String
+
+onready var path_label: Label = $VBox/HBox2/Path
+onready var name_label: Label = $VBox/HBox/Name
+onready var icon_texture: TextureRect = $Icon
+onready var version_label: Label = $VBox/HBox/Version
+onready var favorite_button: Button = $VBox/HBox2/Favorite
+onready var install_dialog := $InstallDialog
+onready var edit_project_dialog := $EditProjectDialog
+
 
 func open() -> int:
 	if not valid: return ERR_CANT_OPEN
@@ -57,16 +67,16 @@ func _on_version_changed(version: String) -> void:
 
 func _build() -> void:
 	_path = Projects.get_project_directory(project_id)
-	$VBox/HBox2/Path.text = _path
+	path_label.text = _path
 
 	project_cfg = ConfigFile.new()
 	if project_cfg.load(_path.plus_file("project.godot")) != OK:
 		modulate.a = .5
-		$VBox/HBox/Name.text = tr("Project not found")
+		name_label.text = tr("Project not found")
 		return
 
 	project_name = project_cfg.get_value("application", "config/name")
-	$VBox/HBox/Name.text = project_name
+	name_label.text = project_name
 
 	var icon = project_cfg.get_value("application", "config/icon")
 	if icon:
@@ -76,7 +86,7 @@ func _build() -> void:
 		icon_img.resize(50, 50, Image.INTERPOLATE_CUBIC)
 		var texture = ImageTexture.new()
 		texture.create_from_image(icon_img)
-		$Icon.texture = texture
+		icon_texture.texture = texture
 
 	var main_scene = project_cfg.get_value("application", "run/main_scene")
 	if main_scene:
@@ -84,25 +94,25 @@ func _build() -> void:
 
 	var version := Projects.get_project_version(project_id)
 	if Versions.exists(version):
-		$VBox/HBox/Version.text = Versions.get_version_name(version)
+		version_label.text = Versions.get_version_name(version)
 	else:
-		$VBox/HBox/Version.text = tr("Unknown version")
+		version_label.text = tr("Unknown version")
 
 	if Projects.get_project_favorite(project_id):
-		$VBox/HBox2/Favorite.pressed = true
-		$VBox/HBox2/Favorite.modulate = Color(1, 1, 1, 1)
+		favorite_button.pressed = true
+		favorite_button.modulate = Color(1, 1, 1, 1)
 	else:
-		$VBox/HBox2/Favorite.pressed = false
-		$VBox/HBox2/Favorite.modulate = Color(1, 1, 1, 0.5)
+		favorite_button.pressed = false
+		favorite_button.modulate = Color(1, 1, 1, 0.5)
 
 	valid = true
 
 func _not_installed() -> void:
 	var version := Projects.get_project_version(project_id)
 	if Versions.exists(version):
-		$InstallDialog.show_dialog(version)
+		install_dialog.show_dialog(version)
 	else:
-		$EditProjectDialog.show_dialog(project_id)
+		edit_project_dialog.show_dialog(project_id)
 
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
@@ -120,7 +130,7 @@ func _on_show_version() -> void:
 	if Versions.exists(version):
 		find_parent("MainWindow").show_version(version)
 	else:
-		$EditProjectDialog.show_dialog(project_id)
+		edit_project_dialog.show_dialog(project_id)
 
 func _resolve_path(path: String) -> String:
 	return path.replace("res://", _path + "/")

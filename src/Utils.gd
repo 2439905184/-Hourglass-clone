@@ -6,7 +6,7 @@ static func uuid() -> String:
 	var rand := RandomNumberGenerator.new()
 	rand.randomize()
 	var bytes := PoolByteArray()
-	for i in range(15):
+	for _i in range(15):
 		bytes.append(rand.randi_range(0, 255))
 
 	var tmp := ["8", "9", "a", "b"]

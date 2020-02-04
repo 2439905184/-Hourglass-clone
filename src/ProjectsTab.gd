@@ -99,7 +99,7 @@ func _on_project_added(project_id: String) -> void:
 	_add_project(project_id)
 	_sort_and_filter()
 
-func _on_project_changed(project_id: String) -> void:
+func _on_project_changed(_project_id: String) -> void:
 	_sort_and_filter()
 
 func _on_project_removed(project_id: String) -> void:
@@ -151,6 +151,6 @@ func _on_sort_selected(id: int) -> void:
 	Config.sort_mode = id
 	_sort_and_filter()
 
-func _on_Search_text_changed(new_text: String) -> void:
+func _on_Search_text_changed(_new_text: String) -> void:
 	_sort_and_filter()
 

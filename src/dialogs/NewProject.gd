@@ -76,8 +76,8 @@ func _on_Name_text_changed(_1: String) -> void:
 	_validate()
 
 
-func _on_version_selected(id: int) -> void:
-	var version = version_dropdown.get_selected_version()
+func _on_version_selected(_id: int) -> void:
+	var version := version_dropdown.get_selected_version()
 	gl_version.visible = (Versions.get_config_version(version) >= 4)
 
 func _on_confirmed() -> void:

@@ -18,9 +18,9 @@ func create_project(path: String, name: String, version: String, gles2: bool) ->
 	match config_version:
 		0, 3:
 			# 0 is for custom versions. Just use the same template as 3.
-			ret = _create_project_3(path, name, version)
+			ret = _create_project_3(path, name)
 		4:
-			ret = _create_project_4(path, name, version, gles2)
+			ret = _create_project_4(path, name, gles2)
 		_:
 			return ERR_DOES_NOT_EXIST
 
@@ -31,7 +31,7 @@ func create_project(path: String, name: String, version: String, gles2: bool) ->
 	return OK
 
 
-func _create_project_3(path: String, name: String, version: String) -> int:
+func _create_project_3(path: String, name: String) -> int:
 	var pg := File.new()
 	pg.open(path.plus_file("project.godot"), File.WRITE)
 	pg.store_string(PROJECT_GODOT_3.format({ "name": name }))
@@ -43,7 +43,7 @@ func _create_project_3(path: String, name: String, version: String) -> int:
 
 	return OK
 
-func _create_project_4(path: String, name: String, version: String, gles2: bool) -> int:
+func _create_project_4(path: String, name: String, gles2: bool) -> int:
 	var pg := File.new()
 	pg.open(path.plus_file("project.godot"), File.WRITE)
 	var gles = GLES_2 if gles2 else ""

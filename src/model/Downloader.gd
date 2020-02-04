@@ -15,7 +15,7 @@ func _init(version: String) -> void:
 
 	connect("request_completed", self, "_on_request_completed")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Versions.emit_signal("download_progress", _version, get_downloaded_bytes(), get_body_size())
 
 func download() -> void:
@@ -27,7 +27,7 @@ func download() -> void:
 	print("Downloading ", _url)
 	request(_url)
 
-func _on_request_completed(result: int, response: int, headers, body) -> void:
+func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 	if result != RESULT_SUCCESS:
 		push_error("Download failed! Could not connect.")
 		push_error("Request URL: " + _url)

@@ -27,4 +27,4 @@ func set_path(new_path: String) -> void:
 
 
 func _on_confirmed() -> void:
-	var project_id := Projects.create_project(path.get_base_dir(), version_dropdown.get_selected_version())
+	Projects.create_project(path.get_base_dir(), version_dropdown.get_selected_version())

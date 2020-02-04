@@ -60,8 +60,8 @@ func _build_tree() -> void:
 	available.set_text(0, tr("Available"))
 	available.set_selectable(0, false)
 
-	var beta := Config.show_beta_versions
-	var mono := Config.show_mono_versions
+	var show_beta := Config.show_beta_versions
+	var show_mono := Config.show_mono_versions
 
 	var search := search_box.text
 
@@ -74,9 +74,9 @@ func _build_tree() -> void:
 		if Versions.is_installed(version):
 			item = tree.create_item(installed)
 		else:
-			if !beta and Versions.has_tag(version, "beta"):
+			if !show_beta and Versions.has_tag(version, "beta"):
 				continue
-			if !mono and Versions.has_tag(version, "mono"):
+			if !show_mono and Versions.has_tag(version, "mono"):
 				continue
 
 			item = tree.create_item(available)
@@ -206,7 +206,7 @@ func _on_AddCustom_pressed() -> void:
 	var version := Versions.add_custom()
 	select_version(version)
 
-func _on_Name_text_entered(new_text: String) -> void:
+func _on_Name_text_entered(_new_text: String) -> void:
 	_on_Rename_pressed()
 
 func _on_Rename_pressed() -> void:
@@ -234,5 +234,5 @@ func _on_Browse_pressed() -> void:
 func _on_BrowseDialog_file_selected(path: String) -> void:
 	Versions.set_custom_executable(_selected_version(), path)
 
-func _on_Search_text_changed(new_text: String) -> void:
+func _on_Search_text_changed(_new_text: String) -> void:
 	_build_tree()

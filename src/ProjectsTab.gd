@@ -133,7 +133,7 @@ func _on_ShowFiles_pressed() -> void:
 		project.show_files()
 
 func _on_Remove_pressed() -> void:
-	for project in _selected:
+	for project in _selected.duplicate():
 		project.remove()
 
 func _on_Edit_pressed() -> void:

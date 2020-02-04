@@ -24,7 +24,8 @@ func create_project(path: String, name: String, version: String, gles2: bool) ->
 	var config_version := Versions.get_config_version(version)
 	var ret : int
 	match config_version:
-		3:
+		0, 3:
+			# 0 is for custom versions. Just use the same template as 3.
 			ret = _create_project_3(path, name, version)
 		4:
 			ret = _create_project_4(path, name, version, gles2)

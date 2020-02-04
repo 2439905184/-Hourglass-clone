@@ -62,7 +62,7 @@ func is_executable_set(version: String) -> bool:
 	return _versions_store.has_section_key(version, "executable")
 
 func get_config_version(version: String) -> int:
-	return _versions_store.get_value(version, "config_version")
+	return _versions_store.get_value(version, "config_version", 0)
 
 func launch(version: String, args: PoolStringArray=[]) -> int:
 	if not is_installed(version): return ERR_DOES_NOT_EXIST

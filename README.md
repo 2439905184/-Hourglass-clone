@@ -7,9 +7,9 @@ require. It aims to match and exceed all the features of the built-in project
 manager (though it's not there yet).
 
 ## Download
-[Download for Linux](https://flyingpimonster.gitlab.io/hourglass/hourglass-linux.tar.gz)
-[Download for macOS](https://flyingpimonster.gitlab.io/hourglass/hourglass-macos.zip)
-[Download for Windows](https://flyingpimonster.gitlab.io/hourglass/hourglass-windows.zip)
+- [Download for Linux](https://flyingpimonster.gitlab.io/hourglass/hourglass-linux.tar.gz)
+- [Download for macOS](https://flyingpimonster.gitlab.io/hourglass/hourglass-macos.zip)
+- [Download for Windows](https://flyingpimonster.gitlab.io/hourglass/hourglass-windows.zip)
 
 ## Build Instructions
 Hourglass itself is a Godot Engine project, written in pure GDScript. However, it

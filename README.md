@@ -1,4 +1,4 @@
-# Hourglass
+![Hourglass Project Manager](data/splash_light.svg)
 A project manager for Godot Engine
 
 Hourglass is the project manager you've been waiting for. It keeps
@@ -27,6 +27,8 @@ Hourglass is licensed under the GNU General Public License, version
 The logo images in `data/template` are licensed under CC-BY-3.0. The icon
 at `data/icon_star.svg` is from the Godot Engine source code, under the MIT
 license.
+
+The Hourglass logo (`data/icon.png`) was created by u/BlueCannonBall on reddit.
 
 ---
 

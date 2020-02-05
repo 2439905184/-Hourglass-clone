@@ -54,7 +54,9 @@ config/name="Hourglass"
 run/main_scene="res://src/MainWindow.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="hourglass"
-config/icon="res://data/template/3/icon.png"
+boot_splash/image="res://data/splash.png"
+boot_splash/fullsize=false
+config/icon="res://data/icon.png"
 
 [autoload]
 

@@ -65,7 +65,9 @@ func _build_tree() -> void:
 
 	var search := search_box.text
 
-	for version in Versions.get_versions():
+	var versions := Array(Versions.get_versions())
+	versions.sort_custom(Versions, "sort_versions")
+	for version in versions:
 		if search != "":
 			if Versions.get_version_name(version).findn(search) < 0:
 				continue

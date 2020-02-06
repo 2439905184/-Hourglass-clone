@@ -33,6 +33,26 @@ func _ready() -> void:
 func get_versions() -> PoolStringArray:
 	return _versions_store.get_sections()
 
+func sort_versions(version_a: String, version_b: String) -> bool:
+	var a_custom := is_custom(version_a)
+	var b_custom := is_custom(version_b)
+
+	# Always sort custom versions first
+	if a_custom and !b_custom:
+		return true
+	if !a_custom and b_custom:
+		return false
+
+	var name_a := get_version_name(version_a)
+	var name_b := get_version_name(version_b)
+
+	# Sort custom versions alphabetically, official versions
+	# reverse alphabetically
+	if a_custom:
+		return name_a.casecmp_to(name_b) == -1
+	else:
+		return name_a.casecmp_to(name_b) == 1
+
 func exists(version: String) -> bool:
 	return _versions_store.has_section(version)
 

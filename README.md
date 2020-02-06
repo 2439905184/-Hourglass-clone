@@ -1,4 +1,5 @@
-![Hourglass Project Manager](data/splash_light.svg)
+![Hourglass Project Manager](data/splash_light.png)
+
 A project manager for Godot Engine
 
 Hourglass is the project manager you've been waiting for. It keeps

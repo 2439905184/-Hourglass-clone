@@ -40,7 +40,7 @@ margin_right = 163.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 130, 0 )
 text = "Last Opened"
-items = [ "Last Opened", null, false, 0, null, "Name", null, false, 1, null ]
+items = [ "Last Opened", null, false, 0, null, "Name", null, false, 1, null, "Version", null, false, 2, null ]
 selected = 0
 
 [node name="spacer" type="Control" parent="VBox/Margin/HBox"]

@@ -4,6 +4,7 @@ extends HBoxContainer
 enum SortMode {
 	LAST_MODIFIED,
 	NAME,
+	VERSION,
 }
 
 const PROJECT_LIST_ITEM = preload("res://src/ProjectListItem.tscn")
@@ -92,6 +93,10 @@ func _project_sorter(a, b) -> bool:
 			var mod_a := Projects.get_project_last_opened(a.project_id)
 			var mod_b := Projects.get_project_last_opened(b.project_id)
 			return mod_a >= mod_b
+		SortMode.VERSION:
+			var version_a := Projects.get_project_version(a.project_id)
+			var version_b := Projects.get_project_version(b.project_id)
+			return Versions.sort_versions(version_a, version_b)
 		_:
 			return false
 

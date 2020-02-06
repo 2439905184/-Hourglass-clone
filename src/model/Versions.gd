@@ -13,7 +13,7 @@ const VERSIONS_TEMPLATE = "res://data/versions.cfg"
 var active_downloads := 0
 
 var _versions_store: ConfigFile
-
+var _installed_cache := {}
 
 func _ready() -> void:
 	_versions_store = ConfigFile.new()
@@ -24,6 +24,10 @@ func _ready() -> void:
 	add_child(updater)
 
 	_merge_versions(VERSIONS_TEMPLATE)
+
+	self.connect("version_installed", self, "_invalidate_installed_cache")
+	self.connect("version_changed", self, "_invalidate_installed_cache")
+
 
 
 func get_versions() -> PoolStringArray:
@@ -53,8 +57,13 @@ func get_download_url(version: String) -> String:
 	return _versions_store.get_value(version, os)
 
 func is_installed(version: String) -> bool:
+	if _installed_cache.has(version):
+		return _installed_cache[version]
+
 	var file := File.new()
-	return file.file_exists(get_executable(version))
+	var result := file.file_exists(get_executable(version))
+	_installed_cache[version] = result
+	return result
 
 func get_directory(version: String) -> String:
 	return OS.get_user_data_dir().plus_file("versions").plus_file(version)
@@ -162,6 +171,9 @@ func _on_versions_updated() -> void:
 	_merge_versions(VersionsUpdater.DOWNLOAD_PATH)
 	var dir := Directory.new()
 	dir.remove(VersionsUpdater.DOWNLOAD_PATH)
+
+func _invalidate_installed_cache(version: String) -> void:
+	_installed_cache.erase(version)
 
 func _save() -> void:
 	_versions_store.save(VERSIONS_STORE)

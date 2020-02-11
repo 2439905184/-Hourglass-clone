@@ -14,6 +14,7 @@ func _ready() -> void:
 	download_file = DOWNLOAD_PATH
 	request(URL)
 
+
 func _on_request_completed(result: int, response: int, _headers: PoolStringArray, _body: PoolByteArray) -> void:
 	if result != RESULT_SUCCESS or response != 200:
 		emit_signal("request_failed")

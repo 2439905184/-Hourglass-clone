@@ -39,11 +39,13 @@ func _ready() -> void:
 
 	_build_tree()
 
+
 func select_version(version_code: String) -> bool:
 	if version_code in _child_items:
 		_child_items[version_code].select(0)
 		return true
 	return false
+
 
 func _build_tree() -> void:
 	var selected := _selected_version()
@@ -91,9 +93,11 @@ func _build_tree() -> void:
 		if not select_version(selected):
 			_on_version_selected()
 
+
 func _selected_version() -> String:
 	var selected := tree.get_selected()
 	return selected.get_metadata(0) if selected else null
+
 
 func _on_version_selected() -> void:
 	var version := _selected_version()
@@ -133,9 +137,11 @@ func _on_version_selected() -> void:
 func _on_Install_pressed() -> void:
 	Versions.install(_selected_version())
 
+
 func _on_Launch_pressed() -> void:
 	Versions.launch(_selected_version(), ["--project-manager"])
 	find_parent("MainWindow").quit()
+
 
 func _on_Uninstall_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())
@@ -147,8 +153,10 @@ func _on_Uninstall_pressed() -> void:
 	dialog.rect_size = Vector2(0, 0)
 	dialog.popup_centered_minsize()
 
+
 func _on_ConfirmUninstall_confirmed() -> void:
 	Versions.uninstall(_selected_version())
+
 
 func _on_Remove_pressed() -> void:
 	var version := Versions.get_version_name(_selected_version())
@@ -160,6 +168,7 @@ func _on_Remove_pressed() -> void:
 	dialog.rect_size = Vector2(0, 0)
 	dialog.popup_centered_minsize()
 
+
 func _on_ConfirmRemove_confirmed() -> void:
 	Versions.remove_custom_version(_selected_version())
 
@@ -168,30 +177,37 @@ func _on_Beta_toggled(pressed: bool) -> void:
 	Config.show_beta_versions = pressed
 	_build_tree()
 
+
 func _on_Mono_toggled(pressed: bool) -> void:
 	Config.show_mono_versions = pressed
 	_build_tree()
+
 
 func _on_version_installed(version: String) -> void:
 	_build_tree()
 	if version == _selected_version():
 		_show_download_bar(false)
 
+
 func _on_versions_updated() -> void:
 	_build_tree()
+
 
 func _on_version_changed(_version: String) -> void:
 	_build_tree()
 
+
 func _on_install_failed(version: String) -> void:
 	ErrorDialog.show_error("Install Failed",
 			tr("Installation of {version} failed. Check the console for more information.").format({"version": version}))
+
 
 func _show_download_bar(show: bool) -> void:
 	download_progress.visible = show
 	download_spacer.visible = !show
 	if show:
 		version_install.visible = false
+
 
 func _on_download_progress(version: String, downloaded: int, total: int) -> void:
 	if version != _selected_version():
@@ -204,19 +220,24 @@ func _on_download_progress(version: String, downloaded: int, total: int) -> void
 	var text := "%.1f / %.1f MB" % [downloaded / 1000000.0, total / 1000000.0]
 	download_progress_label.text = text
 
+
 func _on_AddCustom_pressed() -> void:
 	var version := Versions.add_custom()
 	select_version(version)
 
+
 func _on_Name_text_entered(_new_text: String) -> void:
 	_on_Rename_pressed()
+
 
 func _on_Rename_pressed() -> void:
 	var version := _selected_version()
 	Versions.set_version_name(version, custom_name.text)
 
+
 func _on_ShowExecutable_pressed() -> void:
 	OS.shell_open(Versions.get_executable(_selected_version()).get_base_dir())
+
 
 func _on_Browse_pressed() -> void:
 	var version := _selected_version()
@@ -233,8 +254,10 @@ func _on_Browse_pressed() -> void:
 	]
 	custom_browse.popup_centered()
 
+
 func _on_BrowseDialog_file_selected(path: String) -> void:
 	Versions.set_custom_executable(_selected_version(), path)
+
 
 func _on_Search_text_changed(_new_text: String) -> void:
 	_build_tree()

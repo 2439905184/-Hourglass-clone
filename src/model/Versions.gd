@@ -15,6 +15,7 @@ var active_downloads := 0
 var _versions_store: ConfigFile
 var _installed_cache := {}
 
+
 func _ready() -> void:
 	_versions_store = ConfigFile.new()
 	_versions_store.load(VERSIONS_STORE)
@@ -29,9 +30,9 @@ func _ready() -> void:
 	self.connect("version_changed", self, "_invalidate_installed_cache")
 
 
-
 func get_versions() -> PoolStringArray:
 	return _versions_store.get_sections()
+
 
 func sort_versions(version_a: String, version_b: String) -> bool:
 	var a_custom := is_custom(version_a)
@@ -53,28 +54,35 @@ func sort_versions(version_a: String, version_b: String) -> bool:
 	else:
 		return _compare_semver(name_a, name_b)
 
+
 func exists(version: String) -> bool:
 	return _versions_store.has_section(version)
 
+
 func get_version_name(version: String) -> String:
 	return _versions_store.get_value(version, "name", version)
+
 
 func set_version_name(version: String, new_name: String) -> void:
 	_versions_store.set_value(version, "name", new_name)
 	emit_signal("version_changed", version)
 	_save()
 
+
 func get_tags(version: String) -> PoolStringArray:
 	return _versions_store.get_value(version, "tags", [])
+
 
 func has_tag(version: String, tag: String) -> bool:
 	for i in get_tags(version):
 		if i == tag: return true
 	return false
 
+
 func get_download_url(version: String) -> String:
 	var os := OS.get_name() + "." + ("64" if OS.has_feature("64") else "32")
 	return _versions_store.get_value(version, os)
+
 
 func is_installed(version: String) -> bool:
 	if _installed_cache.has(version):
@@ -85,8 +93,10 @@ func is_installed(version: String) -> bool:
 	_installed_cache[version] = result
 	return result
 
+
 func get_directory(version: String) -> String:
 	return OS.get_user_data_dir().plus_file("versions").plus_file(version)
+
 
 func get_executable(version: String) -> String:
 	if _versions_store.has_section_key(version, "executable"):
@@ -95,16 +105,20 @@ func get_executable(version: String) -> String:
 	var exec_name := "godot.exe" if OS.get_name() == "Windows" else "godot"
 	return get_directory(version).plus_file(exec_name)
 
+
 func set_custom_executable(version: String, path: String) -> void:
 	_versions_store.set_value(version, "executable", path)
 	emit_signal("version_changed", version)
 	_save()
 
+
 func is_executable_set(version: String) -> bool:
 	return _versions_store.has_section_key(version, "executable")
 
+
 func get_config_version(version: String) -> int:
 	return _versions_store.get_value(version, "config_version", 0)
+
 
 func launch(version: String, args: PoolStringArray=[]) -> int:
 	if not is_installed(version):
@@ -114,13 +128,16 @@ func launch(version: String, args: PoolStringArray=[]) -> int:
 	OS.execute(get_executable(version), args, false)
 	return OK
 
+
 func run_scene(version: String, scene: String) -> void:
 	launch(version, [scene])
+
 
 func install(version: String) -> void:
 	var download = Downloader.new(version)
 	add_child(download)
 	download.download()
+
 
 func uninstall(version: String) -> void:
 	if not is_installed(version):
@@ -164,8 +181,10 @@ func add_custom() -> String:
 	_save()
 	return version
 
+
 func is_custom(version: String) -> bool:
 	return _versions_store.get_value(version, "is_custom", false)
+
 
 func remove_custom_version(version: String) -> void:
 	if not is_custom(version):
@@ -187,16 +206,20 @@ func _merge_versions(path: String) -> void:
 	emit_signal("versions_updated")
 	_save()
 
+
 func _on_versions_updated() -> void:
 	_merge_versions(VersionsUpdater.DOWNLOAD_PATH)
 	var dir := Directory.new()
 	dir.remove(VersionsUpdater.DOWNLOAD_PATH)
 
+
 func _invalidate_installed_cache(version: String) -> void:
 	_installed_cache.erase(version)
 
+
 func _save() -> void:
 	_versions_store.save(VERSIONS_STORE)
+
 
 # Returns true if version_a is newer than version_b
 func _compare_semver(version_a: String, version_b: String) -> bool:
@@ -238,6 +261,7 @@ func _compare_semver(version_a: String, version_b: String) -> bool:
 
 	# guess we'll call them equal then
 	return true
+
 
 # Gets the RC number of a version, or 0 if it is not an RC version.
 func _get_rc_num(version: String) -> int:

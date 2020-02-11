@@ -43,6 +43,7 @@ func _create_project_3(path: String, name: String) -> int:
 
 	return OK
 
+
 func _create_project_4(path: String, name: String, gles2: bool) -> int:
 	var pg := File.new()
 	pg.open(path.plus_file("project.godot"), File.WRITE)
@@ -55,6 +56,7 @@ func _create_project_4(path: String, name: String, gles2: bool) -> int:
 	dir.copy("res://data/template/4/icon.png", path.plus_file("icon.png"))
 
 	return OK
+
 
 static func _read_file(path: String) -> String:
 	var file := File.new()

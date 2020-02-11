@@ -8,14 +8,17 @@ var selected_version: String setget set_selected_version, get_selected_version
 func _ready() -> void:
 	refresh()
 
+
 func set_selected_version(new_selected_version: String) -> void:
 	for idx in range(get_item_count()):
 		if get_item_metadata(idx) == new_selected_version:
 			select(idx)
 			return
 
+
 func get_selected_version() -> String:
 	return get_item_metadata(selected)
+
 
 func refresh() -> void:
 	clear()

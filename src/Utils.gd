@@ -16,6 +16,7 @@ static func uuid() -> String:
 	res = res.insert(20, "-").insert(16, "-").insert(12, "-").insert(8, "-")
 	return res
 
+
 static func list_dir_recursive(path: String) -> PoolStringArray:
 	var result : PoolStringArray = []
 	var dir := Directory.new()

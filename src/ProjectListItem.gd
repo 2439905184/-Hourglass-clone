@@ -25,6 +25,7 @@ func _ready() -> void:
 	Versions.connect("version_changed", self, "_on_version_changed")
 	_build()
 
+
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
@@ -49,6 +50,7 @@ func open() -> int:
 		_not_installed()
 	return res
 
+
 func run() -> int:
 	if not valid:
 		return ERR_CANT_OPEN
@@ -60,16 +62,20 @@ func run() -> int:
 		_not_installed()
 	return res
 
+
 func show_files() -> void:
 	if OS.shell_open(_path) != OK:
 		ErrorDialog.show_error("Failed to Show Files", "Could not open the file browser.")
 
+
 func remove() -> void:
 	Projects.remove_project(project_id)
+
 
 func set_selected(new_selected: bool) -> void:
 	selected = new_selected
 	update()
+
 
 func get_selected() -> bool:
 	return selected
@@ -79,9 +85,11 @@ func _on_project_changed(id: String) -> void:
 	if id == project_id:
 		_build()
 
+
 func _on_version_changed(version: String) -> void:
 	if version == Projects.get_project_version(project_id):
 		_build()
+
 
 func _build() -> void:
 	_path = Projects.get_project_directory(project_id)
@@ -125,12 +133,14 @@ func _build() -> void:
 
 	valid = true
 
+
 func _not_installed() -> void:
 	var version := Projects.get_project_version(project_id)
 	if Versions.exists(version):
 		install_dialog.show_dialog(version)
 	else:
 		edit_project_dialog.show_dialog(project_id)
+
 
 func _on_show_version() -> void:
 	var version := Projects.get_project_version(project_id)
@@ -139,8 +149,10 @@ func _on_show_version() -> void:
 	else:
 		edit_project_dialog.show_dialog(project_id)
 
+
 func _resolve_path(path: String) -> String:
 	return path.replace("res://", _path + "/")
+
 
 func _custom_draw() -> void:
 	if selected:
@@ -149,6 +161,7 @@ func _custom_draw() -> void:
 			get_size() + Vector2(10, 10)
 		)
 		draw_style_box(get_stylebox("selected", "Tree"), rect)
+
 
 func _on_Favorite_toggled(button_pressed: bool) -> void:
 	Projects.set_project_favorite(project_id, button_pressed)

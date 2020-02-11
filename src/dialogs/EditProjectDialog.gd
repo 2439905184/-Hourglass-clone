@@ -17,5 +17,6 @@ func show_dialog(project_id: String) -> void:
 	rect_size = Vector2(0, 0)
 	popup_centered_minsize()
 
+
 func _on_confirmed() -> void:
 	Projects.set_project_version(_project_id, version_dropdown.selected_version)

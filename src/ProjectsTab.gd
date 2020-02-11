@@ -37,6 +37,7 @@ func _ready() -> void:
 	Projects.connect("project_changed", self, "_on_project_changed")
 	Projects.connect("project_removed", self, "_on_project_removed")
 
+
 func select_project(project: ProjectListItem, shift=false) -> void:
 	if not shift:
 		for item in _selected:
@@ -64,6 +65,7 @@ func _add_project(project_id: String) -> void:
 	project.project_id = project_id
 	project_list.add_child(project)
 
+
 func _sort_and_filter() -> void:
 	var projects := project_list.get_children()
 	projects.sort_custom(self, "_project_sorter")
@@ -77,6 +79,7 @@ func _sort_and_filter() -> void:
 			projects[i].visible = (name.findn(search) >= 0)
 		else:
 			projects[i].visible = true
+
 
 func _project_sorter(a, b) -> bool:
 	var a_favorite := Projects.get_project_favorite(a.project_id)
@@ -100,12 +103,15 @@ func _project_sorter(a, b) -> bool:
 		_:
 			return false
 
+
 func _on_project_added(project_id: String) -> void:
 	_add_project(project_id)
 	_sort_and_filter()
 
+
 func _on_project_changed(_project_id: String) -> void:
 	_sort_and_filter()
+
 
 func _on_project_removed(project_id: String) -> void:
 	for project in project_list.get_children():
@@ -114,8 +120,10 @@ func _on_project_removed(project_id: String) -> void:
 			if project in _selected:
 				_selected.erase(project)
 
+
 func _on_New_pressed() -> void:
 	new_project.popup_centered()
+
 
 func _on_Open_pressed() -> void:
 	var success := 0
@@ -125,6 +133,7 @@ func _on_Open_pressed() -> void:
 	if success == OK:
 		find_parent("MainWindow").quit()
 
+
 func _on_Run_pressed() -> void:
 	var success := 0
 	for project in _selected:
@@ -133,29 +142,35 @@ func _on_Run_pressed() -> void:
 	if success == OK:
 		find_parent("MainWindow").quit()
 
+
 func _on_ShowFiles_pressed() -> void:
 	for project in _selected:
 		project.show_files()
+
 
 func _on_Remove_pressed() -> void:
 	for project in _selected.duplicate():
 		project.remove()
 
+
 func _on_Edit_pressed() -> void:
 	if _selected.size() == 1:
 		edit_project_dialog.show_dialog(_selected[0].project_id)
 
+
 func _on_Import_pressed() -> void:
 	import_file.popup_centered()
+
 
 func _on_ImportFile_file_selected(path: String) -> void:
 	import_dialog.path = path
 	import_dialog.show_dialog()
 
+
 func _on_sort_selected(id: int) -> void:
 	Config.sort_mode = id
 	_sort_and_filter()
 
+
 func _on_Search_text_changed(_new_text: String) -> void:
 	_sort_and_filter()
-

@@ -15,8 +15,10 @@ func _init(version: String) -> void:
 
 	connect("request_completed", self, "_on_request_completed")
 
+
 func _process(_delta: float) -> void:
 	Versions.emit_signal("download_progress", _version, get_downloaded_bytes(), get_body_size())
+
 
 func download() -> void:
 	Versions.active_downloads += 1
@@ -26,6 +28,7 @@ func download() -> void:
 
 	print("Downloading ", _url)
 	request(_url)
+
 
 func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 	if result != RESULT_SUCCESS:
@@ -42,6 +45,7 @@ func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 		return
 
 	_extract_godot()
+
 
 func _extract_godot() -> void:
 	# open the zip file
@@ -135,10 +139,12 @@ func _extract_godot() -> void:
 	Versions.active_downloads -= 1
 	queue_free()
 
+
 func _failed() -> void:
 	Versions.emit_signal("install_failed", _version)
 	Versions.active_downloads -= 1
 	queue_free()
+
 
 # Returns the longest substring that both strings start with.
 # Will just return b if a is null

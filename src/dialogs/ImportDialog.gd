@@ -15,6 +15,7 @@ func show_dialog() -> void:
 	rect_size = Vector2(0, 0)
 	popup_centered_minsize()
 
+
 func set_path(new_path: String) -> void:
 	path = new_path
 	var cfg = ConfigFile.new()

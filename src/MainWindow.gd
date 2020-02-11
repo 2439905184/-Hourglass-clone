@@ -15,6 +15,7 @@ func _ready() -> void:
 	confirm_quit.get_ok().text = tr("Quit")
 	get_tree().set_auto_accept_quit(false)
 
+
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		if _should_ask_before_quitting():
@@ -28,6 +29,7 @@ func show_version(version_code: String) -> void:
 	versions.select_version(version_code)
 	tab_container.current_tab = 1
 
+
 func quit() -> void:
 	if !_should_ask_before_quitting():
 		get_tree().quit()
@@ -36,8 +38,10 @@ func quit() -> void:
 func _on_Version_pressed() -> void:
 	OS.shell_open("https://flyingpimonster.gitlab.io/hourglass-website")
 
+
 func _should_ask_before_quitting() -> bool:
 	return Versions.active_downloads != 0
+
 
 func _on_ConfirmQuit_confirmed() -> void:
 	get_tree().quit()

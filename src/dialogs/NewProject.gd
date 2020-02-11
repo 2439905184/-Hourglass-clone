@@ -27,33 +27,45 @@ func _on_Browse_pressed() -> void:
 		browse.current_dir = _get_location().get_base_dir()
 	browse.popup_centered_minsize()
 
+
 func _get_name() -> String:
 	return name_label.text
+
 func _set_name(name: String) -> void:
 	name_label.text = name
 	_validate()
+
+
 func _get_location() -> String:
 	return location_label.text
+
 func _set_location(location: String) -> void:
 	location_label.text = location
 	_validate()
+
+
 func _get_version() -> String:
 	return version_dropdown.get_selected_version()
 
+
 func _on_Browse_dir_selected(dir: String) -> void:
 	_set_location(dir)
+
 
 func _on_CreateFolder_pressed() -> void:
 	var folder := _get_name().to_lower().replace(" ", "-")
 	var current := _get_location()
 	_set_location(current.plus_file(folder))
 
+
 func _on_Name_text_entered(_1: String) -> void:
 	_on_CreateFolder_pressed()
+
 
 func _location_exists() -> bool:
 	var dir := Directory.new()
 	return dir.dir_exists(_get_location())
+
 
 func _validate() -> bool:
 	var valid := true
@@ -70,8 +82,11 @@ func _validate() -> bool:
 	get_ok().disabled = not valid
 	return valid
 
+
 func _on_Location_text_changed(_1: String) -> void:
 	_validate()
+
+
 func _on_Name_text_changed(_1: String) -> void:
 	_validate()
 
@@ -79,6 +94,7 @@ func _on_Name_text_changed(_1: String) -> void:
 func _on_version_selected(_id: int) -> void:
 	var version := version_dropdown.get_selected_version()
 	gl_version.visible = (Versions.get_config_version(version) >= 4)
+
 
 func _on_confirmed() -> void:
 	if _validate():
@@ -98,11 +114,13 @@ func _on_confirmed() -> void:
 		if ret == OK:
 			find_parent("MainWindow").quit()
 
+
 func _on_About_pressed() -> void:
 	about_gles.get_cancel().text = tr("Close")
 	about_gles.get_ok().text = tr("More Details")
 	about_gles.rect_size = Vector2(0, 0)
 	about_gles.popup_centered_minsize()
+
 
 func _on_AboutGLES_confirmed() -> void:
 	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/misc/gles2_gles3_differences.html")

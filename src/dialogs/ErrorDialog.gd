@@ -11,6 +11,7 @@ func _ready() -> void:
 
 	rect_min_size = Vector2(300, 0)
 
+
 func show_error(title: String, error: String) -> void:
 	window_title = tr(title)
 	label.text = tr(error)

@@ -47,11 +47,11 @@ func sort_versions(version_a: String, version_b: String) -> bool:
 	var name_b := get_version_name(version_b)
 
 	# Sort custom versions alphabetically, official versions
-	# reverse alphabetically
+	# by version number
 	if a_custom:
 		return name_a.casecmp_to(name_b) == -1
 	else:
-		return name_a.casecmp_to(name_b) == 1
+		return _compare_semver(name_a, name_b)
 
 func exists(version: String) -> bool:
 	return _versions_store.has_section(version)
@@ -197,3 +197,51 @@ func _invalidate_installed_cache(version: String) -> void:
 
 func _save() -> void:
 	_versions_store.save(VERSIONS_STORE)
+
+# Returns true if version_a is newer than version_b
+func _compare_semver(version_a: String, version_b: String) -> bool:
+	# cast to Array so we can use has()
+	var parts_a := Array(version_a.split("-"))
+	var parts_b := Array(version_b.split("-"))
+
+	var ver_a: Array = parts_a[0].split(".")
+	var ver_b: Array = parts_b[0].split(".")
+
+	# check if the version numbers differ
+	for i in range(min(ver_a.size(), ver_b.size())):
+		if int(ver_a[i]) < int(ver_b[i]):
+			return false
+		elif int(ver_a[i]) > int(ver_b[i]):
+			return true
+
+	# if the versions start the same but one is longer, then
+	# the longer one is newer
+	if ver_a.size() < ver_b.size():
+		return false
+	elif ver_a.size() > ver_b.size():
+		return true
+
+	# If the version numbers are the same, check the modifiers
+	# (rc, mono, etc.)
+	var rc_a = _get_rc_num(version_a)
+	var rc_b = _get_rc_num(version_b)
+	if rc_a < rc_b:
+		return false
+	elif rc_a > rc_b:
+		return true
+
+	# sort mono versions as older than regular versions
+	if parts_a.has("mono") and !parts_b.has("mono"):
+		return false
+	elif !parts_a.has("mono") and parts_b.has("mono"):
+		return true
+
+	# guess we'll call them equal then
+	return true
+
+# Gets the RC number of a version, or 0 if it is not an RC version.
+func _get_rc_num(version: String) -> int:
+	for part in version.split("-"):
+		if part.begins_with("rc"):
+			return int(part.rstrip("rc"))
+	return 0

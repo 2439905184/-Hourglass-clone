@@ -248,7 +248,11 @@ func _compare_semver(version_a: String, version_b: String) -> bool:
 	# (rc, mono, etc.)
 	var rc_a = _get_rc_num(version_a)
 	var rc_b = _get_rc_num(version_b)
-	if rc_a < rc_b:
+	if rc_a == 0 and rc_b > 0:
+		return true
+	elif rc_a > 0 and rc_b == 0:
+		return false
+	elif rc_a < rc_b:
 		return false
 	elif rc_a > rc_b:
 		return true

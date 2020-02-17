@@ -21,6 +21,17 @@ Until they are reviewed and accepted, you will need to use
 Build instructions can be found
 [here in Godot's documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html). It is fairly simple.
 
+## Contributing
+Contributions are welcome! If you found a bug or have an idea for a new
+feature, please file an issue on GitLab. If you'd like to contribute a bugfix,
+please file a merge request.
+
+If you contribute code, we'd appreciate if you try to stick to the [official
+style guide for GDScript](https://docs.godotengine.org/en/3.2/getting_started/scripting/gdscript/gdscript_styleguide.html).
+This helps keep the code organized and easily readable for all contributors.
+
+Hourglass follows the [Godot Code of Conduct](https://godotengine.org/code-of-conduct).
+
 ## License
 Hourglass is licensed under the GNU General Public License, version
 3 or, at your option, any later version.

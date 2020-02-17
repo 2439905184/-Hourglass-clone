@@ -17,7 +17,7 @@ Hourglass itself is a Godot Engine project, written in pure GDScript. However, i
 uses a slightly modified engine, in order to read ZIP files using scripts.The
 modifications [have been submitted upstream](https://github.com/godotengine/godot/pull/34444).
 Until they are reviewed and accepted, you will need to use
-[this branch](https://github.com/flyingpimonster/godot/tree/zip-module) instead.
+[this branch](https://github.com/flyingpimonster/godot/tree/zip-module-3.2) instead.
 Build instructions can be found
 [here in Godot's documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html). It is fairly simple.
 

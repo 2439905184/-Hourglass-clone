@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "HTTPRequest",
 "class": "Downloader",
 "language": "GDScript",
-"path": "res://src/model/Downloader.gd"
+"path": "res://src/versions/Downloader.gd"
 }, {
 "base": "Reference",
 "class": "ProjectCreator",
@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "HBoxContainer",
 "class": "ProjectListItem",
 "language": "GDScript",
-"path": "res://src/ProjectListItem.gd"
+"path": "res://src/projects/ProjectListItem.gd"
 }, {
 "base": "Object",
 "class": "Utils",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "HTTPRequest",
 "class": "VersionsUpdater",
 "language": "GDScript",
-"path": "res://src/model/VersionsUpdater.gd"
+"path": "res://src/versions/VersionsUpdater.gd"
 } ]
 _global_script_class_icons={
 "Downloader": "",
@@ -60,9 +60,9 @@ config/icon="res://data/icon.png"
 
 [autoload]
 
-Versions="*res://src/model/Versions.gd"
-Projects="*res://src/model/Projects.gd"
-Config="*res://src/model/Config.gd"
+Versions="*res://src/versions/Versions.gd"
+Projects="*res://src/projects/Projects.gd"
+Config="*res://src/Config.gd"
 ErrorDialog="*res://src/dialogs/ErrorDialog.gd"
 
 [rendering]

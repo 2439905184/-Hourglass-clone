@@ -7,7 +7,7 @@ enum SortMode {
 	VERSION,
 }
 
-const PROJECT_LIST_ITEM = preload("res://src/ProjectListItem.tscn")
+const PROJECT_LIST_ITEM = preload("res://src/projects/ProjectListItem.tscn")
 
 var _selected := []
 

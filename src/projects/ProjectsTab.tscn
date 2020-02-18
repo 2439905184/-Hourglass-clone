@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/dialogs/ImportDialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/ProjectsTab.gd" type="Script" id=2]
+[ext_resource path="res://src/projects/ProjectsTab.gd" type="Script" id=2]
 [ext_resource path="res://src/dialogs/NewProject.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/dialogs/EditProjectDialog.tscn" type="PackedScene" id=4]
 
@@ -159,8 +159,8 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "project.godot", "engine.cfg" )
-current_dir = "/home/jwestman/Documents/hourglass"
-current_path = "/home/jwestman/Documents/hourglass/"
+current_dir = "/home/jwestman/Documents/git/hourglass"
+current_path = "/home/jwestman/Documents/git/hourglass/"
 
 [node name="ImportDialog" parent="Dialogs" instance=ExtResource( 1 )]
 

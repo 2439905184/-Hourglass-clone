@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/ProjectListItem.gd" type="Script" id=1]
-[ext_resource path="res://src/dialogs/InstallDialog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/dialogs/InstallDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/projects/ProjectListItem.gd" type="Script" id=2]
 [ext_resource path="res://src/dialogs/EditProjectDialog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/icon_star.svg" type="Texture" id=4]
 
@@ -11,7 +11,7 @@ margin_top = 10.0
 margin_right = 1014.0
 margin_bottom = 590.0
 custom_constants/separation = 10
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,7 +71,7 @@ margin_left = 1004.0
 margin_right = 1004.0
 margin_bottom = 580.0
 
-[node name="InstallDialog" parent="." instance=ExtResource( 2 )]
+[node name="InstallDialog" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 804.0

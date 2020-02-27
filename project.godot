@@ -64,6 +64,7 @@ Versions="*res://src/versions/Versions.gd"
 Projects="*res://src/projects/Projects.gd"
 Config="*res://src/Config.gd"
 ErrorDialog="*res://src/dialogs/ErrorDialog.gd"
+Git="*res://src/misc/Git.gd"
 
 [rendering]
 

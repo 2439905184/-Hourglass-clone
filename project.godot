@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AssetStore",
+"language": "GDScript",
+"path": "res://src/assetlib/AssetStore.gd"
+}, {
 "base": "HTTPRequest",
 "class": "Downloader",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://src/versions/VersionsUpdater.gd"
 } ]
 _global_script_class_icons={
+"AssetStore": "",
 "Downloader": "",
 "ProjectCreator": "",
 "ProjectListItem": "",
@@ -65,6 +71,7 @@ Projects="*res://src/projects/Projects.gd"
 Config="*res://src/Config.gd"
 ErrorDialog="*res://src/dialogs/ErrorDialog.gd"
 Git="*res://src/misc/Git.gd"
+AssetLibrary="*res://src/assetlib/AssetLibrary.gd"
 
 [rendering]
 

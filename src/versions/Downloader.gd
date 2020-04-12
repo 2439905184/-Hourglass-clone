@@ -49,7 +49,7 @@ func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 
 func _extract_godot() -> void:
 	# open the zip file
-	var unzip := ZipReader.new()
+	var unzip := ZIPReader.new()
 	unzip.open(download_file)
 	var files := unzip.get_files()
 

@@ -17,7 +17,9 @@ onready var run: Button = $Margin/VBox/Run
 onready var remove: Button = $Margin/VBox/Remove
 onready var edit: Button = $Margin/VBox/Edit
 onready var sort_mode: OptionButton = $VBox/Margin/HBox/SortMode
+
 onready var import_file: FileDialog = $Dialogs/ImportFile
+
 onready var project_list: VBoxContainer = $VBox/Scroll/Margin/ProjectList
 onready var search_box: LineEdit = $VBox/Margin/HBox/Search
 onready var new_project := $Dialogs/NewProject

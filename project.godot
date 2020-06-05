@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/projects/ProjectListItem.gd"
 }, {
+"base": "PanelContainer",
+"class": "SearchBar",
+"language": "GDScript",
+"path": "res://SearchBar.gd"
+}, {
+"base": "PanelContainer",
+"class": "SidePanel",
+"language": "GDScript",
+"path": "res://SidePanel.gd"
+}, {
 "base": "Object",
 "class": "Utils",
 "language": "GDScript",
@@ -49,6 +59,8 @@ _global_script_class_icons={
 "Downloader": "",
 "ProjectCreator": "",
 "ProjectListItem": "",
+"SearchBar": "",
+"SidePanel": "",
 "Utils": "",
 "VersionDropdown": "",
 "VersionsUpdater": ""
@@ -57,7 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Hourglass"
-run/main_scene="res://src/MainWindow.tscn"
+run/main_scene="res://Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="hourglass"
 boot_splash/image="res://data/splash.png"

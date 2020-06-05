@@ -1,5 +1,5 @@
-class_name ProjectListItem
 extends HBoxContainer
+class_name ProjectListItem
 
 
 var project_id : String
@@ -19,6 +19,9 @@ onready var favorite_button: Button = $VBox/HBox2/Favorite
 onready var install_dialog := $InstallDialog
 onready var edit_project_dialog := $EditProjectDialog
 
+
+static func instance() -> ProjectListItem:
+	return load("res://src/ProjectListItem.tscn").instance() as ProjectListItem
 
 func _ready() -> void:
 	Projects.connect("project_changed", self, "_on_project_changed")

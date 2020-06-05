@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://styles/search_bar_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://SearchBar.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="SearchBar" type="PanelContainer"]
+margin_right = 594.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 4.0
+margin_right = 584.0
+margin_bottom = 36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+color = Color( 0, 0, 0, 0.627451 )
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+margin_left = 36.0
+margin_right = 550.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_icons/clear = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+margin_left = 554.0
+margin_right = 574.0
+margin_bottom = 32.0
+focus_mode = 0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "X"
+flat = true
+[connection signal="text_change_rejected" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_change_rejected"]
+[connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="HBoxContainer/Delete" to="." method="_on_Delete_pressed"]

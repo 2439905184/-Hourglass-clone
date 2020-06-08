@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://SidePanel.gd" type="Script" id=1]
-[ext_resource path="res://theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/SidePanel.gd" type="Script" id=1]
+[ext_resource path="res://styles/theme.tres" type="Theme" id=2]
 [ext_resource path="res://styles/grey_button_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://styles/yellow_button_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://styles/tab_button_normal.tres" type="StyleBox" id=5]
@@ -187,7 +187,6 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "Show Files"
-[connection signal="pressed" from="VBoxContainer/TopButton" to="." method="_on_TopButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabButtons/Projects" to="." method="_on_Projects_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabButtons/Versions" to="." method="_on_Versions_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabButtons/Templates" to="." method="_on_Templates_pressed"]

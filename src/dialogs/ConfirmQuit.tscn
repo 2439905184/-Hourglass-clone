@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/dialogs/ConfirmQuit.gd" type="Script" id=1]
+
+[node name="ConfirmQuit" type="ConfirmationDialog"]
+margin_right = 200.0
+margin_bottom = 70.0
+dialog_text = "Are you sure you want to quit?
+One or more downloads will be canceled."
+script = ExtResource( 1 )
+[connection signal="about_to_show" from="." to="." method="_on_ConfirmQuit_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_ConfirmQuit_confirmed"]

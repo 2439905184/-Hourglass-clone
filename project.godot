@@ -32,12 +32,12 @@ _global_script_classes=[ {
 "base": "PanelContainer",
 "class": "SearchBar",
 "language": "GDScript",
-"path": "res://SearchBar.gd"
+"path": "res://src/SearchBar.gd"
 }, {
 "base": "PanelContainer",
 "class": "SidePanel",
 "language": "GDScript",
-"path": "res://SidePanel.gd"
+"path": "res://src/SidePanel.gd"
 }, {
 "base": "Object",
 "class": "Utils",
@@ -69,7 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Hourglass"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://src/MainWindow.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="hourglass"
 boot_splash/image="res://data/splash.png"

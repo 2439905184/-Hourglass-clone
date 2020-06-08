@@ -2,10 +2,16 @@ extends Panel
 
 
 onready var side_panel := $VBoxContainer/HBoxContainer/SidePanel
+onready var search_bar := $VBoxContainer/TopBar/MarginContainer/HBoxContainer/SearchBar
 onready var confirm_quit := $ConfirmQuit
 onready var content := $VBoxContainer/HBoxContainer/Content
+onready var projects := $VBoxContainer/HBoxContainer/Content/Projects
 onready var versions := $VBoxContainer/HBoxContainer/Content/Versions
+onready var templates := $VBoxContainer/HBoxContainer/Content/Templates
 
+onready var tabs := [
+	projects, versions, templates
+]
 
 func _ready() -> void:
 	_on_SidePanel_tab_changed(side_panel.current_tab)
@@ -23,6 +29,7 @@ func _notification(what: int) -> void:
 func show_tab(tab: int) -> void:
 	content.current_tab = tab
 	side_panel.current_tab = tab
+	search_bar.text = tabs[tab].search_query
 
 
 func show_version(version_code: String) -> void:
@@ -43,3 +50,5 @@ func _on_SidePanel_tab_changed(tab) -> void:
 	show_tab(tab)
 
 
+func _on_SearchBar_search_changed(new_text) -> void:
+	tabs[side_panel.current_tab].search_query = search_bar.text

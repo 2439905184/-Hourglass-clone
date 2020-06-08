@@ -9,6 +9,8 @@ enum SortMode {
 
 const PROJECT_LIST_ITEM = preload("res://src/projects/ProjectListItem.tscn")
 
+var search_query: String setget set_search_query, get_search_query
+
 var _selected := []
 
 onready var open: Button = $Margin/VBox/Open
@@ -21,7 +23,6 @@ onready var sort_mode: OptionButton = $VBox/Margin/HBox/SortMode
 onready var import_file: FileDialog = $Dialogs/ImportFile
 
 onready var project_list: VBoxContainer = $VBox/Scroll/Margin/ProjectList
-onready var search_box: LineEdit = $VBox/Margin/HBox/Search
 onready var new_project := $Dialogs/NewProject
 onready var import_dialog := $Dialogs/ImportDialog
 onready var edit_project_dialog := $Dialogs/EditProjectDialog
@@ -62,6 +63,14 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 	edit.disabled = _selected.size() != 1
 
 
+func set_search_query(new_search_query: String) -> void:
+	search_query = new_search_query
+	_sort_and_filter()
+
+func get_search_query() -> String:
+	return search_query
+
+
 func _add_project(project_id: String) -> void:
 	var project := PROJECT_LIST_ITEM.instance()
 	project.project_id = project_id
@@ -72,7 +81,7 @@ func _sort_and_filter() -> void:
 	var projects := project_list.get_children()
 	projects.sort_custom(self, "_project_sorter")
 
-	var search: String = search_box.text
+	var search: String = search_query
 
 	for i in range(projects.size()):
 		project_list.move_child(projects[i], i)
@@ -171,8 +180,4 @@ func _on_ImportFile_file_selected(path: String) -> void:
 
 func _on_sort_selected(id: int) -> void:
 	Config.sort_mode = id
-	_sort_and_filter()
-
-
-func _on_Search_text_changed(_new_text: String) -> void:
 	_sort_and_filter()

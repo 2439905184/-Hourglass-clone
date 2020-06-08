@@ -19,14 +19,7 @@ __meta__ = {
 margin_right = 200.0
 margin_bottom = 564.0
 
-[node name="Search" type="LineEdit" parent="SidePane"]
-margin_right = 200.0
-margin_bottom = 24.0
-clear_button_enabled = true
-placeholder_text = "Search Versions"
-
 [node name="Tree" type="Tree" parent="SidePane"]
-margin_top = 28.0
 margin_right = 200.0
 margin_bottom = 462.0
 rect_min_size = Vector2( 200, 0 )
@@ -222,7 +215,6 @@ mode = 0
 access = 2
 current_dir = "/home/jwestman/Documents/hourglass"
 current_path = "/home/jwestman/Documents/hourglass/"
-[connection signal="text_changed" from="SidePane/Search" to="." method="_on_Search_text_changed"]
 [connection signal="item_selected" from="SidePane/Tree" to="." method="_on_version_selected"]
 [connection signal="toggled" from="SidePane/Beta" to="." method="_on_Beta_toggled"]
 [connection signal="toggled" from="SidePane/Mono" to="." method="_on_Mono_toggled"]

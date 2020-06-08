@@ -1,6 +1,8 @@
 extends HBoxContainer
 
 
+var search_query: String setget set_search_query, get_search_query
+
 var _child_items := {}
 
 onready var main_pane: VBoxContainer = $MainPane
@@ -8,7 +10,6 @@ onready var side_pane: VBoxContainer = $SidePane
 onready var beta: CheckBox = $SidePane/Beta
 onready var mono: CheckBox = $SidePane/Mono
 onready var tree: Tree = $SidePane/Tree
-onready var search_box: LineEdit = $SidePane/Search
 onready var version_label: Label = $MainPane/HBox/Version
 onready var version_launch: Button = $MainPane/HBox/Launch
 onready var version_install: Button = $MainPane/HBox/Install
@@ -47,6 +48,14 @@ func select_version(version_code: String) -> bool:
 	return false
 
 
+func set_search_query(new_search_query: String) -> void:
+	search_query = new_search_query
+	_build_tree()
+
+func get_search_query() -> String:
+	return search_query
+
+
 func _build_tree() -> void:
 	var selected := _selected_version()
 	tree.clear()
@@ -65,7 +74,7 @@ func _build_tree() -> void:
 	var show_beta := Config.show_beta_versions
 	var show_mono := Config.show_mono_versions
 
-	var search := search_box.text
+	var search := search_query
 
 	var versions := Array(Versions.get_versions())
 	versions.sort_custom(Versions, "sort_versions")
@@ -257,7 +266,3 @@ func _on_Browse_pressed() -> void:
 
 func _on_BrowseDialog_file_selected(path: String) -> void:
 	Versions.set_custom_executable(_selected_version(), path)
-
-
-func _on_Search_text_changed(_new_text: String) -> void:
-	_build_tree()

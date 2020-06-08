@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/SidePanel.gd" type="Script" id=1]
 [ext_resource path="res://styles/theme.tres" type="Theme" id=2]
 [ext_resource path="res://styles/grey_button_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://styles/yellow_button_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://styles/tab_button_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://styles/tab_button_pressed.tres" type="StyleBox" id=6]
-[ext_resource path="res://styles/tab_button_hover.tres" type="StyleBox" id=7]
+[ext_resource path="res://styles/TabButton.tres" type="Theme" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.168627, 0.203922, 0.254902, 1 )
@@ -40,6 +38,7 @@ margin_left = 18.0
 margin_top = 20.0
 margin_right = 182.0
 margin_bottom = 498.0
+custom_constants/separation = 12
 
 [node name="TopButton" type="Button" parent="VBoxContainer"]
 margin_right = 164.0
@@ -56,24 +55,19 @@ custom_colors/font_color_pressed = Color( 0.207843, 0.207843, 0.207843, 1 )
 text = "ADD CUSTOM VERSION"
 
 [node name="TabButtons" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 35.0
+margin_top = 43.0
 margin_right = 164.0
-margin_bottom = 135.0
-rect_min_size = Vector2( 0, 100 )
-custom_constants/separation = 13
+margin_bottom = 132.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Projects" type="Button" parent="VBoxContainer/TabButtons"]
-margin_top = 14.0
 margin_right = 164.0
-margin_bottom = 29.0
+margin_bottom = 27.0
 focus_mode = 0
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
+theme = ExtResource( 5 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -90,13 +84,11 @@ __meta__ = {
 }
 
 [node name="Versions" type="Button" parent="VBoxContainer/TabButtons"]
-margin_top = 42.0
+margin_top = 31.0
 margin_right = 164.0
-margin_bottom = 57.0
+margin_bottom = 58.0
 focus_mode = 0
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
+theme = ExtResource( 5 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -112,13 +104,11 @@ __meta__ = {
 }
 
 [node name="Templates" type="Button" parent="VBoxContainer/TabButtons"]
-margin_top = 70.0
+margin_top = 62.0
 margin_right = 164.0
-margin_bottom = 85.0
+margin_bottom = 89.0
 focus_mode = 0
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
+theme = ExtResource( 5 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -134,15 +124,15 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 139.0
+margin_top = 144.0
 margin_right = 164.0
-margin_bottom = 143.0
+margin_bottom = 148.0
 custom_styles/separator = SubResource( 3 )
 
 [node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 147.0
+margin_top = 160.0
 margin_right = 164.0
-margin_bottom = 279.0
+margin_bottom = 292.0
 custom_constants/separation = 8
 
 [node name="Open" type="Button" parent="VBoxContainer/Buttons"]

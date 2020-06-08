@@ -52,3 +52,16 @@ func _on_SidePanel_tab_changed(tab) -> void:
 
 func _on_SearchBar_search_changed(new_text) -> void:
 	tabs[side_panel.current_tab].search_query = search_bar.text
+
+
+func _on_SidePanel_action_pressed(name: String) -> void:
+	match name:
+		"projects.new":
+			projects.create_new_project()
+		"projects.import":
+			projects.import_project()
+		"projects.scan":
+			# not implemented yet
+			pass
+		"versions.add":
+			versions.create_custom_version()

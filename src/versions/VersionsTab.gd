@@ -29,8 +29,7 @@ onready var download_spacer: Control = $MainPane/HBox/spacer
 
 func _ready() -> void:
 	main_pane.visible = false
-	beta.pressed = Config.show_beta_versions
-	mono.pressed = Config.show_mono_versions
+	Config.connect("version_settings_changed", self, "_on_version_settings_changed")
 
 	Versions.connect("version_installed", self, "_on_version_installed")
 	Versions.connect("install_failed", self, "_on_install_failed")
@@ -54,6 +53,11 @@ func set_search_query(new_search_query: String) -> void:
 
 func get_search_query() -> String:
 	return search_query
+
+
+func create_custom_version() -> void:
+	var version := Versions.add_custom()
+	select_version(version)
 
 
 func _build_tree() -> void:
@@ -182,16 +186,6 @@ func _on_ConfirmRemove_confirmed() -> void:
 	Versions.remove_custom_version(_selected_version())
 
 
-func _on_Beta_toggled(pressed: bool) -> void:
-	Config.show_beta_versions = pressed
-	_build_tree()
-
-
-func _on_Mono_toggled(pressed: bool) -> void:
-	Config.show_mono_versions = pressed
-	_build_tree()
-
-
 func _on_version_installed(version: String) -> void:
 	_build_tree()
 	if version == _selected_version():
@@ -230,11 +224,6 @@ func _on_download_progress(version: String, downloaded: int, total: int) -> void
 	download_progress_label.text = text
 
 
-func _on_AddCustom_pressed() -> void:
-	var version := Versions.add_custom()
-	select_version(version)
-
-
 func _on_Name_text_entered(_new_text: String) -> void:
 	_on_Rename_pressed()
 
@@ -266,3 +255,7 @@ func _on_Browse_pressed() -> void:
 
 func _on_BrowseDialog_file_selected(path: String) -> void:
 	Versions.set_custom_executable(_selected_version(), path)
+
+
+func _on_version_settings_changed() -> void:
+	_build_tree()

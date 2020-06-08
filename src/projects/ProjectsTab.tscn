@@ -14,18 +14,18 @@ __meta__ = {
 }
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 911.0
+margin_right = 921.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 
 [node name="Margin" type="MarginContainer" parent="VBox"]
-margin_right = 911.0
+margin_right = 921.0
 margin_bottom = 20.0
 custom_constants/margin_left = 10
 
 [node name="HBox" type="HBoxContainer" parent="VBox/Margin"]
 margin_left = 10.0
-margin_right = 911.0
+margin_right = 921.0
 margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="VBox/Margin/HBox"]
@@ -51,14 +51,14 @@ rect_min_size = Vector2( 10, 0 )
 
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
 margin_top = 24.0
-margin_right = 911.0
+margin_right = 921.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="Margin" type="MarginContainer" parent="VBox/Scroll"]
-margin_right = 911.0
+margin_right = 921.0
 margin_bottom = 576.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -70,13 +70,13 @@ custom_constants/margin_bottom = 10
 [node name="ProjectList" type="VBoxContainer" parent="VBox/Scroll/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 901.0
+margin_right = 911.0
 margin_bottom = 566.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_left = 915.0
+margin_left = 925.0
 margin_right = 1024.0
 margin_bottom = 600.0
 custom_constants/margin_right = 10
@@ -84,58 +84,41 @@ custom_constants/margin_left = 10
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
 margin_left = 10.0
-margin_right = 99.0
+margin_right = 89.0
 margin_bottom = 600.0
 custom_constants/separation = 6
 
-[node name="New" type="Button" parent="Margin/VBox"]
-margin_right = 89.0
-margin_bottom = 20.0
-text = "New Project"
-
-[node name="Import" type="Button" parent="Margin/VBox"]
-margin_top = 26.0
-margin_right = 89.0
-margin_bottom = 46.0
-text = "Import"
-
-[node name="HSeparator" type="HSeparator" parent="Margin/VBox"]
-margin_top = 52.0
-margin_right = 89.0
-margin_bottom = 56.0
-
 [node name="Open" type="Button" parent="Margin/VBox"]
-margin_top = 62.0
-margin_right = 89.0
-margin_bottom = 82.0
+margin_right = 79.0
+margin_bottom = 20.0
 disabled = true
 text = "Open"
 
 [node name="Run" type="Button" parent="Margin/VBox"]
-margin_top = 88.0
-margin_right = 89.0
-margin_bottom = 108.0
+margin_top = 26.0
+margin_right = 79.0
+margin_bottom = 46.0
 disabled = true
 text = "Run"
 
 [node name="ShowFiles" type="Button" parent="Margin/VBox"]
-margin_top = 114.0
-margin_right = 89.0
-margin_bottom = 134.0
+margin_top = 52.0
+margin_right = 79.0
+margin_bottom = 72.0
 disabled = true
 text = "Show Files"
 
 [node name="Edit" type="Button" parent="Margin/VBox"]
-margin_top = 140.0
-margin_right = 89.0
-margin_bottom = 160.0
+margin_top = 78.0
+margin_right = 79.0
+margin_bottom = 98.0
 disabled = true
 text = "Edit"
 
 [node name="Remove" type="Button" parent="Margin/VBox"]
-margin_top = 166.0
-margin_right = 89.0
-margin_bottom = 186.0
+margin_top = 104.0
+margin_right = 79.0
+margin_bottom = 124.0
 disabled = true
 text = "Remove"
 
@@ -158,8 +141,6 @@ current_path = "/home/jwestman/Documents/hourglass/"
 
 [node name="EditProjectDialog" parent="Dialogs" instance=ExtResource( 4 )]
 [connection signal="item_selected" from="VBox/Margin/HBox/SortMode" to="." method="_on_sort_selected"]
-[connection signal="pressed" from="Margin/VBox/New" to="." method="_on_New_pressed"]
-[connection signal="pressed" from="Margin/VBox/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="Margin/VBox/Open" to="." method="_on_Open_pressed"]
 [connection signal="pressed" from="Margin/VBox/Run" to="." method="_on_Run_pressed"]
 [connection signal="pressed" from="Margin/VBox/ShowFiles" to="." method="_on_ShowFiles_pressed"]

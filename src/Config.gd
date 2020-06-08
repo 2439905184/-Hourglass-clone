@@ -1,6 +1,8 @@
 extends Node
 
 
+signal version_settings_changed()
+
 const CONFIG_FILE = "user://options.cfg"
 
 var project_location : String setget set_project_location, get_project_location
@@ -34,6 +36,7 @@ func get_show_beta_versions() -> bool:
 
 func set_show_beta_versions(new_val: bool) -> void:
 	_config.set_value("general", "show_beta_versions", new_val)
+	emit_signal("version_settings_changed")
 	save()
 
 
@@ -42,6 +45,7 @@ func get_show_mono_versions() -> bool:
 
 func set_show_mono_versions(new_val: bool) -> void:
 	_config.set_value("general", "show_mono_versions", new_val)
+	emit_signal("version_settings_changed")
 	save()
 
 

@@ -86,11 +86,11 @@ size_flags_vertical = 3
 anchor_top = 0.0
 anchor_bottom = 0.0
 margin_top = 0.0
-margin_right = 200.0
+margin_right = 205.0
 margin_bottom = 516.0
 
 [node name="Content" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 204.0
+margin_left = 209.0
 margin_right = 1024.0
 margin_bottom = 516.0
 size_flags_horizontal = 3
@@ -112,4 +112,5 @@ visible = false
 
 [node name="ConfirmQuit" parent="." instance=ExtResource( 4 )]
 [connection signal="search_changed" from="VBoxContainer/TopBar/MarginContainer/HBoxContainer/SearchBar" to="." method="_on_SearchBar_search_changed"]
+[connection signal="action_pressed" from="VBoxContainer/HBoxContainer/SidePanel" to="." method="_on_SidePanel_action_pressed"]
 [connection signal="tab_changed" from="VBoxContainer/HBoxContainer/SidePanel" to="." method="_on_SidePanel_tab_changed"]

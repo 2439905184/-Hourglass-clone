@@ -63,6 +63,14 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 	edit.disabled = _selected.size() != 1
 
 
+func create_new_project() -> void:
+	new_project.popup_centered()
+
+
+func import_project() -> void:
+	import_file.popup_centered()
+
+
 func set_search_query(new_search_query: String) -> void:
 	search_query = new_search_query
 	_sort_and_filter()
@@ -132,10 +140,6 @@ func _on_project_removed(project_id: String) -> void:
 				_selected.erase(project)
 
 
-func _on_New_pressed() -> void:
-	new_project.popup_centered()
-
-
 func _on_Open_pressed() -> void:
 	var success := 0
 	for project in _selected:
@@ -167,10 +171,6 @@ func _on_Remove_pressed() -> void:
 func _on_Edit_pressed() -> void:
 	if _selected.size() == 1:
 		edit_project_dialog.show_dialog(_selected[0].project_id)
-
-
-func _on_Import_pressed() -> void:
-	import_file.popup_centered()
 
 
 func _on_ImportFile_file_selected(path: String) -> void:

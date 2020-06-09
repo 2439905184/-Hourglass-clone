@@ -89,13 +89,11 @@ func _sort_and_filter() -> void:
 	var projects := project_list.get_children()
 	projects.sort_custom(self, "_project_sorter")
 
-	var search: String = search_query
-
 	for i in range(projects.size()):
 		project_list.move_child(projects[i], i)
-		if not search.empty():
+		if not search_query.empty():
 			var name : String = projects[i].project_name
-			projects[i].visible = (name.findn(search) >= 0)
+			projects[i].visible = (name.findn(search_query) >= 0)
 		else:
 			projects[i].visible = true
 

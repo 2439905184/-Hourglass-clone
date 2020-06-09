@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://styles/search_bar_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://src/SearchBar.gd" type="Script" id=2]
+[ext_resource path="res://data/icons.svg" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="OpenSimplexNoise" id=1]
 
@@ -10,6 +16,11 @@ seamless = true
 noise = SubResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
 
 [node name="SearchBar" type="PanelContainer"]
 margin_right = 594.0
@@ -30,15 +41,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
-margin_right = 32.0
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_right = 16.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-color = Color( 0, 0, 0, 0.627451 )
+texture = SubResource( 5 )
+stretch_mode = 4
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
-margin_left = 36.0
-margin_right = 550.0
+margin_left = 20.0
+margin_right = 574.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_icons/clear = SubResource( 2 )
@@ -46,7 +57,8 @@ custom_styles/normal = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="Delete" type="Button" parent="HBoxContainer"]
-margin_left = 554.0
+visible = false
+margin_left = 546.0
 margin_right = 574.0
 margin_bottom = 32.0
 focus_mode = 0
@@ -55,7 +67,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 enabled_focus_mode = 0
-text = "X"
+icon = SubResource( 4 )
 flat = true
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="HBoxContainer/Delete" to="." method="_on_Delete_pressed"]

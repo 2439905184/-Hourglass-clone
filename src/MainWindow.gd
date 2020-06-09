@@ -30,6 +30,12 @@ func show_tab(tab: int) -> void:
 	content.current_tab = tab
 	side_panel.current_tab = tab
 	search_bar.text = tabs[tab].search_query
+	var placeholders := [
+		tr("Search projects..."),
+		tr("Search versions..."),
+		tr("Search Asset Library...")
+	]
+	search_bar.placeholder_text = placeholders[tab]
 
 
 func show_version(version_code: String) -> void:

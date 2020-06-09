@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/SidePanel.gd" type="Script" id=1]
+[ext_resource path="res://src/components/SidePanel.gd" type="Script" id=1]
 [ext_resource path="res://styles/theme.tres" type="Theme" id=2]
 [ext_resource path="res://styles/YellowButton.tres" type="Theme" id=3]
 [ext_resource path="res://styles/TabButton.tres" type="Theme" id=5]
@@ -126,32 +126,32 @@ tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
 [node name="Projects" type="VBoxContainer" parent="VBoxContainer/Panes"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 8
 
 [node name="New" type="Button" parent="VBoxContainer/Panes/Projects"]
-margin_right = 164.0
+margin_right = 169.0
 margin_bottom = 31.0
 theme = ExtResource( 3 )
 text = "NEW PROJECT"
 
 [node name="Import" type="Button" parent="VBoxContainer/Panes/Projects"]
 margin_top = 39.0
-margin_right = 164.0
+margin_right = 169.0
 margin_bottom = 66.0
 theme = ExtResource( 6 )
 text = "Import"
 
 [node name="Scan" type="Button" parent="VBoxContainer/Panes/Projects"]
 margin_top = 74.0
-margin_right = 164.0
+margin_right = 169.0
 margin_bottom = 101.0
 theme = ExtResource( 6 )
 text = "Scan"
 
 [node name="Versions" type="VBoxContainer" parent="VBoxContainer/Panes"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 6
@@ -182,8 +182,6 @@ text = "Show Mono (C#) Versions"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -124.0
-margin_bottom = -278.0
 custom_constants/separation = 6
 [connection signal="pressed" from="VBoxContainer/TabButtons/Projects" to="." method="_on_Projects_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabButtons/Versions" to="." method="_on_Versions_pressed"]

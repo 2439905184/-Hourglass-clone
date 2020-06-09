@@ -1,23 +1,35 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://styles/search_bar_panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://src/SearchBar.gd" type="Script" id=2]
+[ext_resource path="res://src/components/SearchBar.gd" type="Script" id=2]
 [ext_resource path="res://data/icons.svg" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.890196, 0.890196, 0.890196, 1 )
+border_width_left = 10
+border_width_top = 4
+border_width_right = 10
+border_width_bottom = 4
+border_color = Color( 0.890196, 0.890196, 0.890196, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 16
+
+[sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="OpenSimplexNoise" id=3]
 
-[sub_resource type="NoiseTexture" id=2]
+[sub_resource type="NoiseTexture" id=4]
 seamless = true
-noise = SubResource( 1 )
+noise = SubResource( 3 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
@@ -26,7 +38,7 @@ region = Rect2( 0, 0, 16, 16 )
 margin_right = 594.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,7 +56,7 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 32.0
-texture = SubResource( 5 )
+texture = SubResource( 2 )
 stretch_mode = 4
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
@@ -52,8 +64,8 @@ margin_left = 20.0
 margin_right = 574.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-custom_icons/clear = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+custom_icons/clear = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="Delete" type="Button" parent="HBoxContainer"]
@@ -67,7 +79,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 enabled_focus_mode = 0
-icon = SubResource( 4 )
+icon = SubResource( 6 )
 flat = true
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="HBoxContainer/Delete" to="." method="_on_Delete_pressed"]

@@ -32,12 +32,12 @@ _global_script_classes=[ {
 "base": "PanelContainer",
 "class": "SearchBar",
 "language": "GDScript",
-"path": "res://src/SearchBar.gd"
+"path": "res://src/components/SearchBar.gd"
 }, {
 "base": "PanelContainer",
 "class": "SidePanel",
 "language": "GDScript",
-"path": "res://src/SidePanel.gd"
+"path": "res://src/components/SidePanel.gd"
 }, {
 "base": "Object",
 "class": "Utils",

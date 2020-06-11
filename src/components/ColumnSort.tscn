@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://styles/ColumnSort.tres" type="Theme" id=1]
+[ext_resource path="res://src/components/ColumnSort.gd" type="Script" id=2]
+[ext_resource path="res://data/icons.svg" type="Texture" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[node name="ColumnSort" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+theme = ExtResource( 1 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBox" type="HBoxContainer" parent="Panel"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 595.0
+mouse_filter = 2
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/HBox"]
+margin_top = 288.0
+margin_bottom = 302.0
+
+[node name="SortIcon" type="TextureRect" parent="Panel/HBox"]
+margin_left = 4.0
+margin_top = 287.0
+margin_right = 20.0
+margin_bottom = 303.0
+mouse_filter = 2
+size_flags_vertical = 4
+texture = SubResource( 1 )
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_Button_toggled"]

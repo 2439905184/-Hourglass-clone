@@ -1,14 +1,22 @@
 extends Node
 
 
+enum SortMode {
+	LAST_OPENED,
+	NAME,
+	VERSION,
+}
+
 signal version_settings_changed()
+signal projects_sort_changed()
 
 const CONFIG_FILE = "user://options.cfg"
 
 var project_location : String setget set_project_location, get_project_location
 var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versions
 var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
-var sort_mode : int setget set_sort_mode, get_sort_mode
+var projects_sort : int setget set_projects_sort, get_projects_sort
+var projects_sort_ascending : bool setget set_projects_sort_ascending, get_projects_sort_ascending
 
 var _config: ConfigFile
 
@@ -49,9 +57,19 @@ func set_show_mono_versions(new_val: bool) -> void:
 	save()
 
 
-func get_sort_mode() -> int:
-	return _config.get_value("general", "sort_mode", 0)
+func get_projects_sort() -> int:
+	return _config.get_value("general", "projects_sort", 0)
 
-func set_sort_mode(new_val: int) -> void:
-	_config.set_value("general", "sort_mode", new_val)
+func set_projects_sort(new_val: int) -> void:
+	_config.set_value("general", "projects_sort", new_val)
+	emit_signal("projects_sort_changed")
+	save()
+
+
+func get_projects_sort_ascending() -> bool:
+	return _config.get_value("general", "projects_sort_ascending", false)
+
+func set_projects_sort_ascending(new_val: bool) -> void:
+	_config.set_value("general", "projects_sort_ascending", new_val)
+	emit_signal("projects_sort_changed")
 	save()

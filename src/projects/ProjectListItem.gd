@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends PanelContainer
 class_name ProjectListItem
 
 
@@ -11,13 +11,14 @@ var project_name : String
 var _path : String
 var _main_scene : String
 
-onready var path_label: Label = $VBox/HBox2/Path
-onready var name_label: Label = $VBox/HBox/Name
-onready var icon_texture: TextureRect = $Icon
-onready var version_label: LinkButton = $VBox/HBox/Version
-onready var favorite_button: Button = $VBox/HBox2/Favorite
-onready var install_dialog := $InstallDialog
-onready var edit_project_dialog := $EditProjectDialog
+onready var path_label: Label = $HBox/VBox/Path
+onready var name_label: Label = $HBox/VBox/Name
+onready var icon_texture: TextureRect = $HBox/Icon
+onready var version_label: Label = $HBox/Version
+onready var favorite_button: Button = $HBox/Favorite
+onready var install_dialog := $HBox/InstallDialog
+onready var edit_project_dialog := $HBox/EditProjectDialog
+onready var last_opened := $HBox/LastOpened
 
 
 static func instance() -> ProjectListItem:
@@ -77,7 +78,10 @@ func remove() -> void:
 
 func set_selected(new_selected: bool) -> void:
 	selected = new_selected
-	update()
+	if selected:
+		self_modulate = Color(1, 1, 1, 1)
+	else:
+		self_modulate = Color(1, 1, 1, 0)
 
 
 func get_selected() -> bool:
@@ -134,6 +138,10 @@ func _build() -> void:
 		favorite_button.pressed = false
 		favorite_button.modulate = Color(1, 1, 1, 0.5)
 
+	var last_opened_dt = OS.get_datetime_from_unix_time(Projects.get_project_last_opened(project_id))
+	last_opened.text = "%04d-%02d-%02d" % [last_opened_dt["year"], last_opened_dt["month"], last_opened_dt["day"]]
+	last_opened.hint_tooltip = "%02d:%02d" % [last_opened_dt["hour"], last_opened_dt["minute"]]
+
 	valid = true
 
 
@@ -155,15 +163,6 @@ func _on_show_version() -> void:
 
 func _resolve_path(path: String) -> String:
 	return path.replace("res://", _path + "/")
-
-
-func _custom_draw() -> void:
-	if selected:
-		var rect := Rect2(
-			Vector2(-5, -5),
-			get_size() + Vector2(10, 10)
-		)
-		draw_style_box(get_stylebox("selected", "Tree"), rect)
 
 
 func _on_Favorite_toggled(button_pressed: bool) -> void:

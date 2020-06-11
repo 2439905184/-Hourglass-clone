@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/dialogs/ProjectCreator.gd"
 }, {
-"base": "HBoxContainer",
+"base": "PanelContainer",
 "class": "ProjectListItem",
 "language": "GDScript",
 "path": "res://src/projects/ProjectListItem.gd"

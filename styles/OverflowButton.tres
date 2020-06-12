@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=6 format=2]
 
 [ext_resource path="res://data/icons.svg" type="Texture" id=1]
 
@@ -7,25 +7,16 @@
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 32, 32 )
+region = Rect2( 0, 16, 32, 16 )
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = SubResource( 2 )
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 32, 16 )
 modulate_color = Color( 1, 1, 1, 0.752941 )
 
 [sub_resource type="StyleBoxTexture" id=4]
 texture = SubResource( 2 )
-region_rect = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="StyleBoxTexture" id=6]
-texture = SubResource( 5 )
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 32, 16 )
 
 [resource]
 Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
@@ -38,4 +29,4 @@ Button/styles/disabled = null
 Button/styles/focus = SubResource( 1 )
 Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = SubResource( 6 )
+Button/styles/pressed = SubResource( 3 )

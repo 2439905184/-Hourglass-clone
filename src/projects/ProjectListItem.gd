@@ -33,16 +33,18 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
-	if not event.button_index == BUTTON_LEFT:
-		return
 	if not event.pressed:
 		return
 
 	if event.doubleclick:
-		if open() == OK:
+		if open() == OK and event.button_index == BUTTON_LEFT:
 			find_parent("MainWindow").quit()
 	else:
-		find_parent("Projects").select_project(self, event.shift)
+		if event.button_index == BUTTON_LEFT:
+			find_parent("Projects").select_project(self, event.shift)
+		elif event.button_index == BUTTON_RIGHT:
+			if not selected:
+				find_parent("Projects").select_project(self, false)
 
 
 func open() -> int:
@@ -133,10 +135,8 @@ func _build() -> void:
 
 	if Projects.get_project_favorite(project_id):
 		favorite_button.pressed = true
-		favorite_button.modulate = Color(1, 1, 1, 1)
 	else:
 		favorite_button.pressed = false
-		favorite_button.modulate = Color(1, 1, 1, 0.5)
 
 	var last_opened_dt = OS.get_datetime_from_unix_time(Projects.get_project_last_opened(project_id))
 	last_opened.text = "%04d-%02d-%02d" % [last_opened_dt["year"], last_opened_dt["month"], last_opened_dt["day"]]
@@ -167,3 +167,8 @@ func _resolve_path(path: String) -> String:
 
 func _on_Favorite_toggled(button_pressed: bool) -> void:
 	Projects.set_project_favorite(project_id, button_pressed)
+
+
+func _on_Menu_pressed() -> void:
+	find_parent("Projects").select_project(self)
+	find_parent("Projects").show_menu()

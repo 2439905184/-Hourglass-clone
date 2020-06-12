@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 
 const PROJECT_LIST_ITEM = preload("res://src/projects/ProjectListItem.tscn")
@@ -7,11 +7,12 @@ var search_query: String setget set_search_query, get_search_query
 
 var _selected := []
 
-onready var open: Button = $Margin/VBox/Open
-onready var show_files: Button = $Margin/VBox/ShowFiles
-onready var run: Button = $Margin/VBox/Run
-onready var remove: Button = $Margin/VBox/Remove
-onready var edit: Button = $Margin/VBox/Edit
+onready var menu := $DropdownMenu
+onready var open: Button = $DropdownMenu/VBox/Open
+onready var show_files: Button = $DropdownMenu/VBox/ShowFiles
+onready var run: Button = $DropdownMenu/VBox/Run
+onready var remove: Button = $DropdownMenu/VBox/Remove
+onready var edit: Button = $DropdownMenu/VBox/Edit
 
 onready var import_file: FileDialog = $Dialogs/ImportFile
 
@@ -33,6 +34,12 @@ func _ready() -> void:
 	Projects.connect("project_removed", self, "_on_project_removed")
 
 	Config.connect("projects_sort_changed", self, "_on_projects_sort_changed")
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == BUTTON_RIGHT:
+			show_menu()
 
 
 func select_project(project: ProjectListItem, shift=false) -> void:
@@ -63,6 +70,12 @@ func create_new_project() -> void:
 
 func import_project() -> void:
 	import_file.popup_centered()
+
+
+func show_menu() -> void:
+	if _selected.size() > 0:
+		menu.rect_position = get_viewport().get_mouse_position()
+		menu.popup()
 
 
 func set_search_query(new_search_query: String) -> void:
@@ -176,16 +189,19 @@ func _on_Run_pressed() -> void:
 func _on_ShowFiles_pressed() -> void:
 	for project in _selected:
 		project.show_files()
+	menu.hide()
 
 
 func _on_Remove_pressed() -> void:
 	for project in _selected.duplicate():
 		project.remove()
+	menu.hide()
 
 
 func _on_Edit_pressed() -> void:
 	if _selected.size() == 1:
 		edit_project_dialog.show_dialog(_selected[0].project_id)
+	menu.hide()
 
 
 func _on_ImportFile_file_selected(path: String) -> void:

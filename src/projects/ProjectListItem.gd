@@ -14,7 +14,7 @@ var _main_scene : String
 onready var path_label: Label = $HBox/VBox/Path
 onready var name_label: Label = $HBox/VBox/Name
 onready var icon_texture: TextureRect = $HBox/Icon
-onready var version_label: Label = $HBox/Version
+onready var version_label := $HBox/Version
 onready var favorite_button: Button = $HBox/Favorite
 onready var install_dialog := $HBox/InstallDialog
 onready var edit_project_dialog := $HBox/EditProjectDialog

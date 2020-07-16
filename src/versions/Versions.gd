@@ -1,11 +1,10 @@
 extends Node
 
 
-signal version_installed(version)
+signal versions_updated()
 signal version_changed(version)
 signal download_progress(version, downloaded, total)
 signal install_failed(version)
-signal versions_updated()
 
 const VERSIONS_STORE = "user://versions.cfg"
 const VERSIONS_TEMPLATE = "res://data/versions.cfg"
@@ -26,7 +25,7 @@ func _ready() -> void:
 
 	_merge_versions(VERSIONS_TEMPLATE)
 
-	self.connect("version_installed", self, "_invalidate_installed_cache")
+	self.connect("versions_updated", self, "_invalidate_installed_cache")
 	self.connect("version_changed", self, "_invalidate_installed_cache")
 
 
@@ -107,8 +106,17 @@ func get_executable(version: String) -> String:
 
 
 func set_custom_executable(version: String, path: String) -> void:
+	var was_installed = is_installed(version)
 	_versions_store.set_value(version, "executable", path)
-	emit_signal("version_changed", version)
+
+	# If the installation status changed, emit versions_updated (to resort
+	# the whole list) rather than just version_changed
+	_invalidate_installed_cache(version)
+	if was_installed != is_installed(version):
+		emit_signal("versions_updated")
+	else:
+		emit_signal("version_changed", version)
+
 	_save()
 
 
@@ -134,9 +142,29 @@ func run_scene(version: String, scene: String) -> void:
 
 
 func install(version: String) -> void:
-	var download = Downloader.new(version)
+	var download := Downloader.new(version)
 	add_child(download)
 	download.download()
+	emit_signal("version_changed", version)
+
+
+func cancel_install(version: String) -> void:
+	var downloader := _get_downloader(version)
+	if downloader == null:
+		push_error("Warning! Tried to cancel a download that was not active")
+		return
+
+	downloader.cancel()
+	emit_signal("versions_updated")
+
+
+func is_installing(version: String) -> bool:
+	if is_custom(version):
+		# custom versions are not downloaded and installed, so don't bother
+		# checking for an active download
+		return false
+
+	return _get_downloader(version) != null
 
 
 func uninstall(version: String) -> void:
@@ -170,14 +198,14 @@ func uninstall(version: String) -> void:
 	# delete the directory
 	dir.remove(path)
 
-	emit_signal("version_changed", version)
+	emit_signal("versions_updated")
 
 
 func add_custom() -> String:
 	var version := Utils.uuid()
 	_versions_store.set_value(version, "is_custom", true)
 	_versions_store.set_value(version, "name", tr("New Custom Version"))
-	emit_signal("version_installed", version)
+	emit_signal("versions_updated")
 	_save()
 	return version
 
@@ -191,7 +219,7 @@ func remove_custom_version(version: String) -> void:
 		return
 
 	_versions_store.erase_section(version)
-	emit_signal("version_changed", version)
+	emit_signal("versions_updated")
 	_save()
 
 
@@ -213,12 +241,22 @@ func _on_versions_updated() -> void:
 	dir.remove(VersionsUpdater.DOWNLOAD_PATH)
 
 
-func _invalidate_installed_cache(version: String) -> void:
-	_installed_cache.erase(version)
+func _invalidate_installed_cache(version:="") -> void:
+	if version == "":
+		_installed_cache = {}
+	else:
+		_installed_cache.erase(version)
 
 
 func _save() -> void:
 	_versions_store.save(VERSIONS_STORE)
+
+
+func _get_downloader(version: String) -> Downloader:
+	for downloader in get_children():
+		if downloader is Downloader and downloader.active and downloader.version == version:
+			return downloader
+	return null
 
 
 # Returns true if version_a is newer than version_b

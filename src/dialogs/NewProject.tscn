@@ -160,7 +160,6 @@ current_dir = "/home/jwestman/Documents/hourglass"
 current_path = "/home/jwestman/Documents/hourglass/"
 
 [node name="AboutGLES" type="ConfirmationDialog" parent="."]
-visible = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 608.0
@@ -181,8 +180,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="AboutGLES/HBoxContainer2"]
-margin_right = 218.0
-margin_bottom = 82.0
+margin_top = 137.0
+margin_right = 278.0
+margin_bottom = 219.0
 size_flags_horizontal = 3
 text = "GLES 3:
 Higher visual quality
@@ -191,15 +191,16 @@ Incompatible with older hardware
 Not recommended for web games"
 
 [node name="VSeparator" type="VSeparator" parent="AboutGLES/HBoxContainer2"]
-margin_left = 222.0
-margin_right = 242.0
-margin_bottom = 82.0
+margin_left = 282.0
+margin_right = 302.0
+margin_bottom = 356.0
 custom_constants/separation = 20
 
 [node name="Label2" type="Label" parent="AboutGLES/HBoxContainer2"]
-margin_left = 246.0
-margin_right = 440.0
-margin_bottom = 82.0
+margin_left = 306.0
+margin_top = 137.0
+margin_right = 584.0
+margin_bottom = 219.0
 size_flags_horizontal = 3
 text = "GLES 2:
 Lower visual quality

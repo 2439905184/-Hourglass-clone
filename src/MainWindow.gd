@@ -40,7 +40,7 @@ func show_tab(tab: int) -> void:
 
 func show_version(version_code: String) -> void:
 	show_tab(SidePanel.TABS.VERSIONS)
-	versions.select_version(version_code)
+	versions.select_version_by_code(version_code)
 
 
 func quit() -> void:

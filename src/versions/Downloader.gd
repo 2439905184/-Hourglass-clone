@@ -4,12 +4,13 @@ extends HTTPRequest
 
 const MIRROR = "https://downloads.tuxfamily.org/godotengine/"
 
-var _version: String
+var version: String
+var active := false setget ,is_active
 var _url: String
 
 
 func _init(version: String) -> void:
-	_version = version
+	self.version = version
 	_url = MIRROR + Versions.get_download_url(version)
 	download_file = Versions.get_directory(version).plus_file("download.zip")
 
@@ -17,17 +18,29 @@ func _init(version: String) -> void:
 
 
 func _process(_delta: float) -> void:
-	Versions.emit_signal("download_progress", _version, get_downloaded_bytes(), get_body_size())
+	Versions.emit_signal("download_progress", version, get_downloaded_bytes(), get_body_size())
 
 
 func download() -> void:
 	Versions.active_downloads += 1
 
+	active = true
 	var dir := Directory.new()
-	dir.make_dir_recursive(Versions.get_directory(_version))
+	dir.make_dir_recursive(Versions.get_directory(version))
 
 	print("Downloading ", _url)
 	request(_url)
+
+
+func cancel() -> void:
+	cancel_request()
+	queue_free()
+	Versions.active_downloads -= 1
+	active = false
+
+
+func is_active() -> bool:
+	return active
 
 
 func _on_request_completed(result: int, response: int, _headers, _body) -> void:
@@ -94,7 +107,7 @@ func _extract_godot() -> void:
 		return
 
 	# if there are any files in GodotSharp/ extract them
-	var dest_dir: String = Versions.get_directory(_version)
+	var dest_dir: String = Versions.get_directory(version)
 	for filename in godot_sharp + macos_files:
 		if filename.find("..") != -1:
 			push_error("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
@@ -114,7 +127,7 @@ func _extract_godot() -> void:
 			file.close()
 
 	# extract the godot executable
-	var exec_path: String = Versions.get_executable(_version)
+	var exec_path: String = Versions.get_executable(version)
 	var godot: PoolByteArray = unzip.read_file(prefix.plus_file(exec_file))
 	var out := File.new()
 	out.open(exec_path, File.WRITE)
@@ -135,13 +148,13 @@ func _extract_godot() -> void:
 	var directory := Directory.new()
 	directory.remove(download_file)
 
-	Versions.emit_signal("version_installed", _version)
+	Versions.emit_signal("versions_updated")
 	Versions.active_downloads -= 1
 	queue_free()
 
 
 func _failed() -> void:
-	Versions.emit_signal("install_failed", _version)
+	Versions.emit_signal("install_failed", version)
 	Versions.active_downloads -= 1
 	queue_free()
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/versions/VersionsTab.gd" type="Script" id=1]
+[ext_resource path="res://src/dialogs/EditVersionDialog.tscn" type="PackedScene" id=2]
 
 [node name="Versions" type="HBoxContainer"]
 anchor_right = 1.0
@@ -15,186 +16,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SidePane" type="VBoxContainer" parent="."]
-margin_right = 200.0
-margin_bottom = 564.0
-
-[node name="Tree" type="Tree" parent="SidePane"]
-margin_right = 200.0
-margin_bottom = 564.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_vertical = 3
-hide_root = true
-
-[node name="MainPane" type="VBoxContainer" parent="."]
-margin_left = 210.0
+[node name="Scroll" type="ScrollContainer" parent="."]
 margin_right = 1016.0
 margin_bottom = 564.0
 size_flags_horizontal = 3
 
-[node name="HBox" type="HBoxContainer" parent="MainPane"]
-margin_right = 806.0
-margin_bottom = 20.0
-custom_constants/separation = 6
-
-[node name="Version" type="Label" parent="MainPane/HBox"]
-margin_top = 3.0
-margin_right = 32.0
-margin_bottom = 17.0
-text = "3.0.6"
-
-[node name="spacer" type="Control" parent="MainPane/HBox"]
-margin_left = 38.0
-margin_right = 283.0
-margin_bottom = 20.0
+[node name="VBox" type="VBoxContainer" parent="Scroll"]
+margin_right = 1016.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="DownloadProgress" type="ProgressBar" parent="MainPane/HBox"]
-margin_left = 289.0
-margin_top = 5.0
-margin_right = 534.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 0, 10 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.001
-percent_visible = false
+[node name="Installed" type="VBoxContainer" parent="Scroll/VBox"]
+margin_right = 1016.0
+margin_bottom = 18.0
 
-[node name="Label" type="Label" parent="MainPane/HBox/DownloadProgress"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 7
-size_flags_vertical = 3
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Label" type="Label" parent="Scroll/VBox/Installed"]
+margin_right = 1016.0
+margin_bottom = 14.0
+text = "Installed"
 
-[node name="Launch" type="Button" parent="MainPane/HBox"]
-margin_left = 540.0
-margin_right = 597.0
-margin_bottom = 20.0
-text = "Launch"
+[node name="List" type="VBoxContainer" parent="Scroll/VBox/Installed"]
+margin_top = 18.0
+margin_right = 1016.0
+margin_bottom = 18.0
 
-[node name="Install" type="Button" parent="MainPane/HBox"]
-margin_left = 603.0
-margin_right = 655.0
-margin_bottom = 20.0
-text = "Install"
+[node name="Available" type="VBoxContainer" parent="Scroll/VBox"]
+margin_top = 22.0
+margin_right = 1016.0
+margin_bottom = 40.0
 
-[node name="Remove" type="Button" parent="MainPane/HBox"]
-margin_left = 661.0
-margin_right = 725.0
-margin_bottom = 20.0
-text = "Remove"
+[node name="Label" type="Label" parent="Scroll/VBox/Available"]
+margin_right = 1016.0
+margin_bottom = 14.0
+text = "Available"
 
-[node name="Uninstall" type="Button" parent="MainPane/HBox"]
-margin_left = 731.0
-margin_right = 800.0
-margin_bottom = 20.0
-text = "Uninstall"
+[node name="List" type="VBoxContainer" parent="Scroll/VBox/Available"]
+margin_top = 18.0
+margin_right = 1016.0
+margin_bottom = 18.0
 
-[node name="spacer2" type="Control" parent="MainPane/HBox"]
-margin_left = 806.0
-margin_right = 806.0
-margin_bottom = 20.0
-
-[node name="ConfirmRemove" type="ConfirmationDialog" parent="MainPane/HBox"]
-margin_right = 200.0
-margin_bottom = 70.0
-
-[node name="ConfirmUninstall" type="ConfirmationDialog" parent="MainPane/HBox"]
-margin_right = 200.0
-margin_bottom = 70.0
-
-[node name="HSeparator" type="HSeparator" parent="MainPane"]
-margin_top = 24.0
-margin_right = 806.0
-margin_bottom = 28.0
-
-[node name="EditCustom" type="GridContainer" parent="MainPane"]
-margin_top = 32.0
-margin_right = 806.0
-margin_bottom = 80.0
-custom_constants/hseparation = 10
-columns = 2
-
-[node name="Label" type="Label" parent="MainPane/EditCustom"]
-margin_top = 5.0
-margin_right = 73.0
-margin_bottom = 19.0
-text = "Name:"
-
-[node name="HBox2" type="HBoxContainer" parent="MainPane/EditCustom"]
-margin_left = 83.0
-margin_right = 545.0
-margin_bottom = 24.0
-
-[node name="Name" type="LineEdit" parent="MainPane/EditCustom/HBox2"]
-margin_right = 394.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 150, 0 )
-size_flags_horizontal = 3
-
-[node name="Rename" type="Button" parent="MainPane/EditCustom/HBox2"]
-margin_left = 398.0
-margin_right = 462.0
-margin_bottom = 24.0
-text = "Rename"
-
-[node name="Label2" type="Label" parent="MainPane/EditCustom"]
-margin_top = 31.0
-margin_right = 73.0
-margin_bottom = 45.0
-text = "Executable:"
-
-[node name="HBox" type="HBoxContainer" parent="MainPane/EditCustom"]
-margin_left = 83.0
-margin_top = 28.0
-margin_right = 545.0
-margin_bottom = 48.0
-
-[node name="Executable" type="Label" parent="MainPane/EditCustom/HBox"]
-margin_top = 3.0
-margin_right = 300.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 300, 0 )
-align = 2
-clip_text = true
-
-[node name="Browse" type="Button" parent="MainPane/EditCustom/HBox"]
-margin_left = 304.0
-margin_right = 363.0
-margin_bottom = 20.0
-text = "Browse"
-
-[node name="ShowExecutable" type="Button" parent="MainPane/EditCustom/HBox"]
-margin_left = 367.0
-margin_right = 462.0
-margin_bottom = 20.0
-text = "Show in Files"
-
-[node name="BrowseDialog" type="FileDialog" parent="MainPane/EditCustom/HBox"]
-margin_left = -83.0
-margin_top = -28.0
-margin_right = 517.0
-margin_bottom = 372.0
-rect_min_size = Vector2( 600, 400 )
-window_title = "Open a File"
-mode = 0
-access = 2
-current_dir = "/home/jwestman/Documents/hourglass"
-current_path = "/home/jwestman/Documents/hourglass/"
-[connection signal="item_selected" from="SidePane/Tree" to="." method="_on_version_selected"]
-[connection signal="pressed" from="MainPane/HBox/Launch" to="." method="_on_Launch_pressed"]
-[connection signal="pressed" from="MainPane/HBox/Install" to="." method="_on_Install_pressed"]
-[connection signal="pressed" from="MainPane/HBox/Remove" to="." method="_on_Remove_pressed"]
-[connection signal="pressed" from="MainPane/HBox/Uninstall" to="." method="_on_Uninstall_pressed"]
-[connection signal="confirmed" from="MainPane/HBox/ConfirmRemove" to="." method="_on_ConfirmRemove_confirmed"]
-[connection signal="confirmed" from="MainPane/HBox/ConfirmUninstall" to="." method="_on_ConfirmUninstall_confirmed"]
-[connection signal="text_entered" from="MainPane/EditCustom/HBox2/Name" to="." method="_on_Name_text_entered"]
-[connection signal="pressed" from="MainPane/EditCustom/HBox2/Rename" to="." method="_on_Rename_pressed"]
-[connection signal="pressed" from="MainPane/EditCustom/HBox/Browse" to="." method="_on_Browse_pressed"]
-[connection signal="pressed" from="MainPane/EditCustom/HBox/ShowExecutable" to="." method="_on_ShowExecutable_pressed"]
-[connection signal="file_selected" from="MainPane/EditCustom/HBox/BrowseDialog" to="." method="_on_BrowseDialog_file_selected"]
+[node name="EditVersionDialog" parent="." instance=ExtResource( 2 )]

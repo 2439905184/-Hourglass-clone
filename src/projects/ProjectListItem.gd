@@ -21,9 +21,6 @@ onready var edit_project_dialog := $HBox/EditProjectDialog
 onready var last_opened := $HBox/LastOpened
 
 
-static func instance() -> ProjectListItem:
-	return load("res://src/ProjectListItem.tscn").instance() as ProjectListItem
-
 func _ready() -> void:
 	Projects.connect("project_changed", self, "_on_project_changed")
 	Versions.connect("version_changed", self, "_on_version_changed")
@@ -37,7 +34,7 @@ func _gui_input(event: InputEvent) -> void:
 		return
 
 	if event.doubleclick:
-		if open() == OK and event.button_index == BUTTON_LEFT:
+		if event.button_index == BUTTON_LEFT and open() == OK:
 			find_parent("MainWindow").quit()
 	else:
 		if event.button_index == BUTTON_LEFT:

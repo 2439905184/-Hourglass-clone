@@ -85,17 +85,22 @@ rect_min_size = Vector2( 32, 16 )
 size_flags_vertical = 4
 theme = ExtResource( 5 )
 
-[node name="InstallDialog" parent="HBox" instance=ExtResource( 1 )]
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="InstallDialog" parent="Dialogs" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 804.0
-margin_right = 1004.0
-margin_bottom = 580.0
+margin_left = 429.0
+margin_top = 5.0
+margin_right = 429.0
+margin_bottom = 55.0
+content_size = Vector2( 400, 100 )
 
-[node name="EditProjectDialog" parent="HBox" instance=ExtResource( 3 )]
-margin_left = 804.0
-margin_right = 1069.0
-margin_bottom = 20.0
+[node name="EditProjectDialog" parent="Dialogs" instance=ExtResource( 3 )]
+margin_left = 809.0
+margin_top = 5.0
+margin_right = 1074.0
+margin_bottom = 25.0
 [connection signal="pressed" from="HBox/Version" to="." method="_on_show_version"]
 [connection signal="toggled" from="HBox/Favorite" to="." method="_on_Favorite_toggled"]
 [connection signal="pressed" from="HBox/Menu" to="." method="_on_Menu_pressed"]

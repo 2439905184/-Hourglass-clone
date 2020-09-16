@@ -16,8 +16,8 @@ onready var name_label: Label = $HBox/VBox/Name
 onready var icon_texture: TextureRect = $HBox/Icon
 onready var version_label := $HBox/Version
 onready var favorite_button: Button = $HBox/Favorite
-onready var install_dialog := $HBox/InstallDialog
-onready var edit_project_dialog := $HBox/EditProjectDialog
+onready var install_dialog := $Dialogs/InstallDialog
+onready var edit_project_dialog := $Dialogs/EditProjectDialog
 onready var last_opened := $HBox/LastOpened
 
 
@@ -145,7 +145,7 @@ func _build() -> void:
 func _not_installed() -> void:
 	var version := Projects.get_project_version(project_id)
 	if Versions.exists(version):
-		install_dialog.show_dialog(version)
+		install_dialog.show_version_dialog(version)
 	else:
 		edit_project_dialog.show_dialog(project_id)
 

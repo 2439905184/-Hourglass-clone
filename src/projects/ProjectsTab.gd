@@ -65,7 +65,7 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 
 
 func create_new_project() -> void:
-	new_project.popup_centered()
+	new_project.show_dialog()
 
 
 func import_project() -> void:

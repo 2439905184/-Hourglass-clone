@@ -1,4 +1,4 @@
-extends ConfirmationDialog
+extends BaseDialog
 
 
 onready var version_dropdown: VersionDropdown = $VBox/HBox3/VersionDropdown
@@ -8,16 +8,11 @@ onready var location_label: LineEdit = $VBox/HBox2/Location
 onready var already_exists: Label = $VBox/AlreadyExists
 onready var gl_version: HBoxContainer = $VBox/HBox3/GLVersion
 onready var gl2: CheckBox = $VBox/HBox3/GLVersion/GL2
-onready var about_gles: ConfirmationDialog = $AboutGLES
 
 
 func _ready() -> void:
 	_set_name(tr("New Project"))
 	_set_location(Config.get_project_location())
-
-
-func show_dialog() -> void:
-	version_dropdown.refresh()
 
 
 func _on_Browse_pressed() -> void:
@@ -79,7 +74,7 @@ func _validate() -> bool:
 	else:
 		already_exists.modulate.a = 0
 
-	get_ok().disabled = not valid
+	set_ok_enabled(valid)
 	return valid
 
 
@@ -91,7 +86,7 @@ func _on_Name_text_changed(_1: String) -> void:
 	_validate()
 
 
-func _on_version_selected(_id: int) -> void:
+func _on_VersionDropdown_item_selected(_id: int) -> void:
 	var version := version_dropdown.get_selected_version()
 	gl_version.visible = (Versions.get_config_version(version) >= 4)
 
@@ -116,11 +111,4 @@ func _on_confirmed() -> void:
 
 
 func _on_About_pressed() -> void:
-	about_gles.get_cancel().text = tr("Close")
-	about_gles.get_ok().text = tr("More Details")
-	about_gles.rect_size = Vector2(0, 0)
-	about_gles.popup_centered_minsize()
-
-
-func _on_AboutGLES_confirmed() -> void:
 	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/misc/gles2_gles3_differences.html")

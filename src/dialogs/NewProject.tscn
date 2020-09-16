@@ -5,16 +5,11 @@
 
 [sub_resource type="ButtonGroup" id=1]
 
-[node name="NewProject" type="ConfirmationDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -824.0
-margin_bottom = -530.0
-rect_min_size = Vector2( 450, 70 )
-popup_exclusive = true
-window_title = "Create New Project"
-resizable = true
+[node name="NewProject" type="Node"]
 script = ExtResource( 1 )
+title = "Create New Project"
+content_size = Vector2( 450, 250 )
+ok_text = "Create"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -41,6 +36,8 @@ custom_constants/separation = 5
 margin_right = 498.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="CreateFolder" type="Button" parent="VBox/HBox"]
 margin_left = 503.0
@@ -70,6 +67,8 @@ custom_constants/separation = 5
 margin_right = 524.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="Browse" type="Button" parent="VBox/HBox2"]
 margin_left = 529.0
@@ -158,62 +157,12 @@ mode = 2
 access = 2
 current_dir = "/home/jwestman/Documents/hourglass"
 current_path = "/home/jwestman/Documents/hourglass/"
-
-[node name="AboutGLES" type="ConfirmationDialog" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 608.0
-margin_bottom = 408.0
-window_title = "GLES 3 vs GLES 2"
-dialog_hide_on_ok = false
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="AboutGLES"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="AboutGLES/HBoxContainer2"]
-margin_top = 137.0
-margin_right = 278.0
-margin_bottom = 219.0
-size_flags_horizontal = 3
-text = "GLES 3:
-Higher visual quality
-All features available
-Incompatible with older hardware
-Not recommended for web games"
-
-[node name="VSeparator" type="VSeparator" parent="AboutGLES/HBoxContainer2"]
-margin_left = 282.0
-margin_right = 302.0
-margin_bottom = 356.0
-custom_constants/separation = 20
-
-[node name="Label2" type="Label" parent="AboutGLES/HBoxContainer2"]
-margin_left = 306.0
-margin_top = 137.0
-margin_right = 584.0
-margin_bottom = 219.0
-size_flags_horizontal = 3
-text = "GLES 2:
-Lower visual quality
-Some features not available
-Works on most hardware
-Recommended for web games"
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="text_changed" from="VBox/HBox/Name" to="." method="_on_Name_text_changed"]
 [connection signal="text_entered" from="VBox/HBox/Name" to="." method="_on_Name_text_entered"]
 [connection signal="pressed" from="VBox/HBox/CreateFolder" to="." method="_on_CreateFolder_pressed"]
 [connection signal="text_changed" from="VBox/HBox2/Location" to="." method="_on_Location_text_changed"]
 [connection signal="pressed" from="VBox/HBox2/Browse" to="." method="_on_Browse_pressed"]
-[connection signal="item_selected" from="VBox/HBox3/VersionDropdown" to="." method="_on_version_selected"]
+[connection signal="item_selected" from="VBox/HBox3/VersionDropdown" to="." method="_on_VersionDropdown_item_selected"]
 [connection signal="pressed" from="VBox/HBox3/GLVersion/About" to="." method="_on_About_pressed"]
 [connection signal="dir_selected" from="Browse" to="." method="_on_Browse_dir_selected"]
-[connection signal="confirmed" from="AboutGLES" to="." method="_on_AboutGLES_confirmed"]

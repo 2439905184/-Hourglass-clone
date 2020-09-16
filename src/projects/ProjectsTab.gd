@@ -65,7 +65,7 @@ func select_project(project: ProjectListItem, shift=false) -> void:
 
 
 func create_new_project() -> void:
-	new_project.popup_centered()
+	new_project.show_dialog()
 
 
 func import_project() -> void:
@@ -200,7 +200,7 @@ func _on_Remove_pressed() -> void:
 
 func _on_Edit_pressed() -> void:
 	if _selected.size() == 1:
-		edit_project_dialog.show_dialog(_selected[0].project_id)
+		edit_project_dialog.show_project_dialog(_selected[0].project_id)
 	menu.hide()
 
 

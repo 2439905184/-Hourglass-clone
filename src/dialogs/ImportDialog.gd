@@ -1,4 +1,4 @@
-extends ConfirmationDialog
+extends BaseDialog
 
 
 var path: String setget set_path
@@ -6,14 +6,9 @@ var path: String setget set_path
 onready var version_dropdown: VersionDropdown = $VBox/HBox/VersionDropdown
 
 
-func _ready() -> void:
-	get_ok().text = tr("Import")
-
-
 func show_dialog() -> void:
 	version_dropdown.refresh()
-	rect_size = Vector2(0, 0)
-	popup_centered_minsize()
+	.show_dialog()
 
 
 func set_path(new_path: String) -> void:
@@ -24,7 +19,7 @@ func set_path(new_path: String) -> void:
 		return
 
 	var name = cfg.get_value("application", "config/name")
-	window_title = tr("Import {name}").format({"name":name})
+	self.title = tr("Import {name}").format({"name":name})
 
 
 func _on_confirmed() -> void:

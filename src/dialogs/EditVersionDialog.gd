@@ -1,4 +1,4 @@
-extends WindowDialog
+extends BaseDialog
 
 
 var version_id: String
@@ -9,18 +9,17 @@ onready var browse := $Dialogs/Browse
 onready var show_files := $VBox/HBox2/Show
 
 
-func show_dialog(version_id: String) -> void:
+func show_dialog_for_version(version_id: String) -> void:
 	self.version_id = version_id
 	_update_name()
 	_update_location()
 
-	rect_size = Vector2(0, 0)
-	popup_centered_minsize()
+	show_dialog()
 
 
 func _update_name(lineedit:=true) -> void:
 	var name := Versions.get_version_name(version_id)
-	window_title = tr("Edit %s") % name
+	self.title = tr("Edit %s") % name
 	if lineedit:
 		name_edit.text = name
 

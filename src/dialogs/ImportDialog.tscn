@@ -3,38 +3,36 @@
 [ext_resource path="res://src/misc/VersionDropdown.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/dialogs/ImportDialog.gd" type="Script" id=2]
 
-[node name="ImportDialog" type="ConfirmationDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ImportDialog" type="Node"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+content_size = Vector2( 300, 125 )
+ok_text = "Import"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 1016.0
 margin_bottom = 564.0
+size_flags_vertical = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_top = 18.0
 margin_right = 1008.0
-margin_bottom = 38.0
+margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="VBox/HBox"]
-margin_top = 3.0
+margin_top = 5.0
 margin_right = 95.0
-margin_bottom = 17.0
+margin_bottom = 19.0
 text = "Godot Version:"
 
 [node name="VersionDropdown" parent="VBox/HBox" instance=ExtResource( 1 )]
 margin_left = 99.0
-margin_right = 140.0
+margin_right = 249.0
+margin_bottom = 24.0
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]

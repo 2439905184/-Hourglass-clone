@@ -90,10 +90,6 @@ theme = ExtResource( 5 )
 [node name="InstallDialog" parent="Dialogs" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 429.0
-margin_top = 5.0
-margin_right = 429.0
-margin_bottom = 55.0
 content_size = Vector2( 400, 100 )
 
 [node name="EditProjectDialog" parent="Dialogs" instance=ExtResource( 3 )]

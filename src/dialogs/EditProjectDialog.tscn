@@ -3,10 +3,10 @@
 [ext_resource path="res://src/dialogs/EditProjectDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/misc/VersionDropdown.tscn" type="PackedScene" id=2]
 
-[node name="EditProjectDialog" type="ConfirmationDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="EditProjectDialog" type="Node"]
 script = ExtResource( 1 )
+content_size = Vector2( 300, 100 )
+ok_text = "Save"
 
 [node name="HBox" type="HBoxContainer" parent="."]
 margin_left = 8.0
@@ -18,13 +18,13 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="HBox"]
-margin_top = 13.0
+margin_top = 271.0
 margin_right = 95.0
-margin_bottom = 27.0
+margin_bottom = 285.0
 text = "Godot Version:"
 
 [node name="VersionDropdown" parent="HBox" instance=ExtResource( 2 )]
 margin_left = 99.0
-margin_right = 140.0
-margin_bottom = 40.0
+margin_right = 249.0
+margin_bottom = 556.0
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]

@@ -5,13 +5,8 @@
 
 [sub_resource type="ButtonGroup" id=1]
 
-[node name="NewProject" type="ColorRect"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="NewProject" type="Node"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 title = "Create New Project"
 content_size = Vector2( 450, 250 )
 ok_text = "Create"

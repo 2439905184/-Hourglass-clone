@@ -1,5 +1,5 @@
 class_name BaseDialog
-extends ColorRect
+extends Node
 
 
 signal confirmed()
@@ -13,9 +13,11 @@ export var content_size := Vector2(200, 100)
 export var ok_text: String = tr("Ok") setget set_ok_text, get_ok_text
 export var ok_enabled := true setget set_ok_enabled, get_ok_enabled
 export var cancel_text: String = tr("Cancel") setget set_cancel_text, get_cancel_text
+export var cancel_shown := true setget set_cancel_shown, get_cancel_shown
 
 
-onready var dialog := CONTENTS.instance()
+onready var colorrect := CONTENTS.instance()
+onready var dialog := colorrect.get_node("Dialog")
 onready var vbox := dialog.get_node("VBox")
 onready var title_label := dialog.get_node("VBox/Headerbar/Title")
 onready var content := dialog.get_node("VBox/Content")
@@ -27,7 +29,7 @@ onready var ok := dialog.get_node("VBox/Buttons/Ok")
 
 func _ready() -> void:
 	# don't use our overriden add_child
-	.add_child(dialog)
+	.add_child(colorrect)
 
 	dialog.connect("popup_hide", self, "_on_Dialog_popup_hide")
 	dialog.connect("about_to_show", self, "_on_Dialog_about_to_show")
@@ -36,20 +38,17 @@ func _ready() -> void:
 	ok.connect("pressed", self, "_on_Ok_pressed")
 
 	set_process(false)
-	visible = false
+	colorrect.visible = false
 
 	title_label.text = title
 	ok.text = ok_text
 	ok.disabled = !ok_enabled
 	cancel.text = cancel_text
-
-	color = Color("#7f000000");
-	anchor_right = 1
-	anchor_bottom = 1
+	cancel.visible = cancel_shown
 
 	# if any children were added, move them to the dialog content
 	for child in get_children():
-		if child != dialog:
+		if child != colorrect:
 			child.get_parent().remove_child(child)
 			content.add_child(child)
 
@@ -67,7 +66,7 @@ func get_node(path: NodePath) -> Node:
 
 func _process(delta: float) -> void:
 	if !dialog.visible:
-		visible = false
+		colorrect.visible = false
 
 	set_process(false)
 
@@ -104,6 +103,14 @@ func get_cancel_text() -> String:
 	return cancel_text
 
 
+func set_cancel_shown(new_cancel_shown: bool) -> void:
+	cancel_shown = new_cancel_shown
+	if cancel != null:
+		cancel.visible = !new_cancel_shown
+func get_cancel_shown() -> bool:
+	return cancel_shown
+
+
 func show_dialog() -> void:
 	dialog.popup_centered_minsize(content_size)
 
@@ -127,7 +134,7 @@ func _on_Close_pressed() -> void:
 
 
 func _on_Dialog_about_to_show() -> void:
-	visible = true
+	colorrect.visible = true
 	get_viewport().connect("size_changed", self, "_on_size_changed")
 
 

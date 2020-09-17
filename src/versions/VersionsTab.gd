@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func show_version_edit_dialog(version_id: String) -> void:
-	edit_dialog.show_dialog(version_id)
+	edit_dialog.show_dialog_for_version(version_id)
 
 
 func select_version_by_code(version_code: String, shift := false) -> bool:

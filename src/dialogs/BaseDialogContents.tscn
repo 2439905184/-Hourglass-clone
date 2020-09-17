@@ -12,7 +12,17 @@ flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[node name="Dialog" type="PopupDialog"]
+[node name="BaseDialogContents" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialog" type="PopupDialog" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 3 )
@@ -20,60 +30,60 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="Dialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Headerbar" type="HBoxContainer" parent="VBox"]
+[node name="Headerbar" type="HBoxContainer" parent="Dialog/VBox"]
 margin_right = 114.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="VBox/Headerbar"]
+[node name="Title" type="Label" parent="Dialog/VBox/Headerbar"]
 margin_top = 1.0
 margin_bottom = 15.0
 custom_fonts/font = ExtResource( 1 )
 
-[node name="spacer" type="Control" parent="VBox/Headerbar"]
+[node name="spacer" type="Control" parent="Dialog/VBox/Headerbar"]
 margin_left = 4.0
 margin_right = 94.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 
-[node name="Close" type="Button" parent="VBox/Headerbar"]
+[node name="Close" type="Button" parent="Dialog/VBox/Headerbar"]
 margin_left = 98.0
 margin_right = 114.0
 margin_bottom = 16.0
 theme = ExtResource( 4 )
 icon = SubResource( 1 )
 
-[node name="Content" type="VBoxContainer" parent="VBox"]
+[node name="Content" type="VBoxContainer" parent="Dialog/VBox"]
 margin_top = 20.0
 margin_right = 114.0
 margin_bottom = 20.0
-size_flags_vertical = 3
+size_flags_vertical = 6
 
-[node name="Buttons" type="HBoxContainer" parent="VBox"]
+[node name="Buttons" type="HBoxContainer" parent="Dialog/VBox"]
 margin_top = 24.0
 margin_right = 114.0
 margin_bottom = 54.0
 custom_constants/separation = 10
 
-[node name="spacer" type="Control" parent="VBox/Buttons"]
+[node name="spacer" type="Control" parent="Dialog/VBox/Buttons"]
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
-[node name="Cancel" type="Button" parent="VBox/Buttons"]
+[node name="Cancel" type="Button" parent="Dialog/VBox/Buttons"]
 margin_left = 10.0
 margin_right = 56.0
 margin_bottom = 30.0
 theme = ExtResource( 5 )
 text = "Cancel"
 
-[node name="Ok" type="Button" parent="VBox/Buttons"]
+[node name="Ok" type="Button" parent="Dialog/VBox/Buttons"]
 margin_left = 66.0
 margin_right = 114.0
 margin_bottom = 30.0

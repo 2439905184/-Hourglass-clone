@@ -1,4 +1,4 @@
-extends ConfirmationDialog
+extends BaseDialog
 
 
 var _project_id: String
@@ -6,16 +6,15 @@ var _project_id: String
 onready var version_dropdown: VersionDropdown = $HBox/VersionDropdown
 
 
-func show_dialog(project_id: String) -> void:
+func show_project_dialog(project_id: String) -> void:
 	_project_id = project_id
 	var version := Projects.get_project_version(project_id)
 	version_dropdown.refresh()
 	version_dropdown.selected_version = version
 
-	window_title = tr("Edit {name}").format({"name": Projects.get_project_name(project_id)})
+	self.title = tr("Edit {name}").format({"name": Projects.get_project_name(project_id)})
 
-	rect_size = Vector2(0, 0)
-	popup_centered_minsize()
+	show_dialog()
 
 
 func _on_confirmed() -> void:

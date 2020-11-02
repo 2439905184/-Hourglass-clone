@@ -5,7 +5,7 @@ extends HTTPRequest
 signal request_failed()
 signal versions_updated()
 
-const URL = "https://gitlab.com/FlyingPiMonster/hourglass/raw/master/data/versions.cfg"
+const URL = "https://gitlab.com/jwestman/hourglass/raw/master/data/versions.cfg"
 const DOWNLOAD_PATH = "user://versions_update.cfg"
 
 

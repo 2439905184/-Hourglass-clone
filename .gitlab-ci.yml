@@ -29,6 +29,7 @@ windows:
   artifacts:
     paths:
       - godot/bin
+    expire_in: never
 
 macos:
   <<: *build_rules
@@ -49,6 +50,7 @@ macos:
   artifacts:
     paths:
     - godot/bin/osx.zip
+    expire_in: never
 
 linux:
   <<: *build_rules
@@ -68,6 +70,7 @@ linux:
   artifacts:
     paths:
     - godot/bin
+    expire_in: never
 
 
 export:
@@ -93,6 +96,7 @@ export:
   artifacts:
     paths:
     - public
+    expire_in: never
 
 
 pages:
@@ -104,6 +108,7 @@ pages:
   artifacts:
     paths:
     - public
+    expire_in: never
 
 
 check_versions:

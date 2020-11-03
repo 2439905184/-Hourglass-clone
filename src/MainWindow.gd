@@ -1,10 +1,10 @@
 extends Control
 
 
-onready var confirm_quit: Button = $ConfirmQuit
+onready var confirm_quit: ConfirmationDialog = $ConfirmQuit
 onready var versions: HBoxContainer = $TabContainer/Versions
 onready var tab_container: TabContainer = $TabContainer
-onready var version_label: Label = $HBox/Version
+onready var version_label: LinkButton = $HBox/Version
 
 
 func _ready() -> void:

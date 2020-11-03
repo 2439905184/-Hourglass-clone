@@ -3,8 +3,8 @@ extends ConfirmationDialog
 
 onready var version_dropdown: VersionDropdown = $VBox/HBox3/VersionDropdown
 onready var browse: FileDialog = $Browse
-onready var name_label: Label = $VBox/HBox/Name
-onready var location_label: Label = $VBox/HBox2/Location
+onready var name_label: LineEdit = $VBox/HBox/Name
+onready var location_label: LineEdit = $VBox/HBox2/Location
 onready var already_exists: Label = $VBox/AlreadyExists
 onready var gl_version: HBoxContainer = $VBox/HBox3/GLVersion
 onready var gl2: CheckBox = $VBox/HBox3/GLVersion/GL2

@@ -22,7 +22,10 @@ func get_selected_version() -> String:
 
 func refresh() -> void:
 	clear()
-	for version in Versions.get_versions():
+
+	var versions := Array(Versions.get_versions())
+	versions.sort_custom(Versions, "sort_versions")
+	for version in versions:
 		if Versions.is_installed(version):
 			add_item(Versions.get_version_name(version))
 			set_item_metadata(get_item_count() - 1, version)

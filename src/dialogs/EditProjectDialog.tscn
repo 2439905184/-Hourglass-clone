@@ -5,7 +5,7 @@
 
 [node name="EditProjectDialog" type="Node"]
 script = ExtResource( 1 )
-content_size = Vector2( 300, 100 )
+content_size = Vector2( 300, 150 )
 ok_text = "Save"
 
 [node name="HBox" type="HBoxContainer" parent="."]
@@ -25,6 +25,7 @@ text = "Godot Version:"
 
 [node name="VersionDropdown" parent="HBox" instance=ExtResource( 2 )]
 margin_left = 99.0
-margin_right = 249.0
+margin_right = 1008.0
 margin_bottom = 556.0
+size_flags_horizontal = 3
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]

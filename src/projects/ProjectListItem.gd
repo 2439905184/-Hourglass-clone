@@ -100,6 +100,7 @@ func _on_version_changed(version: String) -> void:
 func _build() -> void:
 	_path = Projects.get_project_directory(project_id)
 	path_label.text = _path
+	path_label.hint_tooltip = _path
 
 	project_cfg = ConfigFile.new()
 	if project_cfg.load(_path.plus_file("project.godot")) != OK:

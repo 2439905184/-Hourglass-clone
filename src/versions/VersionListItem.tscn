@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://styles/ListItem.tres" type="Theme" id=1]
 [ext_resource path="res://styles/InstallButton.tres" type="Theme" id=2]
 [ext_resource path="res://styles/DownloadingButton.tres" type="Theme" id=3]
 [ext_resource path="res://src/versions/VersionListItem.gd" type="Script" id=4]
+[ext_resource path="res://src/dialogs/BaseDialog.gd" type="Script" id=5]
 
 [sub_resource type="VisualShaderNodeCompare" id=1]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0, 0, 0 ), 2, 1e-05 ]
@@ -184,6 +185,8 @@ modulate = Color( 1, 1, 1, 0.752941 )
 margin_top = 18.0
 margin_right = 879.0
 margin_bottom = 32.0
+mouse_filter = 0
+clip_text = true
 
 [node name="DownloadProgress" type="PanelContainer" parent="HBox"]
 visible = false
@@ -262,13 +265,33 @@ text = "Remove"
 
 [node name="Dialogs" type="Node" parent="."]
 
-[node name="ConfirmRemove" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 200.0
-margin_bottom = 70.0
+[node name="ConfirmRemove" type="Node" parent="Dialogs"]
+script = ExtResource( 5 )
+content_size = Vector2( 300, 150 )
+ok_text = "Remove"
 
-[node name="ConfirmUninstall" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 200.0
-margin_bottom = 70.0
+[node name="Label" type="Label" parent="Dialogs/ConfirmRemove"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 220, 0 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmUninstall" type="Node" parent="Dialogs"]
+script = ExtResource( 5 )
+content_size = Vector2( 300, 150 )
+ok_text = "Uninstall"
+
+[node name="Label" type="Label" parent="Dialogs/ConfirmUninstall"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 220, 0 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="HBox/Edit" to="." method="_on_Edit_pressed"]
 [connection signal="pressed" from="HBox/Buttons/Install" to="." method="_on_Install_pressed"]
 [connection signal="pressed" from="HBox/Buttons/Uninstall" to="." method="_on_Uninstall_pressed"]

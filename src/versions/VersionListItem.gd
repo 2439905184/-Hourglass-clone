@@ -13,7 +13,9 @@ onready var download_progress := $HBox/DownloadProgress
 onready var download_label := $HBox/DownloadProgress/Label
 onready var edit_button := $HBox/Edit
 onready var confirm_remove := $Dialogs/ConfirmRemove
+onready var confirm_remove_label := $Dialogs/ConfirmRemove.get_node("Label")
 onready var confirm_uninstall := $Dialogs/ConfirmUninstall
+onready var confirm_uninstall_label := $Dialogs/ConfirmUninstall.get_node("Label")
 
 
 static func instance() -> VersionListItem:
@@ -65,7 +67,9 @@ func _build() -> void:
 
 	if Versions.is_executable_set(version_id):
 		path_label.visible = true
-		path_label.text = Versions.get_executable(version_id)
+		var path = Versions.get_executable(version_id)
+		path_label.text = path
+		path_label.hint_tooltip = path
 	else:
 		path_label.visible = false
 
@@ -112,11 +116,9 @@ func _on_Edit_pressed() -> void:
 func _on_Remove_pressed() -> void:
 	var version := Versions.get_version_name(version_id)
 
-	confirm_remove.get_ok().text = tr("Remove")
-	confirm_remove.dialog_text = tr("Are you sure you want to remove the custom version {version}? No files will be deleted.").format({"version": version})
-	confirm_remove.window_title = tr("Remove {version}?").format({"version": version})
-	confirm_remove.rect_size = Vector2(0, 0)
-	confirm_remove.popup_centered_minsize()
+	confirm_remove_label.text = tr("Are you sure you want to remove the custom version {version}? No files will be deleted.").format({"version": version})
+	confirm_remove.title = tr("Remove {version}?").format({"version": version})
+	confirm_remove.show_dialog()
 
 
 func _on_ConfirmRemove_confirmed() -> void:
@@ -126,11 +128,9 @@ func _on_ConfirmRemove_confirmed() -> void:
 func _on_Uninstall_pressed() -> void:
 	var version := Versions.get_version_name(version_id)
 
-	confirm_uninstall.get_ok().text = tr("Uninstall")
-	confirm_uninstall.dialog_text = tr("Are you sure you want to uninstall {version}?").format({"version": version})
-	confirm_uninstall.window_title = tr("Uninstall {version}?").format({"version": version})
-	confirm_uninstall.rect_size = Vector2(0, 0)
-	confirm_uninstall.popup_centered_minsize()
+	confirm_uninstall_label.text = tr("Are you sure you want to uninstall Godot {version}?").format({"version": version})
+	confirm_uninstall.title = tr("Uninstall {version}?").format({"version": version})
+	confirm_uninstall.show_dialog()
 
 
 func _on_ConfirmUninstall_confirmed() -> void:

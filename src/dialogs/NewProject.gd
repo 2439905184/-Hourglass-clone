@@ -2,7 +2,7 @@ extends BaseDialog
 
 
 onready var version_dropdown: VersionDropdown = $VBox/HBox3/VersionDropdown
-onready var browse: FileDialog = $Browse
+onready var browse: FileDialog = $Dialogs/Browse
 onready var name_label: LineEdit = $VBox/HBox/Name
 onready var location_label: LineEdit = $VBox/HBox2/Location
 onready var already_exists: Label = $VBox/AlreadyExists
@@ -111,4 +111,4 @@ func _on_confirmed() -> void:
 
 
 func _on_About_pressed() -> void:
-	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/misc/gles2_gles3_differences.html")
+	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/rendering/gles2_gles3_differences.html")

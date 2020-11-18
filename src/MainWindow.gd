@@ -21,7 +21,7 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		if _should_ask_before_quitting():
-			confirm_quit.popup_centered()
+			confirm_quit.show_dialog()
 		else:
 			get_tree().quit()
 

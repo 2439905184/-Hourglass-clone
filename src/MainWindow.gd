@@ -2,12 +2,13 @@ extends Panel
 
 
 onready var side_panel := $VBoxContainer/HBoxContainer/SidePanel
-onready var search_bar := $VBoxContainer/TopBar/MarginContainer/HBoxContainer/SearchBar
+onready var search_bar := $VBoxContainer/Margin/TopBar/SearchBar
 onready var confirm_quit := $ConfirmQuit
 onready var content := $VBoxContainer/HBoxContainer/Content
 onready var projects := $VBoxContainer/HBoxContainer/Content/Projects
 onready var versions := $VBoxContainer/HBoxContainer/Content/Versions
 onready var templates := $VBoxContainer/HBoxContainer/Content/Templates
+onready var about_dialog := $AboutDialog
 
 onready var tabs := [
 	projects, versions, templates
@@ -71,3 +72,7 @@ func _on_SidePanel_action_pressed(name: String) -> void:
 			pass
 		"versions.add":
 			versions.create_custom_version()
+
+
+func _on_LogoButton_pressed() -> void:
+	about_dialog.show_dialog()

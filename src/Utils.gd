@@ -2,6 +2,11 @@ class_name Utils
 extends Object
 
 
+const GODOT_DONATE_LINK := "https://godotengine.org/donate"
+const SOURCE_LINK := "https://gitlab.com/jwestman/hourglass"
+const GLES_LINK := "https://docs.godotengine.org/en/latest/tutorials/rendering/gles2_gles3_differences.html"
+
+
 static func uuid() -> String:
 	var rand := RandomNumberGenerator.new()
 	rand.randomize()

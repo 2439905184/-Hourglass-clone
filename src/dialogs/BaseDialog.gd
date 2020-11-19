@@ -12,13 +12,16 @@ export var title: String setget set_title, get_title
 export var content_size := Vector2(200, 100)
 export var ok_text: String = tr("Ok") setget set_ok_text, get_ok_text
 export var ok_enabled := true setget set_ok_enabled, get_ok_enabled
+export var ok_shown := true setget set_ok_shown, get_ok_shown
 export var cancel_text: String = tr("Cancel") setget set_cancel_text, get_cancel_text
 export var cancel_shown := true setget set_cancel_shown, get_cancel_shown
+export var headerbar_shown := true setget set_headerbar_shown, get_headerbar_shown
 
 
 onready var colorrect := CONTENTS.instance()
 onready var dialog := colorrect.get_node("Dialog")
 onready var vbox := dialog.get_node("VBox")
+onready var headerbar := dialog.get_node("VBox/Headerbar")
 onready var title_label := dialog.get_node("VBox/Headerbar/Title")
 onready var content := dialog.get_node("VBox/Content")
 onready var buttons := dialog.get_node("VBox/Buttons")
@@ -43,8 +46,10 @@ func _ready() -> void:
 	title_label.text = title
 	ok.text = ok_text
 	ok.disabled = !ok_enabled
+	set_ok_shown(ok_shown)
 	cancel.text = cancel_text
-	cancel.visible = cancel_shown
+	set_cancel_shown(cancel_shown)
+	headerbar.visible = headerbar_shown
 
 	# if any children were added, move them to the dialog content
 	for child in get_children():
@@ -95,10 +100,20 @@ func get_ok_enabled() -> bool:
 	return ok_enabled
 
 
+func set_ok_shown(new_ok_shown: bool) -> void:
+	ok_shown = new_ok_shown
+	if ok != null:
+		ok.visible = new_ok_shown
+		buttons.visible = ok_shown or cancel_shown
+func get_ok_shown() -> bool:
+	return ok_shown
+
+
 func set_cancel_text(new_cancel_text: String) -> void:
 	cancel_text = new_cancel_text
 	if cancel != null:
 		cancel.text = new_cancel_text
+		buttons.visible = ok_shown or cancel_shown
 func get_cancel_text() -> String:
 	return cancel_text
 
@@ -106,9 +121,17 @@ func get_cancel_text() -> String:
 func set_cancel_shown(new_cancel_shown: bool) -> void:
 	cancel_shown = new_cancel_shown
 	if cancel != null:
-		cancel.visible = !new_cancel_shown
+		cancel.visible = new_cancel_shown
 func get_cancel_shown() -> bool:
 	return cancel_shown
+
+
+func set_headerbar_shown(new_headerbar_shown: bool) -> void:
+	headerbar_shown = new_headerbar_shown
+	if headerbar != null:
+		headerbar.visible = new_headerbar_shown
+func get_headerbar_shown() -> bool:
+	return headerbar_shown
 
 
 func show_dialog() -> void:

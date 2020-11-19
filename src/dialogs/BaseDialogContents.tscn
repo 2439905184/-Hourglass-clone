@@ -36,6 +36,8 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="Dialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,15 +67,15 @@ theme = ExtResource( 4 )
 icon = SubResource( 1 )
 
 [node name="Content" type="VBoxContainer" parent="Dialog/VBox"]
-margin_top = 27.0
+margin_top = 33.0
 margin_right = 128.0
-margin_bottom = 27.0
-size_flags_vertical = 6
+margin_bottom = 33.0
+size_flags_vertical = 2
 
 [node name="Buttons" type="HBoxContainer" parent="Dialog/VBox"]
-margin_top = 31.0
+margin_top = 43.0
 margin_right = 128.0
-margin_bottom = 64.0
+margin_bottom = 76.0
 custom_constants/separation = 10
 
 [node name="spacer" type="Control" parent="Dialog/VBox/Buttons"]

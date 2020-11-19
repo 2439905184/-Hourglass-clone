@@ -111,4 +111,4 @@ func _on_confirmed() -> void:
 
 
 func _on_About_pressed() -> void:
-	OS.shell_open("https://docs.godotengine.org/en/latest/tutorials/rendering/gles2_gles3_differences.html")
+	OS.shell_open(Utils.GLES_LINK)

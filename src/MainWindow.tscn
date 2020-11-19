@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/MainWindow.gd" type="Script" id=1]
 [ext_resource path="res://src/versions/VersionsTab.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/components/SearchBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/components/SidePanel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/templates/TemplatesTab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/dialogs/AboutDialog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/misc/SplashTexture.tres" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.301961, 0.376471, 0.482353, 1 )
@@ -31,53 +33,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopBar" type="Control" parent="VBoxContainer"]
+[node name="Margin" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+margin_bottom = 68.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TopBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 15
-custom_constants/margin_top = 20
-custom_constants/margin_left = 15
-custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/MarginContainer"]
-margin_left = 15.0
-margin_top = 20.0
-margin_right = 1009.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 58.0
 custom_constants/separation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Logo" type="ColorRect" parent="VBoxContainer/TopBar/MarginContainer/HBoxContainer"]
-margin_right = 160.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 160, 0 )
-size_flags_vertical = 3
-color = Color( 1, 1, 1, 0.235294 )
+[node name="LogoButton" type="TextureButton" parent="VBoxContainer/Margin/TopBar"]
+margin_right = 128.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 128, 48 )
+size_flags_vertical = 4
+texture_normal = ExtResource( 10 )
+expand = true
 
-[node name="SearchBar" parent="VBoxContainer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 200.0
-margin_right = 794.0
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TopBar/MarginContainer/HBoxContainer"]
-margin_left = 834.0
-margin_right = 994.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 160, 0 )
-color = Color( 1, 1, 1, 0.235294 )
+[node name="SearchBar" parent="VBoxContainer/Margin/TopBar" instance=ExtResource( 6 )]
+margin_left = 168.0
+margin_top = 4.0
+margin_right = 1004.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 84.0
+margin_top = 72.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
@@ -88,12 +79,12 @@ anchor_top = 0.0
 anchor_bottom = 0.0
 margin_top = 0.0
 margin_right = 200.0
-margin_bottom = 516.0
+margin_bottom = 528.0
 
 [node name="Content" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 220.0
 margin_right = 1004.0
-margin_bottom = 516.0
+margin_bottom = 528.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
@@ -114,9 +105,13 @@ visible = false
 [node name="spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
 margin_left = 1024.0
 margin_right = 1024.0
-margin_bottom = 516.0
+margin_bottom = 528.0
 
 [node name="ConfirmQuit" parent="." instance=ExtResource( 4 )]
-[connection signal="search_changed" from="VBoxContainer/TopBar/MarginContainer/HBoxContainer/SearchBar" to="." method="_on_SearchBar_search_changed"]
+content_size = Vector2( 250, 120 )
+
+[node name="AboutDialog" parent="." instance=ExtResource( 9 )]
+[connection signal="pressed" from="VBoxContainer/Margin/TopBar/LogoButton" to="." method="_on_LogoButton_pressed"]
+[connection signal="search_changed" from="VBoxContainer/Margin/TopBar/SearchBar" to="." method="_on_SearchBar_search_changed"]
 [connection signal="action_pressed" from="VBoxContainer/HBoxContainer/SidePanel" to="." method="_on_SidePanel_action_pressed"]
 [connection signal="tab_changed" from="VBoxContainer/HBoxContainer/SidePanel" to="." method="_on_SidePanel_tab_changed"]

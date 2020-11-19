@@ -1,0 +1,180 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/dialogs/AboutDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/misc/SplashTexture.tres" type="Texture" id=2]
+[ext_resource path="res://data/font/NotoSans-Bold-16.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0.12549 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="Theme" id=7]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 3 )
+Button/styles/normal = SubResource( 4 )
+Button/styles/pressed = SubResource( 5 )
+PanelContainer/styles/panel = SubResource( 6 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[node name="AboutDialog" type="Node"]
+script = ExtResource( 1 )
+content_size = Vector2( 500, 230 )
+ok_shown = false
+cancel_shown = false
+headerbar_shown = false
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_right = 277.0
+margin_bottom = 1001.0
+size_flags_horizontal = 3
+custom_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="VBox/HBox"]
+margin_right = 256.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 256, 96 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox"]
+margin_left = 276.0
+margin_right = 277.0
+margin_bottom = 1001.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBox/HBox/VBox"]
+margin_right = 1.0
+margin_bottom = 14.0
+
+[node name="Label2" type="Label" parent="VBox/HBox/VBox"]
+margin_top = 18.0
+margin_right = 1.0
+margin_bottom = 1001.0
+text = "Copyright 2019-2020 James Westman and other contributors"
+autowrap = true
+
+[node name="VBox" type="VBoxContainer" parent="VBox"]
+margin_top = 1011.0
+margin_right = 277.0
+margin_bottom = 1154.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+theme = SubResource( 7 )
+custom_constants/separation = 10
+
+[node name="GitLab" type="PanelContainer" parent="VBox/VBox"]
+margin_right = 277.0
+margin_bottom = 58.0
+
+[node name="GitLabButton" type="Button" parent="VBox/VBox/GitLab"]
+margin_right = 277.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="VBox/VBox/GitLab"]
+margin_right = 277.0
+margin_bottom = 58.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/VBox/GitLab/VBox"]
+margin_right = 277.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+text = "Hourglass is Open Source"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="VBox/VBox/GitLab/VBox"]
+margin_top = 27.0
+margin_right = 277.0
+margin_bottom = 58.0
+text = "You can view the code here on GitLab. It is licensed under the GPL, version 3 or later."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Donate" type="PanelContainer" parent="VBox/VBox"]
+margin_top = 68.0
+margin_right = 277.0
+margin_bottom = 143.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="DonateButton" type="Button" parent="VBox/VBox/Donate"]
+margin_right = 277.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="VBox/VBox/Donate"]
+margin_right = 277.0
+margin_bottom = 75.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/VBox/Donate/VBox"]
+margin_right = 277.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+text = "Donate to Godot Engine"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="VBox/VBox/Donate/VBox"]
+margin_top = 27.0
+margin_right = 277.0
+margin_bottom = 75.0
+text = "Hourglass itself doesn't currently take donations, but donations to Godot Engine are greatly appreciated!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBox/VBox/GitLab/GitLabButton" to="." method="_on_GitLabButton_pressed"]
+[connection signal="pressed" from="VBox/VBox/Donate/DonateButton" to="." method="_on_DonateButton_pressed"]

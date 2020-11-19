@@ -15,9 +15,7 @@ var _active_updates := 0
 
 func _ready() -> void:
 	_add_store(ASSET_STORE_GODOT, ASSET_STORE_GODOT_URL)
-	update()
-	print(get_asset_preview("godotengine.org:579", "564"))
-	print(get_asset_preview("godotengine.org:579", "564", true))
+	# update()
 
 
 # Updates the asset library repositories.

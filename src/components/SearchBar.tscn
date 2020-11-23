@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/components/SearchBar.gd" type="Script" id=2]
 [ext_resource path="res://data/icons.svg" type="Texture" id=3]
@@ -21,15 +21,9 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="OpenSimplexNoise" id=3]
+[sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="NoiseTexture" id=4]
-seamless = true
-noise = SubResource( 3 )
-
-[sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
@@ -64,8 +58,7 @@ margin_left = 20.0
 margin_right = 574.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-custom_icons/clear = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/normal = SubResource( 3 )
 custom_colors/cursor_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
@@ -80,7 +73,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 enabled_focus_mode = 0
-icon = SubResource( 6 )
+icon = SubResource( 4 )
 flat = true
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="HBoxContainer/Delete" to="." method="_on_Delete_pressed"]

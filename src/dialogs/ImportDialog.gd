@@ -6,6 +6,11 @@ var path: String setget set_path
 onready var version_dropdown: VersionDropdown = $VBox/HBox/VersionDropdown
 
 
+func _ready() -> void:
+	self.content_size = Vector2(300, 125)
+	self.ok_text = tr("Import")
+
+
 func show_dialog() -> void:
 	version_dropdown.refresh()
 	.show_dialog()

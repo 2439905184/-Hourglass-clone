@@ -5,8 +5,6 @@
 
 [node name="EditProjectDialog" type="Node"]
 script = ExtResource( 1 )
-content_size = Vector2( 300, 150 )
-ok_text = "Save"
 
 [node name="HBox" type="HBoxContainer" parent="."]
 margin_left = 8.0

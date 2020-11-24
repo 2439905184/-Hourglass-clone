@@ -108,7 +108,6 @@ margin_right = 1024.0
 margin_bottom = 528.0
 
 [node name="ConfirmQuit" parent="." instance=ExtResource( 4 )]
-content_size = Vector2( 250, 120 )
 
 [node name="AboutDialog" parent="." instance=ExtResource( 9 )]
 [connection signal="pressed" from="VBoxContainer/Margin/TopBar/LogoButton" to="." method="_on_LogoButton_pressed"]

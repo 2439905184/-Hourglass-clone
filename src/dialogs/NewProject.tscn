@@ -9,9 +9,6 @@
 
 [node name="NewProject" type="Node"]
 script = ExtResource( 1 )
-title = "Create New Project"
-content_size = Vector2( 450, 300 )
-ok_text = "Create"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 8.0

@@ -43,10 +43,6 @@ PanelContainer/styles/panel = SubResource( 6 )
 
 [node name="AboutDialog" type="Node"]
 script = ExtResource( 1 )
-content_size = Vector2( 500, 230 )
-ok_shown = false
-cancel_shown = false
-headerbar_shown = false
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 40.0

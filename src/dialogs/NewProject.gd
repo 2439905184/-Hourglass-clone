@@ -14,6 +14,10 @@ func _ready() -> void:
 	_set_name(tr("New Project"))
 	_set_location(Config.get_project_location())
 
+	self.title = tr("Create New Project")
+	self.content_size = Vector2(450, 300)
+	self.ok_text = tr("Create")
+
 
 func _on_Browse_pressed() -> void:
 	if _location_exists():

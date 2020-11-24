@@ -6,6 +6,11 @@ var _project_id: String
 onready var version_dropdown: VersionDropdown = $HBox/VersionDropdown
 
 
+func _ready() -> void:
+	self.content_size = Vector2(300, 150)
+	self.ok_text = "Save"
+
+
 func show_project_dialog(project_id: String) -> void:
 	_project_id = project_id
 	var version := Projects.get_project_version(project_id)

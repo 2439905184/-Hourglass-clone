@@ -4,9 +4,6 @@
 
 [node name="ConfirmQuit" type="Node"]
 script = ExtResource( 1 )
-title = "Cancel Downloads?"
-content_size = Vector2( 250, 150 )
-ok_text = "Quit"
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0

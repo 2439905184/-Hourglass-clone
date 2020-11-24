@@ -9,6 +9,11 @@ onready var browse := $Dialogs/Browse
 onready var show_files := $VBox/HBox2/Show
 
 
+func _ready() -> void:
+	self.content_size = Vector2(400, 200)
+	self.cancel_shown = false
+
+
 func show_dialog_for_version(version_id: String) -> void:
 	self.version_id = version_id
 	_update_name()

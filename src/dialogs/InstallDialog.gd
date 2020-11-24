@@ -4,6 +4,10 @@ extends BaseDialog
 var _version: String
 
 
+func _ready() -> void:
+	self.ok_text = tr("Install")
+
+
 func show_version_dialog(version: String) -> void:
 	_version = version
 	self.title = tr("{version} not installed").format({"version": version})

@@ -5,8 +5,6 @@
 
 [node name="ImportDialog" type="Node"]
 script = ExtResource( 2 )
-content_size = Vector2( 300, 125 )
-ok_text = "Import"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 8.0

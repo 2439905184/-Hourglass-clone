@@ -4,7 +4,6 @@
 
 [node name="InstallDialog" type="Node"]
 script = ExtResource( 1 )
-ok_text = "Install"
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0

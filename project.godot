@@ -86,6 +86,7 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="hourglass"
 boot_splash/image="res://data/splash.png"
 boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.168627, 0.203922, 0.254902, 1 )
 config/icon="res://data/icon.png"
 
 [autoload]

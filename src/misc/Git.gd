@@ -36,7 +36,7 @@ class CloneOperation:
 	func start() -> void:
 		print("Cloning ", url, " into ", dest)
 		self.thread = Thread.new()
-		thread.start(self, "_thread_function", "Wafflecopter")
+		thread.start(self, "_thread_function")
 
 
 	func _thread_function(userdata):

@@ -65,9 +65,5 @@ func _on_Import_pressed() -> void:
 	emit_signal("action_pressed", "projects.import")
 
 
-func _on_Scan_pressed() -> void:
-	emit_signal("action_pressed", "projects.scan")
-
-
 func _on_AddCustom_pressed() -> void:
 	emit_signal("action_pressed", "versions.add")

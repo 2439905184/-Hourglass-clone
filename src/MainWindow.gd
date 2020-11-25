@@ -67,9 +67,6 @@ func _on_SidePanel_action_pressed(name: String) -> void:
 			projects.create_new_project()
 		"projects.import":
 			projects.import_project()
-		"projects.scan":
-			# not implemented yet
-			pass
 		"versions.add":
 			versions.create_custom_version()
 

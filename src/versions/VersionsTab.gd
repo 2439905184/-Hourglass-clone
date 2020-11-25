@@ -9,8 +9,11 @@ var search_query: String setget set_search_query, get_search_query
 var _selected := []
 var _child_items := {}
 
+onready var installed := $Scroll/VBox/Installed
 onready var installed_list := $Scroll/VBox/Installed/List
+onready var available := $Scroll/VBox/Available
 onready var available_list := $Scroll/VBox/Available/List
+onready var no_results := $Scroll/VBox/NoResults
 onready var edit_dialog := $EditVersionDialog
 
 
@@ -71,8 +74,10 @@ func _build_tree() -> void:
 	_selected.clear()
 
 	for row in installed_list.get_children():
+		installed_list.remove_child(row)
 		row.queue_free()
 	for row in available_list.get_children():
+		available_list.remove_child(row)
 		row.queue_free()
 	_child_items.clear()
 
@@ -106,6 +111,10 @@ func _build_tree() -> void:
 
 	for id in selected_ids:
 		select_version_by_code(id, true)
+
+	installed.visible = installed_list.get_child_count() > 0
+	available.visible = available_list.get_child_count() > 0
+	no_results.visible = not (installed.visible or available.visible)
 
 
 func _on_versions_updated() -> void:

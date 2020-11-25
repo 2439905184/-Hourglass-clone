@@ -44,7 +44,7 @@ custom_constants/separation = 12
 
 [node name="TabButtons" type="VBoxContainer" parent="VBoxContainer"]
 margin_right = 164.0
-margin_bottom = 95.0
+margin_bottom = 62.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,6 +91,7 @@ __meta__ = {
 }
 
 [node name="Templates" type="Button" parent="VBoxContainer/TabButtons"]
+visible = false
 margin_top = 66.0
 margin_right = 164.0
 margin_bottom = 95.0
@@ -111,13 +112,13 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 107.0
+margin_top = 74.0
 margin_right = 164.0
-margin_bottom = 111.0
+margin_bottom = 78.0
 custom_styles/separator = SubResource( 3 )
 
 [node name="Panes" type="TabContainer" parent="VBoxContainer"]
-margin_top = 123.0
+margin_top = 90.0
 margin_right = 164.0
 margin_bottom = 478.0
 size_flags_vertical = 3
@@ -142,13 +143,6 @@ margin_right = 164.0
 margin_bottom = 74.0
 theme = ExtResource( 6 )
 text = "Import"
-
-[node name="Scan" type="Button" parent="VBoxContainer/Panes/Projects"]
-margin_top = 82.0
-margin_right = 164.0
-margin_bottom = 115.0
-theme = ExtResource( 6 )
-text = "Scan"
 
 [node name="Versions" type="VBoxContainer" parent="VBoxContainer/Panes"]
 visible = false
@@ -188,7 +182,6 @@ custom_constants/separation = 6
 [connection signal="pressed" from="VBoxContainer/TabButtons/Templates" to="." method="_on_Templates_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Projects/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Projects/Import" to="." method="_on_Import_pressed"]
-[connection signal="pressed" from="VBoxContainer/Panes/Projects/Scan" to="." method="_on_Scan_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Versions/AddCustom" to="." method="_on_AddCustom_pressed"]
 [connection signal="toggled" from="VBoxContainer/Panes/Versions/BetaVersions" to="." method="_on_BetaVersions_toggled"]
 [connection signal="toggled" from="VBoxContainer/Panes/Versions/MonoVersions" to="." method="_on_MonoVersions_toggled"]

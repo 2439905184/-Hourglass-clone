@@ -234,6 +234,7 @@ tabs_visible = false
 [node name="Install" type="Button" parent="HBox/Buttons"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_vertical = 4
 text = "Install"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -243,18 +244,21 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_vertical = 4
 text = "Uninstall"
 
 [node name="Cancel" type="Button" parent="HBox/Buttons"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_vertical = 4
 text = "Cancel"
 
 [node name="Remove" type="Button" parent="HBox/Buttons"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_vertical = 4
 text = "Remove"
 
 [node name="Dialogs" type="Node" parent="."]

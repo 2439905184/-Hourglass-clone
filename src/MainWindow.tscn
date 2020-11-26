@@ -9,7 +9,7 @@
 [ext_resource path="res://src/components/SidePanel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/templates/TemplatesTab.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/dialogs/AboutDialog.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/misc/SplashTexture.tres" type="Texture" id=10]
+[ext_resource path="res://data/splash.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.301961, 0.376471, 0.482353, 1 )
@@ -35,7 +35,7 @@ __meta__ = {
 
 [node name="Margin" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 68.0
+margin_bottom = 60.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -45,30 +45,29 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1014.0
-margin_bottom = 58.0
+margin_bottom = 50.0
 custom_constants/separation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LogoButton" type="TextureButton" parent="VBoxContainer/Margin/TopBar"]
+margin_top = 4.0
 margin_right = 128.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 128, 48 )
+margin_bottom = 36.0
+rect_min_size = Vector2( 128, 32 )
 size_flags_vertical = 4
 texture_normal = ExtResource( 10 )
 expand = true
 
 [node name="SearchBar" parent="VBoxContainer/Margin/TopBar" instance=ExtResource( 6 )]
 margin_left = 168.0
-margin_top = 4.0
 margin_right = 1004.0
-margin_bottom = 44.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
@@ -79,12 +78,12 @@ anchor_top = 0.0
 anchor_bottom = 0.0
 margin_top = 0.0
 margin_right = 200.0
-margin_bottom = 528.0
+margin_bottom = 536.0
 
 [node name="Content" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 220.0
 margin_right = 1004.0
-margin_bottom = 528.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
@@ -105,7 +104,7 @@ visible = false
 [node name="spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
 margin_left = 1024.0
 margin_right = 1024.0
-margin_bottom = 528.0
+margin_bottom = 536.0
 
 [node name="ConfirmQuit" parent="." instance=ExtResource( 4 )]
 

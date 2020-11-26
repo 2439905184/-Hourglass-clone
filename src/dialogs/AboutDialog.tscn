@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/dialogs/AboutDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/misc/SplashTexture.tres" type="Texture" id=2]
+[ext_resource path="res://data/splash.png" type="Texture" id=2]
 [ext_resource path="res://data/font/NotoSans-Bold-16.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -60,8 +60,8 @@ custom_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="VBox/HBox"]
 margin_right = 256.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 256, 96 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource( 2 )

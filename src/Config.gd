@@ -17,6 +17,7 @@ var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versi
 var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
 var projects_sort : int setget set_projects_sort, get_projects_sort
 var projects_sort_ascending : bool setget set_projects_sort_ascending, get_projects_sort_ascending
+var git_init : bool setget set_git_init, get_git_init
 
 var _config: ConfigFile
 
@@ -72,4 +73,12 @@ func get_projects_sort_ascending() -> bool:
 func set_projects_sort_ascending(new_val: bool) -> void:
 	_config.set_value("general", "projects_sort_ascending", new_val)
 	emit_signal("projects_sort_changed")
+	save()
+
+
+func get_git_init() -> bool:
+	return _config.get_value("general", "git_init", true)
+
+func set_git_init(new_val: bool) -> void:
+	_config.set_value("general", "git_init", new_val)
 	save()

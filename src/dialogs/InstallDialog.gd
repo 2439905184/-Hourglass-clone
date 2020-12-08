@@ -5,6 +5,7 @@ var _version: String
 
 
 func _ready() -> void:
+	content_size = Vector2(300, 150)
 	self.ok_text = tr("Install")
 
 

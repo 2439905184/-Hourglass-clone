@@ -8,6 +8,7 @@ onready var location_label: LineEdit = $VBox/HBox2/Location
 onready var already_exists: Label = $VBox/AlreadyExists
 onready var gl_version: HBoxContainer = $VBox/HBox3/GLVersion
 onready var gl2: CheckBox = $VBox/HBox3/GLVersion/GL2
+onready var use_git: CheckBox = $VBox/HBox4/UseGit
 
 
 func _ready() -> void:
@@ -17,6 +18,8 @@ func _ready() -> void:
 	self.title = tr("Create New Project")
 	self.content_size = Vector2(450, 300)
 	self.ok_text = tr("Create")
+	use_git.visible = Git.is_available()
+	use_git.pressed = Config.get_git_init()
 
 
 func _on_Browse_pressed() -> void:
@@ -102,7 +105,8 @@ func _on_confirmed() -> void:
 			_get_location(),
 			_get_name(),
 			_get_version(),
-			gl2.pressed
+			gl2.pressed,
+			use_git.pressed
 		)
 
 		if ret != OK:
@@ -116,3 +120,7 @@ func _on_confirmed() -> void:
 
 func _on_About_pressed() -> void:
 	OS.shell_open(Utils.GLES_LINK)
+
+
+func _on_UseGit_toggled(button_pressed: bool) -> void:
+	Config.set_git_init(button_pressed)

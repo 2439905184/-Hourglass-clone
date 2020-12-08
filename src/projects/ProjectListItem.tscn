@@ -92,7 +92,6 @@ theme = ExtResource( 5 )
 [node name="Dialogs" type="Node" parent="."]
 
 [node name="InstallDialog" parent="Dialogs" instance=ExtResource( 1 )]
-content_size = Vector2( 400, 100 )
 
 [node name="EditProjectDialog" parent="Dialogs" instance=ExtResource( 3 )]
 [connection signal="pressed" from="HBox/Version" to="." method="_on_show_version"]

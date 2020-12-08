@@ -9,9 +9,14 @@ var GLES_2 : String = _read_file("res://data/template/4/gles2.txt")
 var project_id: String
 
 
-func create_project(path: String, name: String, version: String, gles2: bool) -> int:
+func create_project(path: String, name: String, version: String, gles2: bool, git: bool) -> int:
 	var directory := Directory.new()
 	directory.make_dir_recursive(path)
+
+	if git and Git.is_available():
+		Git.init_repository(path)
+		var dir := Directory.new()
+		dir.copy("res://data/template/gitignore.txt", path.plus_file(".gitignore"))
 
 	var config_version := Versions.get_config_version(version)
 	var ret: int

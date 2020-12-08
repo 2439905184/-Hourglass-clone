@@ -42,8 +42,10 @@ caret_blink_speed = 0.5
 
 [node name="CreateFolder" type="Button" parent="VBox/HBox"]
 margin_left = 508.0
+margin_top = 3.0
 margin_right = 600.0
-margin_bottom = 39.0
+margin_bottom = 36.0
+size_flags_vertical = 4
 text = "Create Folder"
 
 [node name="spacer" type="Control" parent="VBox"]
@@ -146,6 +148,17 @@ margin_right = 600.0
 margin_bottom = 203.0
 rect_min_size = Vector2( 0, 5 )
 
+[node name="HBox4" type="HBoxContainer" parent="VBox"]
+margin_top = 207.0
+margin_right = 600.0
+margin_bottom = 224.0
+
+[node name="UseGit" type="CheckBox" parent="VBox/HBox4"]
+margin_right = 150.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 150, 0 )
+text = "Create Git repository"
+
 [node name="Dialogs" type="Node" parent="."]
 
 [node name="Browse" type="FileDialog" parent="Dialogs"]
@@ -168,4 +181,5 @@ current_path = "/home/jwestman/Documents/hourglass/"
 [connection signal="pressed" from="VBox/HBox2/Browse" to="." method="_on_Browse_pressed"]
 [connection signal="item_selected" from="VBox/HBox3/VersionDropdown" to="." method="_on_VersionDropdown_item_selected"]
 [connection signal="pressed" from="VBox/HBox3/GLVersion/About" to="." method="_on_About_pressed"]
+[connection signal="toggled" from="VBox/HBox4/UseGit" to="." method="_on_UseGit_toggled"]
 [connection signal="dir_selected" from="Dialogs/Browse" to="." method="_on_Browse_dir_selected"]

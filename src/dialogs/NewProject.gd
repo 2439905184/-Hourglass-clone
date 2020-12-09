@@ -113,6 +113,8 @@ func _on_confirmed() -> void:
 			ErrorDialog.show_error("Failed to Create Project", "An error occurred while creating the project. Check the console for more information.")
 			return
 
+		Config.project_location = _get_location().get_base_dir()
+
 		ret = Projects.open_project(creator.project_id)
 		if ret == OK:
 			find_parent("MainWindow").quit()

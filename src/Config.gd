@@ -13,6 +13,7 @@ signal projects_sort_changed()
 const CONFIG_FILE = "user://options.cfg"
 
 var project_location : String setget set_project_location, get_project_location
+var custom_version_location : String setget set_custom_version_location, get_custom_version_location
 var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versions
 var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
 var projects_sort : int setget set_projects_sort, get_projects_sort
@@ -33,10 +34,15 @@ func save() -> void:
 
 func get_project_location() -> String:
 	return _config.get_value("general", "project_location", OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS))
-
-
 func set_project_location(new_project_location: String) -> void:
 	_config.set_value("general", "project_location", new_project_location)
+	save()
+
+
+func get_custom_version_location() -> String:
+	return _config.get_value("general", "custom_version_location", OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS))
+func set_custom_version_location(new_custom_version_location: String) -> void:
+	_config.set_value("general", "custom_version_location", new_custom_version_location)
 	save()
 
 

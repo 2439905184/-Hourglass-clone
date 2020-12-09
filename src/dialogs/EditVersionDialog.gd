@@ -6,7 +6,7 @@ signal version_created(version_id)
 var version_id
 
 onready var name_edit := $VBox/HBox/Name
-onready var location_edit := $VBox/HBox2/Location
+onready var location_edit: LineEdit = $VBox/HBox2/Location
 onready var browse := $Dialogs/Browse
 onready var show_files := $VBox/HBox2/Show
 onready var no_file_found := $VBox/NoFileFound
@@ -39,7 +39,7 @@ func _on_Browse_pressed() -> void:
 		browse.current_dir = path.get_base_dir()
 		browse.current_path = path
 	else:
-		browse.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		browse.current_dir = Config.custom_version_location
 
 	browse.popup_centered()
 
@@ -73,3 +73,4 @@ func _on_EditVersionDialog_confirmed() -> void:
 
 	Versions.set_version_name(version_id, name_edit.text)
 	Versions.set_custom_executable(version_id, location_edit.text)
+	Config.custom_version_location = location_edit.text.get_base_dir()

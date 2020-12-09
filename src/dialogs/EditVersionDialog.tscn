@@ -71,6 +71,13 @@ margin_right = 1008.0
 margin_bottom = 33.0
 text = "Show in Files"
 
+[node name="NoFileFound" type="Label" parent="VBox"]
+margin_top = 86.0
+margin_right = 1008.0
+margin_bottom = 103.0
+custom_colors/font_color = Color( 1, 0.619608, 0.619608, 1 )
+text = "This file does not exist."
+
 [node name="Dialogs" type="Node" parent="."]
 
 [node name="Browse" type="FileDialog" parent="Dialogs"]
@@ -82,6 +89,7 @@ mode = 0
 access = 2
 current_dir = "/home/jwestman/Documents/hourglass"
 current_path = "/home/jwestman/Documents/hourglass/"
+[connection signal="confirmed" from="." to="." method="_on_EditVersionDialog_confirmed"]
 [connection signal="text_changed" from="VBox/HBox/Name" to="." method="_on_Name_text_changed"]
 [connection signal="text_changed" from="VBox/HBox2/Location" to="." method="_on_Location_text_changed"]
 [connection signal="pressed" from="VBox/HBox2/Browse" to="." method="_on_Browse_pressed"]

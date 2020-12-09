@@ -80,10 +80,10 @@ margin_bottom = 33.0
 text = "Browse..."
 
 [node name="AlreadyExists" type="Label" parent="VBox"]
-modulate = Color( 1, 0.62, 0.62, 1 )
 margin_top = 131.0
 margin_right = 600.0
 margin_bottom = 148.0
+custom_colors/font_color = Color( 1, 0.619608, 0.619608, 1 )
 text = "This folder already exists"
 
 [node name="spacer2" type="Control" parent="VBox"]

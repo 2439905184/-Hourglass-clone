@@ -27,7 +27,7 @@ func _ready() -> void:
 	_build_tree()
 
 
-func show_version_edit_dialog(version_id: String) -> void:
+func show_version_edit_dialog(version_id) -> void:
 	edit_dialog.show_dialog_for_version(version_id)
 
 
@@ -62,9 +62,7 @@ func get_search_query() -> String:
 
 
 func create_custom_version() -> void:
-	var version := Versions.add_custom()
-	select_version_by_code(version)
-	show_version_edit_dialog(version)
+	show_version_edit_dialog(null)
 
 
 func _build_tree() -> void:
@@ -132,3 +130,7 @@ func _on_install_failed(version: String) -> void:
 
 func _on_version_settings_changed() -> void:
 	_build_tree()
+
+
+func _on_EditVersionDialog_version_created(version_id) -> void:
+	select_version_by_code(version_id)

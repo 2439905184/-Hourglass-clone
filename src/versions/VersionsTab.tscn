@@ -66,3 +66,4 @@ margin_right = 1016.0
 margin_bottom = 27.0
 
 [node name="EditVersionDialog" parent="." instance=ExtResource( 2 )]
+[connection signal="version_created" from="EditVersionDialog" to="." method="_on_EditVersionDialog_version_created"]

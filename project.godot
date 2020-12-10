@@ -58,11 +58,6 @@ _global_script_classes=[ {
 "class": "VersionListItem",
 "language": "GDScript",
 "path": "res://src/versions/VersionListItem.gd"
-}, {
-"base": "HTTPRequest",
-"class": "VersionsUpdater",
-"language": "GDScript",
-"path": "res://src/versions/VersionsUpdater.gd"
 } ]
 _global_script_class_icons={
 "AssetStore": "",
@@ -74,8 +69,7 @@ _global_script_class_icons={
 "SidePanel": "",
 "Utils": "",
 "VersionDropdown": "",
-"VersionListItem": "",
-"VersionsUpdater": ""
+"VersionListItem": ""
 }
 
 [application]
@@ -97,6 +91,7 @@ Config="*res://src/Config.gd"
 ErrorDialog="*res://src/dialogs/ErrorDialog.gd"
 Git="*res://src/misc/Git.gd"
 AssetLibrary="*res://src/assetlib/AssetLibrary.gd"
+Updater="*res://src/Updater.gd"
 
 [rendering]
 

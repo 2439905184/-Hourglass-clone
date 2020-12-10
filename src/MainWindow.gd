@@ -9,14 +9,17 @@ onready var projects := $VBoxContainer/HBoxContainer/Content/Projects
 onready var versions := $VBoxContainer/HBoxContainer/Content/Versions
 onready var templates := $VBoxContainer/HBoxContainer/Content/Templates
 onready var about_dialog := $AboutDialog
+onready var update_indicator := $VBoxContainer/Margin/TopBar/LogoButton/UpdateIndicator
 
 onready var tabs := [
 	projects, versions, templates
 ]
 
+
 func _ready() -> void:
 	_on_SidePanel_tab_changed(side_panel.current_tab)
 	get_tree().set_auto_accept_quit(false)
+	Updater.connect("update_found", self, "_on_update_found")
 
 
 func _notification(what: int) -> void:
@@ -73,3 +76,7 @@ func _on_SidePanel_action_pressed(name: String) -> void:
 
 func _on_LogoButton_pressed() -> void:
 	about_dialog.show_dialog()
+
+
+func _on_update_found(_version: String) -> void:
+	update_indicator.show()

@@ -19,11 +19,9 @@ func _ready() -> void:
 	_versions_store = ConfigFile.new()
 	_versions_store.load(VERSIONS_STORE)
 
-	var updater := VersionsUpdater.new()
-	updater.connect("versions_updated", self, "_on_versions_updated")
-	add_child(updater)
-
-	_merge_versions(VERSIONS_TEMPLATE)
+	var template_cfg = ConfigFile.new()
+	template_cfg.load(VERSIONS_TEMPLATE)
+	merge_versions(template_cfg)
 
 	self.connect("versions_updated", self, "_invalidate_installed_cache")
 	self.connect("version_changed", self, "_invalidate_installed_cache")
@@ -223,22 +221,13 @@ func remove_custom_version(version: String) -> void:
 	_save()
 
 
-func _merge_versions(path: String) -> void:
-	var file := ConfigFile.new()
-	file.load(path)
-
-	for section in file.get_sections():
-		for key in file.get_section_keys(section):
-			_versions_store.set_value(section, key, file.get_value(section, key))
+func merge_versions(versions: ConfigFile) -> void:
+	for section in versions.get_sections():
+		for key in versions.get_section_keys(section):
+			_versions_store.set_value(section, key, versions.get_value(section, key))
 
 	emit_signal("versions_updated")
 	_save()
-
-
-func _on_versions_updated() -> void:
-	_merge_versions(VersionsUpdater.DOWNLOAD_PATH)
-	var dir := Directory.new()
-	dir.remove(VersionsUpdater.DOWNLOAD_PATH)
 
 
 func _invalidate_installed_cache(version:="") -> void:

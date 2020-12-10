@@ -12,6 +12,7 @@ signal projects_sort_changed()
 
 const CONFIG_FILE = "user://options.cfg"
 
+var disable_update_check : bool setget set_disable_update_check, get_disable_update_check
 var project_location : String setget set_project_location, get_project_location
 var custom_version_location : String setget set_custom_version_location, get_custom_version_location
 var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versions
@@ -19,6 +20,11 @@ var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versi
 var projects_sort : int setget set_projects_sort, get_projects_sort
 var projects_sort_ascending : bool setget set_projects_sort_ascending, get_projects_sort_ascending
 var git_init : bool setget set_git_init, get_git_init
+
+# The version code for the downloaded versions.cfg. When info.cfg is downloaded,
+# if it has a higher versions_cfg than this, a new versions.cfg needs to be
+# downloaded.
+var versions_update: int setget set_versions_update, get_versions_update
 
 var _config: ConfigFile
 
@@ -30,6 +36,13 @@ func _ready() -> void:
 
 func save() -> void:
 	_config.save(CONFIG_FILE)
+
+
+func get_disable_update_check() -> bool:
+	return _config.get_value("general", "disable_update_check", false)
+func set_disable_update_check(new_val: bool) -> void:
+	_config.set_value("general", "disable_update_check", new_val)
+	save()
 
 
 func get_project_location() -> String:
@@ -87,4 +100,11 @@ func get_git_init() -> bool:
 
 func set_git_init(new_val: bool) -> void:
 	_config.set_value("general", "git_init", new_val)
+	save()
+
+
+func get_versions_update() -> int:
+	return _config.get_value("general", "versions_update", 0)
+func set_versions_update(new_val: int) -> void:
+	_config.set_value("general", "versions_update", new_val)
 	save()

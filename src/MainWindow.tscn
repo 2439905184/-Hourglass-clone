@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/MainWindow.gd" type="Script" id=1]
 [ext_resource path="res://src/versions/VersionsTab.tscn" type="PackedScene" id=2]
@@ -10,11 +10,17 @@
 [ext_resource path="res://src/templates/TemplatesTab.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/dialogs/AboutDialog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://data/splash.png" type="Texture" id=10]
+[ext_resource path="res://data/icons.svg" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.301961, 0.376471, 0.482353, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="MainWindow" type="Panel"]
 anchor_right = 1.0
@@ -60,6 +66,16 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 10 )
 expand = true
 
+[node name="UpdateIndicator" type="TextureRect" parent="VBoxContainer/Margin/TopBar/LogoButton"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_bottom = 40.0
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SearchBar" parent="VBoxContainer/Margin/TopBar" instance=ExtResource( 6 )]
 margin_left = 168.0
 margin_right = 1004.0
@@ -86,7 +102,7 @@ margin_right = 1004.0
 margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 tabs_visible = false
 
 [node name="Projects" parent="VBoxContainer/HBoxContainer/Content" instance=ExtResource( 3 )]

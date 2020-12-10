@@ -8,6 +8,7 @@ const UPDATE_LINK := "https://hourglass.flyingpimonster.net"
 const GLES_LINK := "https://docs.godotengine.org/en/latest/tutorials/rendering/gles2_gles3_differences.html"
 
 
+# Creates a v4 UUID. See <https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>.
 static func uuid() -> String:
 	var rand := RandomNumberGenerator.new()
 	rand.randomize()
@@ -21,22 +22,3 @@ static func uuid() -> String:
 	res = res.insert(16, tmp[0]).insert(12, "4")
 	res = res.insert(20, "-").insert(16, "-").insert(12, "-").insert(8, "-")
 	return res
-
-
-static func list_dir_recursive(path: String) -> PoolStringArray:
-	var result : PoolStringArray = []
-	var dir := Directory.new()
-
-	dir.open(path)
-	dir.list_dir_begin(true, false)
-	var child := dir.get_next()
-	while child != "":
-		var child_path := path.plus_file(child)
-
-		if dir.current_is_dir():
-			result.append_array(list_dir_recursive(child_path))
-		result.append(child_path)
-
-		child = dir.get_next()
-
-	return result

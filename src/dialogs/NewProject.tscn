@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/dialogs/NewProject.gd" type="Script" id=1]
-[ext_resource path="res://src/misc/VersionDropdown.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/components/VersionDropdown.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/font/NotoSans-Bold-16.tres" type="DynamicFont" id=4]
 [ext_resource path="res://styles/theme.tres" type="Theme" id=5]
 

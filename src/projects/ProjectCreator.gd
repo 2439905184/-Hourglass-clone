@@ -1,10 +1,17 @@
+# ProjectCreator.gd -- Create new projects
+#
+# ProjectCreator generates the files in a new project. Different Godot versions
+# use slightly different templates, so the version must be taken into account.
+# GLES 2 also has its own settings if it's enabled, and if "Create Git
+# Repository" is checked, `git init` needs to be run.
+
 class_name ProjectCreator
 extends Reference
 
 
 var PROJECT_GODOT_3: String = _read_file("res://data/template/3/project.godot")
 var PROJECT_GODOT_4: String = _read_file("res://data/template/4/project.godot")
-var GLES_2 : String = _read_file("res://data/template/4/gles2.txt")
+var GLES_2: String = _read_file("res://data/template/4/gles2.txt")
 
 var project_id: String
 

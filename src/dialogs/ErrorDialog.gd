@@ -1,7 +1,7 @@
 extends BaseDialog
 
 
-onready var label: Label = Label.new()
+onready var label := Label.new()
 
 
 func _init() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func show_error(title: String, error: String) -> void:
-	title = tr(title)
+	self.title = tr(title)
 	label.text = tr(error)
 
-	show_dialog()
+	self.show_dialog()

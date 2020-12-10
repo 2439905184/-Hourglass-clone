@@ -1,3 +1,9 @@
+# Downloader.gd -- Downloads Godot versions
+#
+# The Downloader node downloads and extracts versions of Godot Engine from
+# the mirror at downloads.tuxfamily.org. Each download uses a new Downloader
+# node; it's not an autoload.
+
 class_name Downloader
 extends HTTPRequest
 
@@ -45,15 +51,15 @@ func is_active() -> bool:
 
 func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 	if result != RESULT_SUCCESS:
-		push_error("Download failed! Could not connect.")
-		push_error("Request URL: " + _url)
-		push_error("Connection error: " + str(result) + " (see https://docs.godotengine.org/en/3.1/classes/class_httprequest.html#enumerations)")
+		printerr("Download failed! Could not connect.")
+		printerr("Request URL: " + _url)
+		printerr("Connection error: " + str(result) + " (see https://docs.godotengine.org/en/3.1/classes/class_httprequest.html#enumerations)")
 		_failed()
 		return
 
 	if response != 200:
-		push_error("Download failed! HTTP status code " + str(response))
-		push_error("Request URL: " + _url)
+		printerr("Download failed! HTTP status code " + str(response))
+		printerr("Request URL: " + _url)
 		_failed()
 		return
 
@@ -96,13 +102,13 @@ func _extract_godot() -> void:
 					godot_sharp.append(file)
 				else:
 					if exec_file:
-						push_error("Error! Can't tell which file is the Godot executable")
+						printerr("Error! Can't tell which file is the Godot executable")
 						_failed()
 						return
 					exec_file = file
 
 	if not exec_file:
-		push_error("Error! Can't find Godot executable in zip file")
+		printerr("Error! Can't find Godot executable in zip file")
 		_failed()
 		return
 
@@ -110,8 +116,8 @@ func _extract_godot() -> void:
 	var dest_dir: String = Versions.get_directory(version)
 	for filename in godot_sharp + macos_files:
 		if filename.find("..") != -1:
-			push_error("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
-			push_error(filename)
+			printerr("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
+			printerr(filename)
 			_failed()
 			return
 

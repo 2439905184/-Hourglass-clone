@@ -1,3 +1,11 @@
+# Config.gd -- Program configuration
+#
+# Hourglass stores its configuration data at user://options.cfg. There isn't
+# currently an explicit settings dialog, but these options save some of the
+# UI state, such as the sort order on the Projects tab. It also saves
+# miscellaneous things the program needs to remember, like which version of
+# versions.cfg it has.
+
 extends Node
 
 
@@ -12,14 +20,14 @@ signal projects_sort_changed()
 
 const CONFIG_FILE = "user://options.cfg"
 
-var disable_update_check : bool setget set_disable_update_check, get_disable_update_check
-var project_location : String setget set_project_location, get_project_location
-var custom_version_location : String setget set_custom_version_location, get_custom_version_location
-var show_beta_versions : bool setget set_show_beta_versions, get_show_beta_versions
-var show_mono_versions : bool setget set_show_mono_versions, get_show_mono_versions
-var projects_sort : int setget set_projects_sort, get_projects_sort
-var projects_sort_ascending : bool setget set_projects_sort_ascending, get_projects_sort_ascending
-var git_init : bool setget set_git_init, get_git_init
+var disable_update_check: bool setget set_disable_update_check, get_disable_update_check
+var project_location: String setget set_project_location, get_project_location
+var custom_version_location: String setget set_custom_version_location, get_custom_version_location
+var show_beta_versions: bool setget set_show_beta_versions, get_show_beta_versions
+var show_mono_versions: bool setget set_show_mono_versions, get_show_mono_versions
+var projects_sort: int setget set_projects_sort, get_projects_sort
+var projects_sort_ascending: bool setget set_projects_sort_ascending, get_projects_sort_ascending
+var git_init: bool setget set_git_init, get_git_init
 
 # The version code for the downloaded versions.cfg. When info.cfg is downloaded,
 # if it has a higher versions_cfg than this, a new versions.cfg needs to be
@@ -61,7 +69,6 @@ func set_custom_version_location(new_custom_version_location: String) -> void:
 
 func get_show_beta_versions() -> bool:
 	return _config.get_value("general", "show_beta_versions", false)
-
 func set_show_beta_versions(new_val: bool) -> void:
 	_config.set_value("general", "show_beta_versions", new_val)
 	emit_signal("version_settings_changed")
@@ -70,7 +77,6 @@ func set_show_beta_versions(new_val: bool) -> void:
 
 func get_show_mono_versions() -> bool:
 	return _config.get_value("general", "show_mono_versions", false)
-
 func set_show_mono_versions(new_val: bool) -> void:
 	_config.set_value("general", "show_mono_versions", new_val)
 	emit_signal("version_settings_changed")
@@ -79,7 +85,6 @@ func set_show_mono_versions(new_val: bool) -> void:
 
 func get_projects_sort() -> int:
 	return _config.get_value("general", "projects_sort", 0)
-
 func set_projects_sort(new_val: int) -> void:
 	_config.set_value("general", "projects_sort", new_val)
 	emit_signal("projects_sort_changed")
@@ -88,7 +93,6 @@ func set_projects_sort(new_val: int) -> void:
 
 func get_projects_sort_ascending() -> bool:
 	return _config.get_value("general", "projects_sort_ascending", false)
-
 func set_projects_sort_ascending(new_val: bool) -> void:
 	_config.set_value("general", "projects_sort_ascending", new_val)
 	emit_signal("projects_sort_changed")
@@ -97,7 +101,6 @@ func set_projects_sort_ascending(new_val: bool) -> void:
 
 func get_git_init() -> bool:
 	return _config.get_value("general", "git_init", true)
-
 func set_git_init(new_val: bool) -> void:
 	_config.set_value("general", "git_init", new_val)
 	save()

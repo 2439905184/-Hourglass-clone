@@ -1,9 +1,28 @@
+# Versions.gd -- Maintains the version list
+#
+# Versions is an Autoload class that keeps track of all the Godot versions
+# Hourglass knows about. This includes built-in versions and custom ones.
+#
+# The list is stored at user://versions.cfg. It is initially created from the
+# versions.cfg packaged with the software at res://data/versions.cfg. It is
+# then updated from the latest source code on GitLab (see src/Updater.gd)
+# by merging the new entries with the existing ones.
+#
+# Custom versions are also supported. These have a custom executable path set.
+# Since versions.cfg is updated by merging new entries rather than copying the
+# entire new file, custom versions aren't overwritten.
+
 extends Node
 
 
+# Emitted when the versions list is updated: a version is added, installed,
+# removed, etc.
 signal versions_updated()
+# Emitted when the details of a version are changed.
 signal version_changed(version)
+# Emitted when the download progress of a version changes.
 signal download_progress(version, downloaded, total)
+# Emitted if installation of a version fails for some reason.
 signal install_failed(version)
 
 const VERSIONS_STORE = "user://versions.cfg"

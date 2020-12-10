@@ -2,14 +2,14 @@ extends PanelContainer
 class_name ProjectListItem
 
 
-var project_id : String
-var project_cfg : ConfigFile
+var project_id: String
+var project_cfg: ConfigFile
 var selected := false setget set_selected, get_selected
 var valid := false
-var project_name : String
+var project_name: String
 
-var _path : String
-var _main_scene : String
+var _path: String
+var _main_scene: String
 
 onready var path_label: Label = $HBox/VBox/Path
 onready var name_label: Label = $HBox/VBox/Name

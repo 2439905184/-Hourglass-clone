@@ -1,3 +1,8 @@
+# Git.gd -- Git tools
+#
+# An Autoload class that wraps the needed parts of the git command line, like
+# git init.
+
 extends Node
 
 

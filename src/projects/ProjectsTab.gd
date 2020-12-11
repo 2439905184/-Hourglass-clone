@@ -16,6 +16,7 @@ onready var edit: Button = $DropdownMenu/VBox/Edit
 
 onready var import_file: FileDialog = $Dialogs/ImportFile
 
+onready var scroll: ScrollContainer = $VBox/Scroll
 onready var project_list: VBoxContainer = $VBox/Scroll/ProjectList
 onready var new_project := $Dialogs/NewProject
 onready var import_dialog := $Dialogs/ImportDialog
@@ -32,6 +33,8 @@ func _ready() -> void:
 	Projects.connect("project_added", self, "_on_project_added")
 	Projects.connect("project_changed", self, "_on_project_changed")
 	Projects.connect("project_removed", self, "_on_project_removed")
+
+	scroll.get_v_scrollbar().connect("visibility_changed", self, "_on_scrollbar_visibility_changed")
 
 	Config.connect("projects_sort_changed", self, "_on_projects_sort_changed")
 
@@ -211,3 +214,13 @@ func _on_ImportFile_file_selected(path: String) -> void:
 
 func _on_projects_sort_changed() -> void:
 	_sort_and_filter()
+
+
+func _on_scrollbar_visibility_changed() -> void:
+	print("***** VISIBILITY ", scroll.get_v_scrollbar().visible)
+	var stylebox := scroll.get_stylebox("bg")
+	if scroll.get_v_scrollbar().visible:
+		stylebox.content_margin_right = 15
+	else:
+		print("***** SIZE ", scroll.get_v_scrollbar().rect_size.x)
+		stylebox.content_margin_right = scroll.get_v_scrollbar().rect_size.x + 15

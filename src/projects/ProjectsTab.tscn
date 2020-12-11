@@ -14,6 +14,7 @@
 content_margin_left = 15.0
 content_margin_right = 15.0
 content_margin_top = 5.0
+content_margin_bottom = 5.0
 
 [node name="Projects" type="HBoxContainer"]
 anchor_right = 1.0
@@ -48,7 +49,7 @@ rect_min_size = Vector2( 75, 0 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 75.0
-margin_right = 564.0
+margin_right = 552.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Name"
@@ -57,8 +58,8 @@ group = SubResource( 1 )
 [node name="ColumnSort3" parent="VBox/PanelContainer/HBox" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 564.0
-margin_right = 724.0
+margin_left = 552.0
+margin_right = 712.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 160, 0 )
 text = "Engine Version"
@@ -68,8 +69,8 @@ sort_type = 2
 [node name="ColumnSort4" parent="VBox/PanelContainer/HBox" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 724.0
-margin_right = 834.0
+margin_left = 712.0
+margin_right = 822.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 110, 0 )
 text = "Last Opened"
@@ -77,10 +78,10 @@ group = SubResource( 1 )
 sort_type = 0
 
 [node name="spacer2" type="Control" parent="VBox/PanelContainer/HBox"]
-margin_left = 834.0
+margin_left = 822.0
 margin_right = 933.0
 margin_bottom = 26.0
-rect_min_size = Vector2( 99, 0 )
+rect_min_size = Vector2( 111, 0 )
 
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
 margin_top = 30.0

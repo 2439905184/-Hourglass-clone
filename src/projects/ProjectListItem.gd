@@ -136,7 +136,8 @@ func _build() -> void:
 	else:
 		favorite_button.pressed = false
 
-	var last_opened_dt = OS.get_datetime_from_unix_time(Projects.get_project_last_opened(project_id))
+	var tz: int = OS.get_time_zone_info()["bias"] * 60
+	var last_opened_dt = OS.get_datetime_from_unix_time(Projects.get_project_last_opened(project_id) + tz)
 	last_opened.text = "%04d-%02d-%02d" % [last_opened_dt["year"], last_opened_dt["month"], last_opened_dt["day"]]
 	last_opened.hint_tooltip = "%02d:%02d" % [last_opened_dt["hour"], last_opened_dt["minute"]]
 

@@ -6,6 +6,7 @@ var selected_version: String setget set_selected_version, get_selected_version
 
 
 func _ready() -> void:
+	Versions.connect("versions_updated", self, "refresh")
 	refresh()
 
 
@@ -21,6 +22,7 @@ func get_selected_version() -> String:
 
 
 func refresh() -> void:
+	var selected = get_selected_version()
 	clear()
 
 	var versions := Array(Versions.get_versions())
@@ -29,3 +31,6 @@ func refresh() -> void:
 		if Versions.is_installed(version):
 			add_item(Versions.get_version_name(version))
 			set_item_metadata(get_item_count() - 1, version)
+
+	if selected:
+		set_selected_version(selected)

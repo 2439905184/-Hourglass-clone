@@ -181,7 +181,8 @@ func is_installing(version: String) -> bool:
 		# checking for an active download
 		return false
 
-	return _get_downloader(version) != null
+	var downloader = _get_downloader(version)
+	return downloader != null && not downloader.failed
 
 
 func uninstall(version: String) -> void:

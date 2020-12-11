@@ -12,12 +12,21 @@ const MIRROR = "https://downloads.tuxfamily.org/godotengine/"
 
 var version: String
 var active := false setget ,is_active
+var failed := false
 var _url: String
 
 
 func _init(version: String) -> void:
+	Versions.active_downloads += 1
+
 	self.version = version
-	_url = MIRROR + Versions.get_download_url(version)
+	var url = Versions.get_download_url(version)
+
+	if not url:
+		_failed("Hourglass can't find a download for your OS and architecture.")
+		return
+
+	_url = MIRROR + url
 	download_file = Versions.get_directory(version).plus_file("download.zip")
 
 	connect("request_completed", self, "_on_request_completed")
@@ -28,8 +37,6 @@ func _process(_delta: float) -> void:
 
 
 func download() -> void:
-	Versions.active_downloads += 1
-
 	active = true
 	var dir := Directory.new()
 	dir.make_dir_recursive(Versions.get_directory(version))
@@ -54,13 +61,13 @@ func _on_request_completed(result: int, response: int, _headers, _body) -> void:
 		printerr("Download failed! Could not connect.")
 		printerr("Request URL: " + _url)
 		printerr("Connection error: " + str(result) + " (see https://docs.godotengine.org/en/3.1/classes/class_httprequest.html#enumerations)")
-		_failed()
+		_failed("The download failed to start.")
 		return
 
 	if response != 200:
 		printerr("Download failed! HTTP status code " + str(response))
 		printerr("Request URL: " + _url)
-		_failed()
+		_failed("The download failed to start.")
 		return
 
 	_extract_godot()
@@ -103,13 +110,13 @@ func _extract_godot() -> void:
 				else:
 					if exec_file:
 						printerr("Error! Can't tell which file is the Godot executable")
-						_failed()
+						_failed("The downloaded file seems to be broken.")
 						return
 					exec_file = file
 
 	if not exec_file:
 		printerr("Error! Can't find Godot executable in zip file")
-		_failed()
+		_failed("The downloaded file seems to be broken.")
 		return
 
 	# if there are any files in GodotSharp/ extract them
@@ -118,7 +125,7 @@ func _extract_godot() -> void:
 		if filename.find("..") != -1:
 			printerr("DANGER! POTENTIAL MALICIOUS DOWNLOAD DETECTED. A file in the zip archive contains `..` which can be used to overwrite files outside the destination! Aborting.")
 			printerr(filename)
-			_failed()
+			_failed("The downloaded file seems to be broken.")
 			return
 
 		var filepath := dest_dir.plus_file(filename)
@@ -159,8 +166,13 @@ func _extract_godot() -> void:
 	queue_free()
 
 
-func _failed() -> void:
-	Versions.emit_signal("install_failed", version)
+func _failed(reason) -> void:
+	self.failed = true
+
+	if not reason:
+		reason = "Check the console for more information."
+
+	Versions.emit_signal("install_failed", version, reason)
 	Versions.active_downloads -= 1
 	queue_free()
 

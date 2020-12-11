@@ -123,9 +123,10 @@ func _on_version_changed(_version: String) -> void:
 	_child_items[_version].update()
 
 
-func _on_install_failed(version: String) -> void:
+func _on_install_failed(version: String, reason: String) -> void:
 	ErrorDialog.show_error("Install Failed",
-			tr("Installation of {version} failed. Check the console for more information.").format({"version": version}))
+			tr("Installation of %s failed. %s") % [version, reason])
+	_build_tree()
 
 
 func _on_version_settings_changed() -> void:

@@ -38,7 +38,8 @@ Hourglass is licensed under the GNU General Public License, version
 
 The logo images in `data/template` are licensed under CC-BY-3.0. The icon
 at `data/icon_star.svg` is from the Godot Engine source code, under the MIT
-license.
+license. Noto Sans, in `data/font`, is licensed under the Apache License,
+version 2.0 (see `data/font/LICENSE.txt`).
 
 The Hourglass logo (`data/icon.png`) was created by u/BlueCannonBall on reddit.
 

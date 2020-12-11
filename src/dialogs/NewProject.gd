@@ -21,6 +21,8 @@ func _ready() -> void:
 	use_git.visible = Git.is_available()
 	use_git.pressed = Config.get_git_init()
 
+	_update_gl_version_visible()
+
 
 func _on_Browse_pressed() -> void:
 	if _location_exists():
@@ -93,9 +95,12 @@ func _on_Name_text_changed(_1: String) -> void:
 	_validate()
 
 
-func _on_VersionDropdown_item_selected(_id: int) -> void:
+func _update_gl_version_visible() -> void:
 	var version := version_dropdown.get_selected_version()
 	gl_version.visible = (Versions.get_config_version(version) >= 4)
+
+func _on_VersionDropdown_item_selected(_id: int) -> void:
+	_update_gl_version_visible()
 
 
 func _on_confirmed() -> void:

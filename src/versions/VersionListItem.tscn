@@ -263,7 +263,7 @@ text = "Remove"
 
 [node name="Dialogs" type="Node" parent="."]
 
-[node name="ConfirmRemove" type="Node" parent="Dialogs"]
+[node name="ConfirmRemove" type="CanvasLayer" parent="Dialogs"]
 script = ExtResource( 5 )
 content_size = Vector2( 300, 150 )
 ok_text = "Remove"
@@ -277,7 +277,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ConfirmUninstall" type="Node" parent="Dialogs"]
+[node name="ConfirmUninstall" type="CanvasLayer" parent="Dialogs"]
 script = ExtResource( 5 )
 content_size = Vector2( 300, 150 )
 ok_text = "Uninstall"

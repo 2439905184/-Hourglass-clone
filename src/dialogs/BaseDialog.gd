@@ -1,5 +1,5 @@
 class_name BaseDialog
-extends Node
+extends CanvasLayer
 
 
 signal confirmed()

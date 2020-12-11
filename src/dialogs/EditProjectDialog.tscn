@@ -3,8 +3,7 @@
 [ext_resource path="res://src/dialogs/EditProjectDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/components/VersionDropdown.tscn" type="PackedScene" id=2]
 
-
-[node name="EditProjectDialog" type="Node"]
+[node name="EditProjectDialog" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="HBox" type="HBoxContainer" parent="."]

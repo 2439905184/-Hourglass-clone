@@ -17,6 +17,5 @@ func _ready() -> void:
 
 func show_error(title: String, error: String) -> void:
 	self.title = tr(title)
-	label.text = tr(error)
-
 	self.show_dialog()
+	label.text = tr(error)

@@ -3,8 +3,7 @@
 [ext_resource path="res://src/components/VersionDropdown.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/dialogs/ImportDialog.gd" type="Script" id=2]
 
-
-[node name="ImportDialog" type="Node"]
+[node name="ImportDialog" type="CanvasLayer"]
 script = ExtResource( 2 )
 
 [node name="VBox" type="VBoxContainer" parent="."]

@@ -76,7 +76,7 @@ func _extract_godot() -> void:
 	var exec_file: String
 	var godot_sharp := []
 	var macos_files := []
-	var prefix: String
+	var prefix
 	if files.size() == 1:
 		exec_file = files[0]
 		prefix = ""

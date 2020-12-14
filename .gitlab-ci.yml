@@ -1,104 +1,34 @@
 image: python:slim
 
 stages:
-- build
 - export
 - publish
 
-.build_rules: &build_rules
-  rules:
-  - if: $CI_COMMIT_BRANCH == "ci" || $CI_COMMIT_TAG
-    when: on_success
-  - when: never
-
-.build_godot: &build_godot
-- git clone --depth 1 --branch zip-module-3.2.3 https://github.com/flyingpimonster/godot.git
-- cd godot
-- scons target=release platform=$PLATFORM debug_symbols=no disable_3d=yes tools=no xaudio2=no pulseaudio=no touch=no module_arkit_enabled=no module_assimp_enabled=no module_bullet_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_enet_enabled=no module_etc_enabled=no module_gdnative_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jsonrpc_enabled=no module_mobile_vr_enabled=no module_mono_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_recast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_xatlas_unwrap_enabled=no
-- cd -
-
-windows:
-  <<: *build_rules
-  stage: build
-  variables:
-    PLATFORM: windows
-  script:
-  - apt-get update
-  - apt-get install -y build-essential scons pkg-config git mingw-w64
-  - *build_godot
-  artifacts:
-    paths:
-      - godot/bin
-    expire_in: never
-
-macos:
-  <<: *build_rules
-  stage: build
-  tags:
-    - macos
-  variables:
-    PLATFORM: osx
-  script:
-  - *build_godot
-  - cp -r godot/misc/dist/osx_template.app godot/bin/osx_template.app
-  - cd godot/bin
-  - chmod +x godot.osx.opt.64
-  - mkdir -p osx_template.app/Contents/MacOS
-  - mv godot.osx.opt.64 osx_template.app/Contents/MacOS/godot_osx_release.64
-  - zip -r osx.zip osx_template.app
-  - cd -
-  artifacts:
-    paths:
-    - godot/bin/osx.zip
-    expire_in: never
-
-linux:
-  <<: *build_rules
-  stage: build
-  variables:
-    PLATFORM: x11
-  script:
-  - apt-get update
-  - apt-get install -y build-essential scons pkg-config libx11-dev libxcursor-dev
-  - apt-get install -y libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev
-  - apt-get install -y libpulse-dev libfreetype6-dev libudev-dev libxi-dev
-  - apt-get install -y libxrandr-dev git
-  - *build_godot
-  - cd godot
-  - scons platform=server debug_symbols=no xaudio2=no pulseaudio=no touch=no module_arkit_enabled=no module_assimp_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_enet_enabled=no module_etc_enabled=no module_gdnative_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jsonrpc_enabled=no module_mobile_vr_enabled=no module_mono_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_recast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_xatlas_unwrap_enabled=no
-  - cd -
-  artifacts:
-    paths:
-    - godot/bin
-    expire_in: never
-
 
 export:
-  <<: *build_rules
   stage: export
   variables:
     GODOT_VERSION: 3.2.3
+    EXPORT_DIR: .local/share/godot/templates/$GODOT_VERSION.stable
+    BIN_REPO: https://gitlab.com/jwestman/hourglass-zip-module/-/raw/master
   script:
   - apt-get update
-  - apt-get install -y zip unzip
-  - mkdir -p $HOME/.local/share/godot/templates/$GODOT_VERSION.stable
-  - cp godot/bin/godot.x11.opt.64 $HOME/.local/share/godot/templates/$GODOT_VERSION.stable/linux_x11_64_release
-  - cp godot/bin/godot.windows.opt.64.exe $HOME/.local/share/godot/templates/$GODOT_VERSION.stable/windows_64_release.exe
-  - cp godot/bin/osx.zip $HOME/.local/share/godot/templates/$GODOT_VERSION.stable/osx.zip
+  - apt-get install -y wget zip
+  - mkdir -p $HOME/$EXPORT_DIR
+  - wget -nv -O $HOME/$EXPORT_DIR/linux_x11_64_release $BIN_REPO/godot.x11.opt.64
+  - wget -nv -O $HOME/$EXPORT_DIR/windows_64_release.exe $BIN_REPO/godot.windows.opt.64.exe
+  - wget -nv -O $HOME/$EXPORT_DIR/osx.zip $BIN_REPO/osx.zip
+  - wget -nv -O godot $BIN_REPO/godot_server.x11.tools.64
+  - chmod +x godot
   - mkdir public
-  - ./godot/bin/godot_server.x11.tools.64 --export linux hourglass-linux
+  - ./godot --export linux hourglass-linux
   - tar czf public/hourglass-linux.tar.gz hourglass-linux
-  - ./godot/bin/godot_server.x11.tools.64 --export windows hourglass-windows.exe
+  - ./godot --export windows hourglass-windows.exe
   - zip public/hourglass-windows.zip hourglass-windows.exe
-  - ./godot/bin/godot_server.x11.tools.64 --export macos hourglass-macos.app
-  # workaround for godotengine/godot#527
-  - unzip hourglass-macos.app
-  - chmod +x Hourglass.app/Contents/MacOS/Hourglass
-  - zip -r public/hourglass-macos.zip Hourglass.app
+  - ./godot --export macos public/hourglass-macos.zip
   artifacts:
     paths:
     - public
-    - godot/bin
     expire_in: never
 
 
@@ -115,7 +45,7 @@ pages:
 
 
 check_versions:
-  stage: build
+  stage: export
   script:
   - python3 scripts/check_versions.py
   rules:

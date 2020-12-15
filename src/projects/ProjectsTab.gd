@@ -21,6 +21,8 @@ onready var project_list: VBoxContainer = $VBox/Scroll/ProjectList
 onready var new_project := $Dialogs/NewProject
 onready var import_dialog := $Dialogs/ImportDialog
 onready var edit_project_dialog := $Dialogs/EditProjectDialog
+onready var confirm_remove: BaseDialog = $Dialogs/ConfirmRemove
+onready var confirm_remove_label: Label = $Dialogs/ConfirmRemove.get_node("Label")
 
 
 func _ready() -> void:
@@ -196,9 +198,21 @@ func _on_ShowFiles_pressed() -> void:
 
 
 func _on_Remove_pressed() -> void:
+	if _selected.size() == 1:
+		confirm_remove.title = tr("Remove project?")
+		confirm_remove_label.text = tr("Are you sure you want to remove %s from the list? No files will be deleted.") % _selected[0].project_name
+	else:
+		confirm_remove.title = tr("Remove projects?")
+		confirm_remove_label.text = tr("Are you sure you want to remove %d projects from the list? No files will be deleted.") % _selected.size()
+
+	confirm_remove.content_size = Vector2(250, 150)
+	confirm_remove.show_dialog()
+	menu.hide()
+
+
+func _on_ConfirmRemove_confirmed() -> void:
 	for project in _selected.duplicate():
 		project.remove()
-	menu.hide()
 
 
 func _on_Edit_pressed() -> void:

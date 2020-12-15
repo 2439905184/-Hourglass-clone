@@ -137,6 +137,14 @@ margin_bottom = 33.0
 theme = ExtResource( 3 )
 text = "NEW PROJECT"
 
+[node name="InstallStable" type="Button" parent="VBoxContainer/Panes/Projects"]
+visible = false
+margin_top = 41.0
+margin_right = 164.0
+margin_bottom = 74.0
+theme = ExtResource( 3 )
+text = "INSTALL"
+
 [node name="Import" type="Button" parent="VBoxContainer/Panes/Projects"]
 margin_top = 41.0
 margin_right = 164.0
@@ -181,6 +189,7 @@ custom_constants/separation = 6
 [connection signal="pressed" from="VBoxContainer/TabButtons/Versions" to="." method="_on_Versions_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabButtons/Templates" to="." method="_on_Templates_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Projects/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panes/Projects/InstallStable" to="." method="_on_InstallStable_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Projects/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panes/Versions/AddCustom" to="." method="_on_AddCustom_pressed"]
 [connection signal="toggled" from="VBoxContainer/Panes/Versions/BetaVersions" to="." method="_on_BetaVersions_toggled"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/dialogs/ImportDialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/projects/ProjectsTab.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/components/ColumnSort.tscn" type="PackedScene" id=6]
 [ext_resource path="res://styles/Popup.tres" type="Theme" id=7]
 [ext_resource path="res://src/dialogs/BaseDialog.gd" type="Script" id=8]
+[ext_resource path="res://data/font/NotoSans-Bold-16.tres" type="DynamicFont" id=10]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -16,6 +17,12 @@ content_margin_left = 15.0
 content_margin_right = 15.0
 content_margin_top = 5.0
 content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
 
 [node name="Projects" type="HBoxContainer"]
 anchor_right = 1.0
@@ -30,23 +37,23 @@ margin_right = 933.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBox"]
+[node name="ColumnHeader" type="PanelContainer" parent="VBox"]
 margin_right = 933.0
 margin_bottom = 26.0
 mouse_filter = 1
 theme = ExtResource( 5 )
 
-[node name="HBox" type="HBoxContainer" parent="VBox/PanelContainer"]
+[node name="HBox" type="HBoxContainer" parent="VBox/ColumnHeader"]
 margin_right = 933.0
 margin_bottom = 26.0
 custom_constants/separation = 0
 
-[node name="spacer" type="Control" parent="VBox/PanelContainer/HBox"]
+[node name="spacer" type="Control" parent="VBox/ColumnHeader/HBox"]
 margin_right = 75.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 75, 0 )
 
-[node name="ColumnSort" parent="VBox/PanelContainer/HBox" instance=ExtResource( 6 )]
+[node name="ColumnSort" parent="VBox/ColumnHeader/HBox" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 75.0
@@ -56,7 +63,7 @@ size_flags_horizontal = 3
 text = "Name"
 group = SubResource( 1 )
 
-[node name="ColumnSort3" parent="VBox/PanelContainer/HBox" instance=ExtResource( 6 )]
+[node name="ColumnSort3" parent="VBox/ColumnHeader/HBox" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 552.0
@@ -67,7 +74,7 @@ text = "Engine Version"
 group = SubResource( 1 )
 sort_type = 2
 
-[node name="ColumnSort4" parent="VBox/PanelContainer/HBox" instance=ExtResource( 6 )]
+[node name="ColumnSort4" parent="VBox/ColumnHeader/HBox" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 712.0
@@ -78,7 +85,7 @@ text = "Last Opened"
 group = SubResource( 1 )
 sort_type = 0
 
-[node name="spacer2" type="Control" parent="VBox/PanelContainer/HBox"]
+[node name="spacer2" type="Control" parent="VBox/ColumnHeader/HBox"]
 margin_left = 822.0
 margin_right = 933.0
 margin_bottom = 26.0
@@ -87,7 +94,7 @@ rect_min_size = Vector2( 111, 0 )
 [node name="Scroll" type="ScrollContainer" parent="VBox"]
 margin_top = 30.0
 margin_right = 933.0
-margin_bottom = 600.0
+margin_bottom = 535.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -101,6 +108,28 @@ margin_right = 918.0
 margin_bottom = 5.0
 size_flags_horizontal = 3
 custom_constants/separation = 5
+
+[node name="Welcome" type="PanelContainer" parent="VBox"]
+margin_top = 539.0
+margin_right = 933.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Welcome"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 913.0
+margin_bottom = 51.0
+
+[node name="Heading" type="Label" parent="VBox/Welcome/VBox"]
+margin_right = 893.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 10 )
+
+[node name="Instructions" type="Label" parent="VBox/Welcome/VBox"]
+margin_top = 27.0
+margin_right = 893.0
+margin_bottom = 41.0
 
 [node name="Dialogs" type="Node" parent="."]
 

@@ -23,6 +23,10 @@ onready var import_dialog := $Dialogs/ImportDialog
 onready var edit_project_dialog := $Dialogs/EditProjectDialog
 onready var confirm_remove: BaseDialog = $Dialogs/ConfirmRemove
 onready var confirm_remove_label: Label = $Dialogs/ConfirmRemove.get_node("Label")
+onready var column_header := $VBox/ColumnHeader
+onready var welcome := $VBox/Welcome
+onready var welcome_heading := $VBox/Welcome/VBox/Heading
+onready var welcome_instructions := $VBox/Welcome/VBox/Instructions
 
 
 func _ready() -> void:
@@ -35,6 +39,7 @@ func _ready() -> void:
 	Projects.connect("project_added", self, "_on_project_added")
 	Projects.connect("project_changed", self, "_on_project_changed")
 	Projects.connect("project_removed", self, "_on_project_removed")
+	Versions.connect("versions_updated", self, "_set_welcome_text")
 
 	scroll.get_v_scrollbar().connect("visibility_changed", self, "_on_scrollbar_visibility_changed")
 
@@ -109,6 +114,23 @@ func _sort_and_filter() -> void:
 		else:
 			projects[i].visible = true
 
+	if projects.size() == 0:
+		welcome.show()
+		scroll.hide()
+		_set_welcome_text()
+	else:
+		welcome.hide()
+		scroll.show()
+
+
+func _set_welcome_text() -> void:
+	if not Versions.any_installed():
+		welcome_heading.text = tr("Godot Engine is not yet installed")
+		welcome_instructions.text = tr("Go to the Versions tab to install Godot.")
+	else:
+		welcome_heading.text = tr("No projects yet")
+		welcome_instructions.text = tr("Create a new project, or import your existing ones")
+
 
 func _project_sorter(a, b) -> bool:
 	var a_favorite := Projects.get_project_favorite(a.project_id)
@@ -168,9 +190,15 @@ func _on_project_changed(_project_id: String) -> void:
 func _on_project_removed(project_id: String) -> void:
 	for project in project_list.get_children():
 		if project.project_id == project_id:
+			project_list.remove_child(project)
 			project.queue_free()
 			if project in _selected:
 				_selected.erase(project)
+
+	if project_list.get_children().size() == 0:
+		# that was the last project
+		# use _sort_and_filter to show the welcome screen again
+		_sort_and_filter()
 
 
 func _on_Open_pressed() -> void:

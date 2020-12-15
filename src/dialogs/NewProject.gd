@@ -97,7 +97,7 @@ func _on_Name_text_changed(_1: String) -> void:
 
 func _update_gl_version_visible() -> void:
 	var version := version_dropdown.get_selected_version()
-	gl_version.visible = (Versions.get_config_version(version) >= 4)
+	gl_version.visible = (version != null and Versions.get_config_version(version) >= 4)
 
 func _on_VersionDropdown_item_selected(_id: int) -> void:
 	_update_gl_version_visible()

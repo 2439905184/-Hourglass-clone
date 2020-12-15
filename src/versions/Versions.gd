@@ -50,6 +50,24 @@ func get_versions() -> PoolStringArray:
 	return _versions_store.get_sections()
 
 
+# Gets the latest stable built-in version.
+func get_stable_version() -> String:
+	var latest: String
+	for version in get_versions():
+		if not is_custom(version) and not has_tag(version, "beta") and not has_tag(version, "mono"):
+			if latest == null or sort_versions(version, latest):
+				latest = version
+	return latest
+
+
+# Returns whether any version is installed.
+func any_installed() -> bool:
+	for version in get_versions():
+		if is_installed(version):
+			return true
+	return false
+
+
 func sort_versions(version_a: String, version_b: String) -> bool:
 	var a_custom := is_custom(version_a)
 	var b_custom := is_custom(version_b)

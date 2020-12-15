@@ -259,10 +259,8 @@ func _on_projects_sort_changed() -> void:
 
 
 func _on_scrollbar_visibility_changed() -> void:
-	print("***** VISIBILITY ", scroll.get_v_scrollbar().visible)
 	var stylebox := scroll.get_stylebox("bg")
 	if scroll.get_v_scrollbar().visible:
 		stylebox.content_margin_right = 15
 	else:
-		print("***** SIZE ", scroll.get_v_scrollbar().rect_size.x)
 		stylebox.content_margin_right = scroll.get_v_scrollbar().rect_size.x + 15

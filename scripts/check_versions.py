@@ -3,7 +3,7 @@
 import configparser, sys, time, urllib.error, urllib.request
 
 mirror = "https://downloads.tuxfamily.org/godotengine/"
-platforms = ["source", "Windows.32", "Windows.64", "OSX.32", "OSX.64", "X11.32", "X11.64"]
+platforms = ["source", "Windows.32", "Windows.64", "OSX.32", "OSX.64", "OSX.arm64", "X11.32", "X11.64"]
 
 config = configparser.ConfigParser()
 config.read("data/versions.cfg")
@@ -32,7 +32,7 @@ for version in config:
                 print("    \u001b[1;32m[200]\u001b[0m {}".format(url))
             else:
                 print("    \u001b[1;31m[{}]\u001b[0m {}".format(status, url))
-                bad_urls += url
+                bad_urls += [url]
 
 end_time = time.time()
 

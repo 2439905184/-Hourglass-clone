@@ -332,9 +332,12 @@ func _compare_semver(version_a: String, version_b: String) -> bool:
 	return true
 
 
-# Gets the RC number of a version, or 0 if it is not an RC version.
+# Gets the RC/beta number of a version, or 0 if it is not an RC version.
+# RC versions get 1000 added to them, so they sort properly.
 func _get_rc_num(version: String) -> int:
 	for part in version.split("-"):
 		if part.begins_with("rc"):
-			return int(part.rstrip("rc"))
+			return int(part.rstrip("rc")) + 1000
+		elif part.begins_with("beta"):
+			return int(part.rstrip("beta"))
 	return 0

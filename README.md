@@ -8,18 +8,19 @@ require. It aims to match and exceed all the features of the built-in project
 manager (though it's not there yet).
 
 ## Download
-- [Download for Linux](https://flyingpimonster.gitlab.io/hourglass/hourglass-linux.tar.gz)
-- [Download for macOS](https://flyingpimonster.gitlab.io/hourglass/hourglass-macos.zip)
-- [Download for Windows](https://flyingpimonster.gitlab.io/hourglass/hourglass-windows.zip)
+- [Download for Linux](https://jwestman.gitlab.io/hourglass/hourglass-linux.tar.gz)
+- [Download for macOS](https://jwestman.gitlab.io/hourglass/hourglass-macos.zip)
+- [Download for Windows](https://jwestman.gitlab.io/hourglass/hourglass-windows.zip)
 
 ## Build Instructions
 Hourglass itself is a Godot Engine project, written in pure GDScript. However, it
-uses a slightly modified engine, in order to read ZIP files using scripts.The
+uses a slightly modified engine, in order to read ZIP files using scripts. The
 modifications [have been submitted upstream](https://github.com/godotengine/godot/pull/34444).
 Until they are reviewed and accepted, you will need to use
 [this branch](https://github.com/flyingpimonster/godot/tree/zip-module-3.2) instead.
-Build instructions can be found
-[here in Godot's documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html). It is fairly simple.
+You can [download prebuilt binaries](https://gitlab.com/jwestman/hourglass-zip-module)
+or build it from scratch by following
+[the instructions in Godot's documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html).
 
 ## Contributing
 Contributions are welcome! If you found a bug or have an idea for a new

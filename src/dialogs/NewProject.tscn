@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/dialogs/NewProject.gd" type="Script" id=1]
 [ext_resource path="res://src/components/VersionDropdown.tscn" type="PackedScene" id=2]
+[ext_resource path="res://styles/EditorTheme.tres" type="Theme" id=3]
 [ext_resource path="res://data/font/NotoSans-Bold-16.tres" type="DynamicFont" id=4]
 [ext_resource path="res://styles/theme.tres" type="Theme" id=5]
 
@@ -167,6 +168,7 @@ margin_top = 8.0
 margin_right = 608.0
 margin_bottom = 408.0
 rect_min_size = Vector2( 600, 400 )
+theme = ExtResource( 3 )
 window_title = "Open a Directory"
 resizable = true
 mode = 2

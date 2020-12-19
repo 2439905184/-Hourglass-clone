@@ -26,6 +26,7 @@ export:
   - ./godot --export windows hourglass-windows.exe
   - zip public/hourglass-windows.zip hourglass-windows.exe
   - ./godot --export macos public/hourglass-macos.zip
+  - ./godot --export-pack linux public/hourglass.pck
   artifacts:
     paths:
     - public

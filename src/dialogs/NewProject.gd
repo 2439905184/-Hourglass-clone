@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _on_Browse_pressed() -> void:
-	if _location_exists():
+	if _location_invalid():
 		browse.current_dir = _get_location()
 	else:
 		browse.current_dir = _get_location().get_base_dir()
@@ -66,9 +66,19 @@ func _on_Name_text_entered(_1: String) -> void:
 	_on_CreateFolder_pressed()
 
 
-func _location_exists() -> bool:
+func _location_invalid() -> bool:
 	var dir := Directory.new()
-	return dir.dir_exists(_get_location())
+	var path := _get_location()
+
+	if not dir.dir_exists(path) and not dir.file_exists(path):
+		return false
+
+	dir.open(path)
+	dir.list_dir_begin(true)
+	if not dir.get_next().empty():
+		return true
+
+	return false
 
 
 func _validate() -> bool:
@@ -77,7 +87,7 @@ func _validate() -> bool:
 	if _get_name().strip_edges().empty():
 		valid = false
 
-	if _location_exists():
+	if _location_invalid():
 		already_exists.modulate.a = 1
 		valid = false
 	else:

@@ -85,7 +85,7 @@ margin_top = 131.0
 margin_right = 600.0
 margin_bottom = 148.0
 custom_colors/font_color = Color( 1, 0.619608, 0.619608, 1 )
-text = "This folder already exists"
+text = "This folder already exists, and is not empty"
 
 [node name="spacer2" type="Control" parent="VBox"]
 margin_top = 152.0

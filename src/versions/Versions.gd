@@ -114,7 +114,16 @@ func has_tag(version: String, tag: String) -> bool:
 
 
 func get_download_url(version: String) -> String:
-	var os := OS.get_name() + "." + ("64" if OS.has_feature("64") else "32")
+	var arch: String
+
+	if OS.has_feature("arm64"):
+		arch = "arm64"
+	elif OS.has_feature("64"):
+		arch = "64"
+	else:
+		arch = "32"
+
+	var os := OS.get_name() + "." + arch
 	return _versions_store.get_value(version, os)
 
 

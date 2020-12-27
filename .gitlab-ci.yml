@@ -18,6 +18,7 @@ export:
   - wget -nv -O $HOME/$EXPORT_DIR/linux_x11_64_release $BIN_REPO/godot.x11.opt.64
   - wget -nv -O $HOME/$EXPORT_DIR/windows_64_release.exe $BIN_REPO/godot.windows.opt.64.exe
   - wget -nv -O $HOME/$EXPORT_DIR/osx.zip $BIN_REPO/osx.zip
+  - wget -nv -O godot.x11.opt.arm64 $BIN_REPO/godot.x11.opt.arm64
   - wget -nv -O godot $BIN_REPO/godot_server.x11.tools.64
   - chmod +x godot
   - mkdir public
@@ -26,6 +27,8 @@ export:
   - ./godot --export windows hourglass-windows.exe
   - zip public/hourglass-windows.zip hourglass-windows.exe
   - ./godot --export macos public/hourglass-macos.zip
+  - ./godot --export linux-arm hourglass-linux-arm
+  - tar czf public/hourglass-linux-arm.tar.gz hourglass-linux-arm
   - ./godot --export-pack linux public/hourglass.pck
   artifacts:
     paths:

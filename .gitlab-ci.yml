@@ -44,13 +44,3 @@ pages:
     - public
     expire_in: never
 
-
-check_versions:
-  stage: export
-  script:
-  - python3 scripts/check_versions.py
-  rules:
-  - changes:
-    - data/versions.cfg
-    when: always
-  - when: never

@@ -148,6 +148,8 @@ func _project_sorter(a, b) -> bool:
 func _project_sorter_names(a, b) -> bool:
 	var name_a := Projects.get_project_name(a.project_id)
 	var name_b := Projects.get_project_name(b.project_id)
+	if name_a == null: return false
+	if name_b == null: return true
 	return name_a.nocasecmp_to(name_b) == -1
 
 

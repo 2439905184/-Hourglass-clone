@@ -1,3 +1,11 @@
+# 0.9.2 (2021-01-01)
+
+- When creating a new project, allow the project directory to exist if it is
+empty
+- Fix a crash when a project was missing on disk and projects were sorted by
+name
+
+
 # 0.9.0 (2020-12-17)
 
 - Redesign the user interface

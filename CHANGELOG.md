@@ -1,4 +1,4 @@
-# 0.9.2 (2021-01-01)
+# 0.9.2 (2021-02-01)
 
 - When creating a new project, allow the project directory to exist if it is
 empty

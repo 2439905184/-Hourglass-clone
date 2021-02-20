@@ -13,6 +13,11 @@ manager (though it's not there yet).
 - [Download for Windows](https://jwestman.gitlab.io/hourglass/hourglass-windows.zip)
 
 ## Build Instructions
+
+*Note: The following only applies if you want to contribute to Hourglass's
+development. If you just want to use it, the downloads above should work without
+any extra steps.*
+
 Hourglass itself is a Godot Engine project, written in pure GDScript. However, it
 uses a slightly modified engine, in order to read ZIP files using scripts. The
 modifications [have been submitted upstream](https://github.com/godotengine/godot/pull/34444).

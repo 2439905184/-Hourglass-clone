@@ -24,10 +24,10 @@ To add a new version to Hourglass:
 ## Releasing Hourglass
 
 1. Read the git log since the last release and add a changelog to the top
-   of `CHANGELOG.md`. Be sure to keep the formatting consistent~
+   of `CHANGELOG.md`. Be sure to keep the formatting consistent!
 2. Update the version string in `data/info.cfg`.
-3. Create a commit with these two changes. Use "RELEASE: " followed by the
-   version as the message.
+3. Create a commit with these two changes. For the commit message, use
+   "RELEASE: " followed by the version string.
 4. Tag this commit with the version string using `git tag`.
 5. Push both the commit and the tag to GitLab.
 6. Go to the website repo (<https://gitlab.com/jwestman/hourglass-website/>)

@@ -40,7 +40,8 @@ source="{path}/godot-{version}.tar.xz"
 [{version_id}-mono]
 {create_tags(tags + ["mono"])}
 config_version=4
-OSX.64="{path}/mono/Godot_v{version}_mono_osx.64.zip"
+OSX.64="{path}/mono/Godot_v{version}_mono_osx.universal.zip"
+OSX.arm64="{path}/mono/Godot_v{version}_mono_osx.universal.zip"
 Windows.32="{path}/mono/Godot_v{version}_mono_win32.zip"
 Windows.64="{path}/mono/Godot_v{version}_mono_win64.zip"
 X11.32="{path}/mono/Godot_v{version}_mono_x11_32.zip"

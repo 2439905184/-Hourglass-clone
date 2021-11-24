@@ -8,25 +8,36 @@ stages:
 export:
   stage: export
   variables:
-    GODOT_VERSION: 3.2.3
+    GODOT_VERSION: "3.4"
     EXPORT_DIR: .local/share/godot/templates/$GODOT_VERSION.stable
-    BIN_REPO: https://gitlab.com/jwestman/hourglass-zip-module/-/raw/master
+    JOB_ID: 1817394051
+    EXPORT_BASE: "https://gitlab.com/jwestman/hourglass-zip-module/-/jobs/$JOB_ID/artifacts/raw/godot/bin"
   script:
-  - apt-get update
-  - apt-get install -y wget zip
-  - mkdir -p $HOME/$EXPORT_DIR
-  - wget -nv -O $HOME/$EXPORT_DIR/linux_x11_64_release $BIN_REPO/godot.x11.opt.64
-  - wget -nv -O $HOME/$EXPORT_DIR/windows_64_release.exe $BIN_REPO/godot.windows.opt.64.exe
-  - wget -nv -O $HOME/$EXPORT_DIR/osx.zip $BIN_REPO/osx.zip
-  - wget -nv -O godot $BIN_REPO/godot_server.x11.tools.64
-  - chmod +x godot
-  - mkdir public
-  - ./godot --export linux hourglass-linux
-  - tar czf public/hourglass-linux.tar.gz hourglass-linux
-  - ./godot --export windows hourglass-windows.exe
-  - zip public/hourglass-windows.zip hourglass-windows.exe
-  - ./godot --export macos public/hourglass-macos.zip
-  - ./godot --export-pack linux public/hourglass.pck
+    - apt-get update
+    - apt-get install -y wget zip
+    - mkdir -p $HOME/$EXPORT_DIR
+
+    - wget -nv -O $HOME/$EXPORT_DIR/linux_x11_64_release      $EXPORT_BASE/godot.x11.opt.64
+    - wget -nv -O $HOME/$EXPORT_DIR/windows_64_release.exe    $EXPORT_BASE/godot.windows.opt.64.exe
+    - wget -nv -O $HOME/$EXPORT_DIR/osx.zip                   $EXPORT_BASE/osx.zip
+    - wget -nv -O osx_arm64.zip                               $EXPORT_BASE/osx_arm64.zip
+    - wget -nv -O linux_x11_arm64_release                     $EXPORT_BASE/godot.x11.opt.arm64
+    - wget -nv -O godot                                       $EXPORT_BASE/godot_server.x11.opt.tools.64
+
+    - chmod +x godot
+
+    - mkdir public
+    - ./godot --export macos public/hourglass-macos.zip
+    - ./godot --export macos_arm64 public/hourglass-macos-arm64.zip
+    - ./godot --export-pack linux public/hourglass.pck
+
+    - ./godot --export linux hourglass-linux
+    - tar czf public/hourglass-linux.tar.gz hourglass-linux
+    - ./godot --export linux_arm64 hourglass-linux-arm64
+    - tar czf public/hourglass-linux-arm64.tar.gz hourglass-linux-arm64
+
+    - ./godot --export windows hourglass-windows.exe
+    - zip public/hourglass-windows.zip hourglass-windows.exe
   artifacts:
     paths:
     - public

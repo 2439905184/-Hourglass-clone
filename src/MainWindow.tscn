@@ -125,6 +125,7 @@ margin_bottom = 536.0
 [node name="ConfirmQuit" parent="." instance=ExtResource( 4 )]
 
 [node name="AboutDialog" parent="." instance=ExtResource( 9 )]
+
 [connection signal="pressed" from="VBoxContainer/Margin/TopBar/LogoButton" to="." method="_on_LogoButton_pressed"]
 [connection signal="search_changed" from="VBoxContainer/Margin/TopBar/SearchBar" to="." method="_on_SearchBar_search_changed"]
 [connection signal="action_pressed" from="VBoxContainer/HBoxContainer/SidePanel" to="." method="_on_SidePanel_action_pressed"]

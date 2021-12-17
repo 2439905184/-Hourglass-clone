@@ -6,7 +6,8 @@ mirror = "https://downloads.tuxfamily.org/godotengine/"
 platforms = ["source", "Windows.32", "Windows.64", "OSX.32", "OSX.64", "OSX.arm64", "X11.32", "X11.64"]
 
 config = configparser.ConfigParser()
-config.read("data/versions.cfg")
+data = sys.stdin.read()
+config.read_string(data)
 
 urls = []
 bad_urls = []
@@ -40,4 +41,7 @@ print("Checked {} URLs in {}s, found {} problems".format(
     len(urls), (end_time - start_time), len(bad_urls)
 ))
 
-sys.exit(0 if len(bad_urls) == 0 else 1)
+if len(bad_urls):
+    sys.exit(1)
+else:
+    print(data)

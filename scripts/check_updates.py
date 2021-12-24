@@ -103,5 +103,5 @@ with open("data/info.cfg", "w") as file:
     info.write(file, space_around_delimiters=False)
 
 subprocess.run(["git", "add", "data/info.cfg", "data/versions.cfg"])
-subprocess.run(["git", "commit", "-m", "versions.cfg: " + ", ".join(discovered_versions)])
-subprocess.run(["git", "push", "-o", "merge_request.create"])
+subprocess.run(["git", "commit", "--no-gpg-sign", "-m", "versions.cfg: " + ", ".join(discovered_versions)])
+subprocess.run(["git", "push", "--set-upstream", "origin", "versions-auto-update", "-o", "merge_request.create"])

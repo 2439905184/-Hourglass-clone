@@ -9,9 +9,9 @@ class_name ProjectCreator
 extends Reference
 
 
-var PROJECT_GODOT_3: String = _read_file("res://data/template/3/project.godot")
-var PROJECT_GODOT_4: String = _read_file("res://data/template/4/project.godot")
-var GLES_2: String = _read_file("res://data/template/4/gles2.txt")
+var PROJECT_GODOT_3: String = _read_file("res://data/template/v3/project_godot")
+var PROJECT_GODOT_4: String = _read_file("res://data/template/v4/project_godot")
+var GLES_2: String = _read_file("res://data/template/v4/gles2.txt")
 
 var project_id: String
 
@@ -50,8 +50,8 @@ func _create_project_3(path: String, name: String) -> int:
 	pg.close()
 
 	var dir := Directory.new()
-	dir.copy("res://data/template/3/default_env.tres", path.plus_file("default_env.tres"))
-	dir.copy("res://data/template/3/icon.png", path.plus_file("icon.png"))
+	dir.copy("res://data/template/v3/default_env.tres", path.plus_file("default_env.tres"))
+	dir.copy("res://data/template/v3/icon.png", path.plus_file("icon.png"))
 
 	return OK
 
@@ -64,8 +64,8 @@ func _create_project_4(path: String, name: String, gles2: bool) -> int:
 	pg.close()
 
 	var dir := Directory.new()
-	dir.copy("res://data/template/4/default_env.tres", path.plus_file("default_env.tres"))
-	dir.copy("res://data/template/4/icon.png", path.plus_file("icon.png"))
+	dir.copy("res://data/template/v4/default_env.tres", path.plus_file("default_env.tres"))
+	dir.copy("res://data/template/v4/icon.png", path.plus_file("icon.png"))
 
 	return OK
 

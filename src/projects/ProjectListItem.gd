@@ -108,7 +108,7 @@ func _build() -> void:
 		name_label.text = tr("Project not found")
 		return
 
-	project_name = project_cfg.get_value("application", "config/name")
+	project_name = project_cfg.get_value("application", "config/name", "Untitled Project")
 	name_label.text = project_name
 
 	var icon = project_cfg.get_value("application", "config/icon")

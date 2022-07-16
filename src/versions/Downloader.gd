@@ -107,6 +107,9 @@ func _extract_godot() -> void:
 			for file in files:
 				if file.begins_with("GodotSharp/"):
 					godot_sharp.append(file)
+					continue
+				if file.ends_with(".cmd"):
+					continue
 				else:
 					if exec_file:
 						printerr("Error! Can't tell which file is the Godot executable")
@@ -141,7 +144,11 @@ func _extract_godot() -> void:
 
 	# extract the godot executable
 	var exec_path: String = Versions.get_executable(version)
-	var godot: PoolByteArray = unzip.read_file(prefix.plus_file(exec_file))
+	var godot : PoolByteArray
+	if (exec_file == ".exe"):
+		godot = unzip.read_file(prefix + exec_file)
+	else:
+		godot = unzip.read_file(prefix.plus_file(exec_file))
 	var out := File.new()
 	out.open(exec_path, File.WRITE)
 	out.store_buffer(godot)

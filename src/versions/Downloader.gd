@@ -105,17 +105,16 @@ func _extract_godot() -> void:
 				macos_files.append(file)
 		else:
 			for file in files:
+				if file.ends_with(".cmd"): continue
 				if file.begins_with("GodotSharp/"):
 					godot_sharp.append(file)
 					continue
-				if file.ends_with(".cmd"):
-					continue
-				else:
-					if exec_file:
-						printerr("Error! Can't tell which file is the Godot executable")
-						_failed("The downloaded file seems to be broken.")
-						return
-					exec_file = file
+				
+				if exec_file:
+					printerr("Error! Can't tell which file is the Godot executable")
+					_failed("The downloaded file seems to be broken.")
+					return
+				exec_file = file
 
 	if not exec_file:
 		printerr("Error! Can't find Godot executable in zip file")
@@ -144,11 +143,7 @@ func _extract_godot() -> void:
 
 	# extract the godot executable
 	var exec_path: String = Versions.get_executable(version)
-	var godot : PoolByteArray
-	if (exec_file == ".exe"):
-		godot = unzip.read_file(prefix + exec_file)
-	else:
-		godot = unzip.read_file(prefix.plus_file(exec_file))
+	var godot : PoolByteArray = unzip.read_file(prefix.plus_file(exec_file))
 	var out := File.new()
 	out.open(exec_path, File.WRITE)
 	out.store_buffer(godot)
@@ -184,19 +179,25 @@ func _failed(reason) -> void:
 	queue_free()
 
 
-# Returns the longest substring that both strings start with.
+# Returns the longest common path that both strings start with.
 # Will just return b if a is null
 func _str_prefix(a, b: String) -> String:
-	if a == null:
-		return b
-
+	var base : Array = b.get_base_dir().split("/")
 	var result := ""
-	for i in range(a.length()):
-		if b.length() < i:
-			break
-		if b[i] != a[i]:
-			break
-
-		result += a[i]
-
+	
+	if a == null:
+		for i in base.size():
+			if base[i].length() == 0:
+				break
+				
+			result += base[i] + "/"
+	
+	else:
+		var a_split : Array = a.split("/")
+		for i in base.size():
+			if i > a_split.size() || a_split[i] != base[i] || a_split[i].length() == 0:
+				break
+			
+			result += a_split[i] + "/"
+	
 	return result

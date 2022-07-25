@@ -1,3 +1,9 @@
+# 0.9.3 (2022-07-35)
+
+- Some fixes to the project template
+- Fix a crash that could occur when a project didn't have a name
+- Fix installing Godot 3.5 and later on Windows (@tdetoy)
+
 # 0.9.2 (2021-02-01)
 
 - When creating a new project, allow the project directory to exist if it is

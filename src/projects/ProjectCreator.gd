@@ -51,7 +51,7 @@ func _create_project_3(path: String, name: String) -> int:
 
 	var dir := Directory.new()
 	dir.copy("res://data/template/v3/default_env.tres", path.plus_file("default_env.tres"))
-	dir.copy("res://data/template/v3/icon.png", path.plus_file("icon.png"))
+	dir.copy("res://data/template/v3/icon.png.bin", path.plus_file("icon.png"))
 
 	return OK
 
@@ -65,7 +65,7 @@ func _create_project_4(path: String, name: String, gles2: bool) -> int:
 
 	var dir := Directory.new()
 	dir.copy("res://data/template/v4/default_env.tres", path.plus_file("default_env.tres"))
-	dir.copy("res://data/template/v4/icon.png", path.plus_file("icon.png"))
+	dir.copy("res://data/template/v4/icon.png.bin", path.plus_file("icon.png"))
 
 	return OK
 

@@ -1,3 +1,7 @@
+# 0.9.4 (2022-08-11)
+
+- Fix icon.png not being added to new projects
+
 # 0.9.3 (2022-07-35)
 
 - Some fixes to the project template

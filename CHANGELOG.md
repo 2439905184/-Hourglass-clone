@@ -2,7 +2,7 @@
 
 - Fix icon.png not being added to new projects
 
-# 0.9.3 (2022-07-35)
+# 0.9.3 (2022-07-25)
 
 - Some fixes to the project template
 - Fix a crash that could occur when a project didn't have a name
